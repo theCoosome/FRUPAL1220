@@ -1,4 +1,6 @@
 #include <ncurses.h>
+#include <vector>
+
 using namespace std;
 
 
@@ -8,9 +10,17 @@ int main() {
     nodelay(stdscr, true);
     clear();
 
-    //initialize variables
+    // initialize variables
 
     bool running = true; // program running conditional
+
+    // player variables
+    int energy = 100;
+    int whiffles = 1000;
+    bool binoculars = false;
+    bool boat = false;
+    // vector<object> inventory;
+
 
     // cursor position
     int cx = 2;
