@@ -1,6 +1,8 @@
 #include <ncurses.h>
 #include <vector>
 
+#include "object.h"
+
 using namespace std;
 
 
