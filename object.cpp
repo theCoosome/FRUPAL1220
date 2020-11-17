@@ -93,7 +93,7 @@ tool::tool():name(NULL), power(0), obs_type(0)
 
 }
 
-tool::tool(int add_obstype, int add_power, char *add_name): coffee_shop(add_type, add_cost)
+tool::tool(int add_obstype, int add_power, char *add_name): object(add_type, add_cost)
 //constructor with args
 {
 	name = new char[strlen(add_name)+1];
