@@ -77,7 +77,7 @@ class treasure: public object
 	public:
 	treasure(); //default constructor
 	//constructor with args
-	treasure(int add_type, int add_cost); 
+	treasure(int add_type, int add_cost, bool add_isempty); 
 	treasure(const treasure &to_copy); //copy constructor
 	~treasure(); // destructor
 	void display();

@@ -92,6 +92,7 @@ tool::tool():name(NULL), power(0), obs_type(0)
 {
 
 }
+
 tool::tool(int add_type, int add_cost, char *add_name, int add_power, int add_obstype):object(add_type, add_cost)
 //constructor with args
 {
@@ -131,10 +132,10 @@ treasure::treasure():is_empty(0)
 
 }
 
-treasure::treasure(bool add_empty): object(add_type, add_cost)
+treasure::treasure(int add_type, int add_cost, bool add_isempty):object(add_type, add_cost)
 //constructor with arguments
 {
-	is_empty = add_empty;
+	is_empty = add_isempty;
 }
 
 treasure::treasure(const treasure &to_copy):object(to_copy)
