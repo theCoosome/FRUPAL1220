@@ -157,7 +157,7 @@ treasure::~treasure()
 {
 }
 
-obstable::obstacle():obs_type(0)
+obstacle::obstacle():obs_type(0)
 //default constructor
 {
 
