@@ -164,7 +164,7 @@ obstacle::obstacle():obs_type(0)
 }
 
 
-obstacle::obstacle(int add_obstype): object(add_type, add_cost)
+obstacle::obstacle(int add_type, int add_cost, int add_obstype):object(add_type, add_cost)
 //constructor with arguments
 {
 	obs_type = add_obstype;
