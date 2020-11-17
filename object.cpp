@@ -16,7 +16,7 @@ object::object(const object  &to_copy)
 //copy constructor 
 {
 	
-	type = to_copy.price;
+	type = to_copy.type;
 	cost = to_copy.cost;
 }
 
@@ -126,7 +126,7 @@ tool::~tool()
 	name = NULL;
 }
 
-treasure::treasure():is_empy(0)
+treasure::treasure():is_empty(0)
 //default constructor
 {
 
@@ -153,7 +153,7 @@ void treasure::display()
 }
 
 treasure::~treasure()
-//destructor for the play area
+//destructor for the treasure
 {
 }
 
@@ -186,8 +186,8 @@ void obstacle::display()
 	//will need work
 }
 
-treasure::~treasure()
-//destructor for the play area
+obstacle::~obstacle()
+//destructor for the obstacle
 {
 }
 
