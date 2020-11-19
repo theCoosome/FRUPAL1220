@@ -44,7 +44,7 @@ int main() {
 
         // User input, always considered
         switch (ch) {
-          case 113: // q
+          case 'q':
             //press q to quit
             running = false;
             break;
