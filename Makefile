@@ -5,7 +5,7 @@ PROGS= frupal
 
 all: $(PROGS)
 
-%: main.cpp object.cpp object.h world.cpp world.h
+frupal: main.cpp object.cpp object.h world.cpp world.h
 	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
 
 zip:
