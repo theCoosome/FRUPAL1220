@@ -1,4 +1,4 @@
-//Author of header: Colton Jelsema
+// Author of header: Colton Jelsema and Vincent Vermilya
 // Header for the matrix that stores information about the game world
 
 #include "object.h"
@@ -12,7 +12,7 @@ class grovnik {
 
 	~grovnik();
 
-	setData(int terr_type, object * data);
+	void setData(int terr_type, object * data);
 
 	//private: 'proper' structure dictates use of private variables,
 	// but having a manager for the data makes that unwieldly and unnessecary.
@@ -23,13 +23,19 @@ class grovnik {
 class World {
 	public:
 	World();
+	World(unsigned int width1, unsigned int length1);
 	// The world should never by directly copied.
 	
 	~World();
 
 	// grovnik builder for use by world builders
-	setGrovnik(int x, int y, int terr_type, object * data);
+	void setGrovnik(int x, int y, int terr_type, object * data);
+	void clearfog(unsigned int x1, unsigned int y1);
+	void clearfog_rad(unsigned int x1, unsigned int y1, unsigned int radius);
+	bool ** get_fog();
 
 	private:
+	unsigned int width, height;
 	grovnik ** tiles;
+	bool ** fog; // false is fog, true is clear
 };
