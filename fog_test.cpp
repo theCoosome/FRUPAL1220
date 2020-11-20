@@ -29,10 +29,11 @@ int main(int argc, char* argv[]) {
 		for(int x = 0; x < width; x++) {
 			if(tmp[y][x] != expected[y][x]) {
 				err = true;
-				break;
+				goto end;
 			}
 		}
 	}
+	end:
 	if(err == true) {
 		cerr << "Fog test failed" << endl;
 		cerr << "What test expected | What test got" << endl;
