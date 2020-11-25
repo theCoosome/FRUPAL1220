@@ -117,14 +117,20 @@ tool::tool(const tool &to_copy):object(to_copy)
 	power = to_copy.power;
 }
 
-
-void tool::display()
+char* tool::get_t_name()
 {
-	object::display();
-	//needs work 
-
+	return name;
 }
 
+int tool::get_power()
+{
+	return power;
+}
+
+int tool::get_obstype()
+{
+	return obs_type;
+}
 
 tool::~tool()
 {
@@ -151,11 +157,11 @@ treasure::treasure(const treasure &to_copy):object(to_copy)
 }
 
 
-void treasure::display()
+bool treasure::get_empty()
 //display function
 {
-	object::display();
-	//will need work
+	return is_empty;
+
 }
 
 treasure::~treasure()
@@ -185,11 +191,10 @@ obstacle::obstacle(const obstacle &to_copy):object(to_copy)
 }
 
 
-void obstacle::display()
+int obstacle::get_obstacle()
 //display function
 {
-	object::display();
-	//will need work
+	return obs_type;
 }
 
 obstacle::~obstacle()

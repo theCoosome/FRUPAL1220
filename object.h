@@ -46,7 +46,7 @@ class food: public object
 	food(int add_type, int add_cost, char *add_name, int value); //constuctor with args
 	food(const food &to_copy); //copy constructor
 	~food(); //destructor
-	int get_name(); 
+	char*  get_name(); 
 	int get_value();
 
 	protected:
@@ -63,7 +63,9 @@ class tool: public object
 	//constructor with args
 	tool(int add_type, int add_cost, char *add_name, int add_power, int obs_type); 
 	tool(const tool &to_copy);
-	void display(); //display function
+	int get_obstype();
+	int get_power();
+	char* get_t_name();
 	~tool(); //destrucor
 
 	protected:
@@ -82,7 +84,7 @@ class treasure: public object
 	treasure(int add_type, int add_cost, bool add_isempty); 
 	treasure(const treasure &to_copy); //copy constructor
 	~treasure(); // destructor
-	void display();
+	bool get_empty();
 
 	protected:
 	bool is_empty; //will it dissapear when empty?
@@ -100,7 +102,9 @@ class obstacle: public object
 	obstacle(int add_type, int add_cost, int obs_type);
 	obstacle(const obstacle &to_copy); //copy constructor
 	~obstacle(); // destructor
-	void display();
+	int get_obstacle();
+
+
 
 	protected:
 	//Cost is repurposed into Durability, or Cost to destroy
