@@ -108,5 +108,3 @@ class obstacle: public object
 
 #endif
 
-
-
