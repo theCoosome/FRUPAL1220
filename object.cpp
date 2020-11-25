@@ -30,18 +30,23 @@ object::object(int add_type, int add_cost)
 }
 
 
-
-void object::display()
+int  object::get_type()
 //display function
 {
-	//this needs work
+	return type;
 }
 
+int object::get_cost()
+//display function
+{
+	return cost;
+}
 
 object::~object()
 //destructor
 {
 }
+
 
 food::food():name(NULL), value(0)
 //default constructor
@@ -70,14 +75,15 @@ food::food(const food &to_copy):object(to_copy)
 	value = to_copy.value;
 }
 
-
-void food::display()
-//display function
+char* food::get_name() 
 {
-	object::display();
-	//needs work
+	return name;
 }
 
+int food::get_value()
+{
+	return value;
+}
 
 food::~food()
 //destructor for the play area

@@ -29,7 +29,8 @@ class object
 	object(const object & to_copy); //copy constructor
 	object(int add_type, int add_cost); //constructor with args
 	virtual ~object();//destructor
-	virtual void display(); //display for the base clas
+	int get_type(); 
+	int get_cost();
 
 	protected:
 	int type;
@@ -45,7 +46,8 @@ class food: public object
 	food(int add_type, int add_cost, char *add_name, int value); //constuctor with args
 	food(const food &to_copy); //copy constructor
 	~food(); //destructor
-	void display();
+	int get_name(); 
+	int get_value();
 
 	protected:
 	char *name; //The name of the food
