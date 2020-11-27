@@ -5,32 +5,23 @@
 #include "object.h"
 #include "world.h"
 
+//color definitions
+#define MEADOW_PAIR 1
+#define SWAMP_PAIR 2
+#define WATER_PAIR 3
+#define WALL_PAIR 4
+#define DIAMOND_PAIR 5
+#define HERO_PAIR 6
+
 using namespace std;
 
 
 int main() {
-  /*
-    //map reader, loads into world
-    ifstream map;
-    map.open("test.map");
-    if (map.is_open()) {
-      while (getline (map, line)) {
-      
-      }
-    }
-    */
 
     initscr();
     keypad(stdscr, true);
     nodelay(stdscr, true);
     clear();
-
-    #define MEADOW_PAIR 1
-    #define SWAMP_PAIR 2
-    #define WATER_PAIR 3
-    #define WALL_PAIR 4
-    #define DIAMOND_PAIR 5
-    #define HERO_PAIR 6
 
     //initialize color stuff
     start_color();
@@ -40,6 +31,7 @@ int main() {
     init_pair(WALL_PAIR, COLOR_BLACK, COLOR_WHITE);
     init_pair(DIAMOND_PAIR, COLOR_WHITE, COLOR_CYAN);
     init_pair(HERO_PAIR, COLOR_YELLOW, COLOR_RED);
+
 
     // initialize variables
 
