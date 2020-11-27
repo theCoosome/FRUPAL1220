@@ -32,7 +32,9 @@ class World {
 	void setGrovnik(int x, int y, int terr_type, object * data);
 	void clearfog(unsigned int x1, unsigned int y1);
 	void clearfog_rad(unsigned int x1, unsigned int y1, unsigned int radius);
+#ifdef TEST
 	bool ** get_fog();
+#endif
 
 	private:
 	unsigned int width, height;

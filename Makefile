@@ -9,7 +9,10 @@ frupal: main.cpp object.cpp object.h world.cpp world.h
 	$(CC) $(CFLAGS) main.cpp object.cpp world.cpp -o $@ $(LDFLAGS)
 
 fog_test: fog_test.cpp object.cpp object.h world.cpp world.h
-	$(CC) $(CFLAGS) fog_test.cpp object.cpp world.cpp -o $@ $(LDFLAGS)
+	$(CC) $(CFLAGS) -DTEST fog_test.cpp object.cpp world.cpp -o $@ $(LDFLAGS)
+
+test: fog_test
+	./fog_test
 
 zip:
 	zip frupal.zip *
