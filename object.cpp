@@ -75,7 +75,7 @@ food::food(const food &to_copy):object(to_copy)
 	value = to_copy.value;
 }
 
-char* food::get_name() 
+char* food::get_name()
 {
 	return name;
 }
