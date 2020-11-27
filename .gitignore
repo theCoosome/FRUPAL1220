@@ -32,3 +32,6 @@
 *.app
 frupal
 fog_test
+
+*.swp
+*.dSYM
