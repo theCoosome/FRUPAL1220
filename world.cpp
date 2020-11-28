@@ -81,6 +81,11 @@ void World::fileRead() {
 	int x;
 	int y;
 	int t;
+
+	int cost;
+	int value;
+	int power;
+	int type;
 	inf.open("mapdata.txt");
 	inf.peek();
 	while (!inf.eof()) {
@@ -94,16 +99,13 @@ void World::fileRead() {
 		// Read the remaining data
 		switch (t) {
 			case 1: // treasure: Returned value
-				int cost;
 				inf >> cost;
 				tiles[x][y].poi = new treasure(cost, false);
 				break;
 
 			case 2: // food: cost, value, name
-				int cost;
 				inf >> cost;
 				inf.ignore(100, ' ');
-				int value;
 				inf >> value;
 				inf.ignore(100, ' ');
 
@@ -112,13 +114,10 @@ void World::fileRead() {
 				break;
 
 			case 3: // tools: cost, power, obstype, name
-				int cost;
 				inf >> cost;
 				inf.ignore(100, ' ');
-				int power;
 				inf >> power;
 				inf.ignore(100, ' ');
-				int type;
 				inf >> type;
 				inf.ignore(100, ' ');
 
@@ -139,10 +138,8 @@ void World::fileRead() {
 				break;
 
 			case 7: // Obsticle: cost, type
-				int cost;
 				inf >> cost;
 				inf.ignore(100, ' ');
-				int type;
 				inf >> type;
 				tiles[x][y].poi = new obstacle(cost, type);
 				break;
