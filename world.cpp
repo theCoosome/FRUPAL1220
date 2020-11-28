@@ -65,12 +65,12 @@ void World::fileRead() {
 	char xval[1];
 
 	//Read each line
-	for (int y=0; y < height; ++y) {
+	for (unsigned int y=0; y < height; ++y) {
 		inf.get(input, width, '\n');
 		inf.ignore(width, '\n');
 
 		//Interpret each value
-		for (int x=0; x < width; ++x) {
+		for (unsigned int x=0; x < width; ++x) {
 			xval[0] = input[x];
 			tiles[x][y].terrain = atoi(xval);
 		}
