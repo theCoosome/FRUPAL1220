@@ -91,18 +91,39 @@ void World::fileRead() {
 		inf >> t;
 		inf.ignore(5, ' ');
 
+		// Read the remaining data
 		switch (t) {
-			case 1: // treasure
+			case 1: // treasure: Returned value
 				int cost;
-				tiles[x][y].poi = new treasure();
+				inf >> cost;
+				tiles[x][y].poi = new treasure(cost, false);
 				break;
 
-			case 2: // food
-				tiles[x][y].poi = new food();
+			case 2: // food: cost, value, name
+				int cost;
+				inf >> cost;
+				inf.ignore(100, ' ');
+				int value;
+				inf >> value;
+				inf.ignore(100, ' ');
+
+				inf.get(input, 256, '\n');
+				tiles[x][y].poi = new food(cost, input, value);
 				break;
 
-			case 3: // tools
-				tiles[x][y].poi = new tool();
+			case 3: // tools: cost, power, obstype, name
+				int cost;
+				inf >> cost;
+				inf.ignore(100, ' ');
+				int power;
+				inf >> power;
+				inf.ignore(100, ' ');
+				int type;
+				inf >> type;
+				inf.ignore(100, ' ');
+
+				inf.get(input, 256, '\n');
+				tiles[x][y].poi = new tool(cost, input, power, type);
 				break;
 
 			case 4: // clues
@@ -117,8 +138,13 @@ void World::fileRead() {
 				//tiles[x][y].poi = new 
 				break;
 
-			case 7: // Obsticle
-				tiles[x][y].poi = new obstacle();
+			case 7: // Obsticle: cost, type
+				int cost;
+				inf >> cost;
+				inf.ignore(100, ' ');
+				int type;
+				inf >> type;
+				tiles[x][y].poi = new obstacle(cost, type);
 				break;
 		}
 		inf.ignore(256, '\n'); // Ignore to the next line
