@@ -62,6 +62,7 @@ void World::fileRead() {
 
 	inf.open("map.txt");
 	char input[256];
+	char xval[1];
 
 	//Read each line
 	for (int y=0; y < height; ++y) {
@@ -70,7 +71,8 @@ void World::fileRead() {
 
 		//Interpret each value
 		for (int x=0; x < width; ++x) {
-			tiles[x][y].terrain = atoi(input[x]);
+			xval[0] = input[x];
+			tiles[x][y].terrain = atoi(xval);
 		}
 	}
 	inf.close();
