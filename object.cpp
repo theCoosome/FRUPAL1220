@@ -55,7 +55,7 @@ food::food():name(NULL), value(0)
 }
 
 
-food::food(int add_type, int add_cost, char *add_name, int add_value):object(add_type, add_cost)
+food::food(int add_cost, char *add_name, int add_value):object(2, add_cost)
 //constructor with arguments
 {
 	name  = new char[strlen(add_name)+1];
@@ -99,7 +99,7 @@ tool::tool():name(NULL), power(0), obs_type(0)
 
 }
 
-tool::tool(int add_type, int add_cost, char *add_name, int add_power, int add_obstype):object(add_type, add_cost)
+tool::tool(int add_cost, char *add_name, int add_power, int add_obstype):object(3, add_cost)
 //constructor with args
 {
 	name = new char[strlen(add_name)+1];
@@ -144,7 +144,7 @@ treasure::treasure():is_empty(0)
 
 }
 
-treasure::treasure(int add_type, int add_cost, bool add_isempty):object(add_type, add_cost)
+treasure::treasure(int add_cost, bool add_isempty):object(1, add_cost)
 //constructor with arguments
 {
 	is_empty = add_isempty;
@@ -176,7 +176,7 @@ obstacle::obstacle():obs_type(0)
 }
 
 
-obstacle::obstacle(int add_type, int add_cost, int add_obstype):object(add_type, add_cost)
+obstacle::obstacle(int add_cost, int add_obstype):object(7, add_cost)
 //constructor with arguments
 {
 	obs_type = add_obstype;

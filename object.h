@@ -43,7 +43,7 @@ class food: public object
 {
 	public:
 	food(); //default constructor
-	food(int add_type, int add_cost, char *add_name, int value); //constuctor with args
+	food(int add_cost, char *add_name, int value); //constuctor with args
 	food(const food &to_copy); //copy constructor
 	~food(); //destructor
 	char*  get_name();
@@ -61,7 +61,7 @@ class tool: public object
 	public:
 	tool(); //default constructor
 	//constructor with args
-	tool(int add_type, int add_cost, char *add_name, int add_power, int obs_type); 
+	tool(int add_cost, char *add_name, int add_power, int obs_type); 
 	tool(const tool &to_copy);
 	int get_obstype();
 	int get_power();
@@ -81,7 +81,7 @@ class treasure: public object
 	public:
 	treasure(); //default constructor
 	//constructor with args
-	treasure(int add_type, int add_cost, bool add_isempty); 
+	treasure(int add_cost, bool isempty);
 	treasure(const treasure &to_copy); //copy constructor
 	~treasure(); // destructor
 	bool get_empty();
@@ -99,7 +99,7 @@ class obstacle: public object
 	public:
 	obstacle(); //default constructor
 	//constructor with args
-	obstacle(int add_type, int add_cost, int obs_type);
+	obstacle(int add_cost, int obs_type);
 	obstacle(const obstacle &to_copy); //copy constructor
 	~obstacle(); // destructor
 	int get_obstacle();
@@ -113,6 +113,4 @@ class obstacle: public object
 };
 
 #endif
-
-
 
