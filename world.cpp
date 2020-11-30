@@ -66,6 +66,7 @@ void World::fileRead() {
 
 	//Read each line
 	for (unsigned int y=0; y < height; ++y) {
+		cout << "\nLine: " << y;
 		inf.get(input, width, '\n');
 		inf.ignore(width, '\n');
 
@@ -74,6 +75,9 @@ void World::fileRead() {
 			xval[0] = input[x];
 			tiles[x][y].terrain = atoi(xval);
 		}
+		inf.peek();
+		if (inf.eof())
+			y = height + 1;
 	}
 	inf.close();
 
@@ -152,6 +156,10 @@ void World::fileRead() {
 
 void World::setGrovnik(int x, int y, int terr_type, object * data) {
 	tiles[x][y].setData(terr_type, data);
+}
+
+grovnik * World::getAt(unsigned int x, unsigned int y) {
+	return & tiles[x][y];
 }
 
 // Clear fog[y1][x1] from false to true

@@ -18,6 +18,8 @@ using namespace std;
 
 
 int main() {
+    World map;
+    map.fileRead();
 
     initscr();
     keypad(stdscr, true);
@@ -36,7 +38,7 @@ int main() {
 
     // initialize variables
     World map;
- //   map.fileRead();
+    map.fileRead();
 
     bool running = true; // program running conditional
 
@@ -49,13 +51,12 @@ int main() {
 
 
     // test world
-    World testWorld = World();
     for (int i = 0; i < 128; i++) {
       for (int j = 0; j < 128; j++) {
-        testWorld.setGrovnik(i, j, 0, nullptr); 
-        attron(COLOR_PAIR(MEADOW_PAIR));
+        grovnik * temp = map.getAt(i, j);
+        attron(COLOR_PAIR(temp -> terrain));
         mvaddch(i, j, ' ');
-        attroff(COLOR_PAIR(MEADOW_PAIR));
+        attroff(COLOR_PAIR(temp -> terrain));
       }
     }
     int katch = mainle();

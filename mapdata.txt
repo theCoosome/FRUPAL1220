@@ -1,4 +1,4 @@
 6 2 1 500
 6 4 2 5 20 Fat apple
-6 6 3 20 2 steel axe
+6 6 3 20 2 1 steel axe
 6 8 7 20 1
