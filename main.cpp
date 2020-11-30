@@ -2,6 +2,7 @@
 #include <vector>
 
 #include "object.h"
+#include "world.h"
 
 using namespace std;
 
@@ -13,6 +14,8 @@ int main() {
     clear();
 
     // initialize variables
+    World map;
+    map.fileRead();
 
     bool running = true; // program running conditional
 
