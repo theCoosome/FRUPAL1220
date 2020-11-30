@@ -35,4 +35,5 @@ fog_test
 
 # MacOS
 *.dSYM
+*.swp
 .DS_Store
