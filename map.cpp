@@ -1,7 +1,7 @@
 // Jonnie Herrera
 // Unfinished map sample, need object class functions implementations
 
-#include "map-sample.h"
+#include "map.h"
 #include <fstream>
 
 // constructor
