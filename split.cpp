@@ -10,7 +10,7 @@
 
 
 
-int main()
+int mainle()
 {
 	initscr();
 	int y_beg, x_beg;

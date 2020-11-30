@@ -4,6 +4,7 @@
 
 #include "object.h"
 #include "world.h"
+#include "split.cpp"
 
 //color definitions
 #define MEADOW_PAIR 1
@@ -35,7 +36,7 @@ int main() {
 
     // initialize variables
     World map;
-    map.fileRead();
+ //   map.fileRead();
 
     bool running = true; // program running conditional
 
@@ -57,6 +58,7 @@ int main() {
         attroff(COLOR_PAIR(MEADOW_PAIR));
       }
     }
+    int katch = mainle();
     
     refresh(); 
     // cursor position
