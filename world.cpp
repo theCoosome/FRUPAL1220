@@ -66,7 +66,6 @@ void World::fileRead() {
 
 	//Read each line
 	for (unsigned int y=0; y < height; ++y) {
-		cout << "\nLine: " << y;
 		inf.get(input, width, '\n');
 		inf.ignore(width, '\n');
 
