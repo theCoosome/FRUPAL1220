@@ -130,15 +130,15 @@ void World::fileRead() {
 				break;
 
 			case 4: // clues
-				//tiles[x][y].poi = new 
+				//tiles[x][y].poi = new
 				break;
 
 			case 5: // ship
-				//tiles[x][y].poi = new 
+				//tiles[x][y].poi = new
 				break;
 
 			case 6: // Binoculars
-				//tiles[x][y].poi = new 
+				//tiles[x][y].poi = new
 				break;
 
 			case 7: // Obsticle: cost, type

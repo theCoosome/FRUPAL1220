@@ -1,6 +1,6 @@
 //Author of this file: Leah Moser
-// This is the file that will be in charge of 
-//The split screen with stats 
+// This is the file that will be in charge of
+//The split screen with stats
 
 
 

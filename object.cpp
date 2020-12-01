@@ -1,6 +1,6 @@
 //Author of file  Leah Moser
 //This is the implementation file for the object class
-//This class is where the heirarchical relationship is and it will be 
+//This class is where the heirarchical relationship is and it will be
 
 #include "object.h"
 
@@ -13,9 +13,9 @@ object::object(): type(0), cost(0)
 
 
 object::object(const object  &to_copy)
-//copy constructor 
+//copy constructor
 {
-	
+
 	type = to_copy.type;
 	cost = to_copy.cost;
 }
@@ -105,7 +105,7 @@ tool::tool(int add_cost, char *add_name, int add_power, int add_obstype):object(
 	name = new char[strlen(add_name)+1];
 	power = add_power;
 	obs_type = add_obstype;
-	
+
 }
 
 tool::tool(const tool &to_copy):object(to_copy)

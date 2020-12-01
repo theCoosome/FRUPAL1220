@@ -3,7 +3,7 @@
 // object.h functions need to be implemented in order to work
 
 //#include <iostream>
-//#include <cstring> 
+//#include <cstring>
 //#include <cctype>
 #include "object.h"
 
@@ -18,10 +18,10 @@ class map
 {
 	public:
 		map();
-		~map();	
+		~map();
 		grovnik ** getMap(); // creates the map reading from textfile
 		void displayMap(); // displays map
-		
+
 	private:
 		grovnik ** worldMap; // 2D array of grovnik objects
 };

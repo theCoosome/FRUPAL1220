@@ -25,7 +25,7 @@ class World {
 	World();
 	World(unsigned int width1, unsigned int length1);
 	// The world should never by directly copied.
-	
+
 	~World();
 
 	// grovnik builder for use by world builders

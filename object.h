@@ -1,11 +1,11 @@
 //Author of header: Leah Moser
-//Program: Frupal Game 
+//Program: Frupal Game
 //Date: 11/10/20
-//This is the header file for the heirarchical relationship portion 
+//This is the header file for the heirarchical relationship portion
 //of the program. This file holds all the prototypes for the funcitonality of the
-//implementation file. 
-//Note to the group: Please feel free to change anything you see might need 
-//changing 
+//implementation file.
+//Note to the group: Please feel free to change anything you see might need
+//changing
 
 
 
@@ -17,7 +17,7 @@
 #include <stdlib.h>
 
 #ifndef OBJECT_H
-#define OBJECT_H 
+#define OBJECT_H
 
 using namespace std;
 
@@ -61,7 +61,7 @@ class tool: public object
 	public:
 	tool(); //default constructor
 	//constructor with args
-	tool(int add_cost, char *add_name, int add_power, int obs_type); 
+	tool(int add_cost, char *add_name, int add_power, int obs_type);
 	tool(const tool &to_copy);
 	int get_obstype();
 	int get_power();

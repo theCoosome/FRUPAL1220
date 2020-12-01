@@ -18,9 +18,6 @@ using namespace std;
 
 
 int main() {
-    World map;
-    map.fileRead();
-
     initscr();
     keypad(stdscr, true);
     nodelay(stdscr, true);
@@ -60,8 +57,8 @@ int main() {
       }
     }
     int katch = mainle();
-    
-    refresh(); 
+
+    refresh();
     // cursor position
     int cx = 2;
     int cy = 2;
@@ -89,7 +86,7 @@ int main() {
             //press q to quit
             running = false;
             break;
-          case KEY_LEFT: 
+          case KEY_LEFT:
             if (cx ==  0) {
               move(cy, COLS - 1);
             } else {

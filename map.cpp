@@ -8,9 +8,9 @@
 map::map()
 {
 	worldMap = getMap(); // worldMap catches the getMap value which will be a 2D array
-	
+
 // Original 2D array initialization
-/*	
+/*
 	for(int r = 0; r < 128; r++)
 	{
 		worldMap[r] = new grovnik[128];
@@ -37,11 +37,11 @@ map::~map()
 		{
 			delete [] worldMap[c];
 		}
-		
+
 		delete [] worldMap;
 	}
-	
-	
+
+
 }
 
 // function reads a text file filled with numbers, representing the items
@@ -58,7 +58,7 @@ grovnik** map::getMap()
 	}
 
 	grovnik ** Map = new grovnik * [5];
-	
+
 	for(int r = 0; r < 5; r++)
 	{
 		Map[r] = new grovnik[5];
@@ -68,12 +68,12 @@ grovnik** map::getMap()
 	{
 		for(int c = 0; c < 5; c++)
 		{
-			in_file >> Map[r][c].item;	
+			in_file >> Map[r][c].item;
 			//Map[r][c].item = in_file.get(); // need a set type function from object class
 			Map[r][c].visited = 0;
 		}
 	}
-			
+
 	return Map; // returns 2D array, need to ask if its okay
 }
 
@@ -97,14 +97,14 @@ void map::displayMap()
 
 	//cout << "3, 3: " << worldMap[3][3].item << endl; // was testing whether it displayed correctly
 }
-		
+
 // test main function to see if it worked
 int main()
 {
 	map obj;
-	
+
 	obj.displayMap();
-	
+
 	return 0;
 }
 
