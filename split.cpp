@@ -42,11 +42,6 @@ int mainle(int whiffles, int energy, bool binocs, bool boat)
 	{
 		bote = "on";
 	}
-		
-
-
-
-	
 
 	WINDOW *win = newwin(height, width, y_beg, x_beg);
 
@@ -62,9 +57,6 @@ int mainle(int whiffles, int energy, bool binocs, bool boat)
 	mvprintw(LINES-8, (COLS-width/2)-7, bino);
 	mvprintw(LINES-7, (COLS-width/2)-7, "Boat: ");
 	mvprintw(LINES-6, (COLS-width/2)-7, bote);
-
-
-
 
 	wrefresh(win);
 
