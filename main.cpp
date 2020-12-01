@@ -41,7 +41,7 @@ int main() {
 
     // player variables
     int energy = 100;
-    int whiffles = 1000;
+    int  whiffles = 1000;
     bool binoculars = false;
     bool boat = false;
     // vector<object> inventory;

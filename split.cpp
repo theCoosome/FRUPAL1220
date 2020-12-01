@@ -7,9 +7,10 @@
 
 
 #include <ncurses.h>
+#include <string>
 
 
-
+using namespace std;
 
 int mainle(int whiffles, int energy)
 {
@@ -25,6 +26,13 @@ int mainle(int whiffles, int energy)
 	int left, right, top, bottom, tl, tr, bl, br;
 	left = right = 0;
 	top = bottom = tl = tr = bl = br = 95;
+	string tmp = to_string(whiffles);
+    	char const *to_add = tmp.c_str();
+	string temp = to_string(energy);
+    	char const *to_add2 = tmp.c_str();
+
+
+
 	
 
 	WINDOW *win = newwin(height, width, y_beg, x_beg);
@@ -33,10 +41,10 @@ int mainle(int whiffles, int energy)
 
 	wborder(win, left, right, top, bottom, tl, tr, bl, br);
 	mvprintw(2, (COLS-width/2)-7, "Bag Contents");
-        mvprintw(LINES-10, (COLS-width/2)-7, "Whiffles: ");
-	mvwaddch(win,LINES-10, (COLS-width/2)+20, char(whiffles));
-	mvprintw(LINES-12, (COLS-width/2)-7, "Energy: ");
-	mvwaddch(win,LINES-10, (COLS-width/2)+20, char(energy));
+        mvprintw(LINES-13, (COLS-width/2)-7, "Whiffles: ");
+	mvprintw(LINES-12, (COLS-width/2)-7, to_add);
+	mvprintw(LINES-11, (COLS-width/2)-7, "Energy: ");
+	mvprintw(LINES-10, (COLS-width/2)-7, to_add2);
 
 
 
