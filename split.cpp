@@ -55,12 +55,12 @@ int mainle(int whiffles, int energy, bool binocs, bool boat)
 	mvprintw(2, (COLS-width/2)-7, "Bag Contents");
         mvprintw(LINES-13, (COLS-width/2)-7, "Whiffles: ");
 	mvprintw(LINES-12, (COLS-width/2)-7, to_add);
-	mvprintw(LINES-11, (COLS-width/2)-7, "Energy: ");
-	mvprintw(LINES-10, (COLS-width/2)-7, to_add2);
-	mvprintw(LINES-9, (COLS-width/2)-7, "Binoculars: ");
-	mvprintw(LINES-8, (COLS-width/2)-7, bino);
-	mvprintw(LINES-7, (COLS-width/2)-7, "Boat: ");
-	mvprintw(LINES-6, (COLS-width/2)-7, bote);
+	mvprintw(LINES-10, (COLS-width/2)-7, "Energy: ");
+	mvprintw(LINES-9, (COLS-width/2)-7, to_add2);
+	mvprintw(LINES-7, (COLS-width/2)-7, "Binoculars: ");
+	mvprintw(LINES-6, (COLS-width/2)-7, bino);
+	mvprintw(LINES-4, (COLS-width/2)-7, "Boat: ");
+	mvprintw(LINES-3, (COLS-width/2)-7, bote);
 
 	wrefresh(win);
 
