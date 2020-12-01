@@ -56,7 +56,7 @@ int main() {
         attroff(COLOR_PAIR(temp -> terrain));
       }
     }
-    int katch = mainle();
+    int katch = mainle(whiffles, energy);
 
     refresh();
     // cursor position

@@ -10,7 +10,8 @@
 
 
 
-int mainle()
+
+int mainle(int whiffles, int energy)
 {
 	initscr();
 	int y_beg, x_beg;
@@ -32,6 +33,9 @@ int mainle()
 
 	wborder(win, left, right, top, bottom, tl, tr, bl, br);
 	mvprintw(2, (COLS-width/2)-7, "Bag Contents");
+	mvprintw(LINES-10, (COLS-width/2)-7, "Whiffles: ");
+	mvprintw(LINES-12, (COLS-width/2)-7, "Energy: ");
+
 
 	wrefresh(win);
 
