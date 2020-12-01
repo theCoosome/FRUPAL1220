@@ -33,7 +33,7 @@ map::~map()
 	if(worldMap)
 	{
 
-		for(int c = 0; c < 5; c++)
+		for(int c = 0; c < 128; c++)
 		{
 			delete [] worldMap[c];
 		}
@@ -57,16 +57,16 @@ grovnik** map::getMap()
 		return 0;
 	}
 
-	grovnik ** Map = new grovnik * [5];
+	grovnik ** Map = new grovnik * [128];
 	
-	for(int r = 0; r < 5; r++)
+	for(int r = 0; r < 128; r++)
 	{
-		Map[r] = new grovnik[5];
+		Map[r] = new grovnik[128];
 	}
 
-	for(int r = 0; r < 5; r++)
+	for(int r = 0; r < 128; r++)
 	{
-		for(int c = 0; c < 5; c++)
+		for(int c = 0; c < 128; c++)
 		{
 			in_file >> Map[r][c].item;	
 			//Map[r][c].item = in_file.get(); // need a set type function from object class
@@ -86,9 +86,9 @@ void map::displayMap()
 		return;
 	}
 
-	for(int r = 0; r < 5; r++)
+	for(int r = 0; r < 128; r++)
 	{
-		for(int c =0; c < 5; c++)
+		for(int c =0; c < 128; c++)
 		{
 			cout << worldMap[r][c].item;
 		}
