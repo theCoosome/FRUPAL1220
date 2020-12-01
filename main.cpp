@@ -58,6 +58,8 @@ int main() {
     }
     int katch = mainle(whiffles, energy, binoculars, boat);
 
+    move((LINES*3)/8, (COLS*3)/8);
+
     refresh();
     // cursor position
     int cx = 2;
