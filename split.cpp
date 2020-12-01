@@ -25,7 +25,7 @@ int mainle(int whiffles, int energy)
 	int left, right, top, bottom, tl, tr, bl, br;
 	left = right = 0;
 	top = bottom = tl = tr = bl = br = 95;
-
+	
 
 	WINDOW *win = newwin(height, width, y_beg, x_beg);
 
@@ -33,8 +33,11 @@ int mainle(int whiffles, int energy)
 
 	wborder(win, left, right, top, bottom, tl, tr, bl, br);
 	mvprintw(2, (COLS-width/2)-7, "Bag Contents");
-	mvprintw(LINES-10, (COLS-width/2)-7, "Whiffles: ");
+        mvprintw(LINES-10, (COLS-width/2)-7, "Whiffles: ");
+	mvwaddch(win,LINES-10, (COLS-width/2)+20, char(whiffles));
 	mvprintw(LINES-12, (COLS-width/2)-7, "Energy: ");
+	mvwaddch(win,LINES-10, (COLS-width/2)+20, char(energy));
+
 
 
 	wrefresh(win);
