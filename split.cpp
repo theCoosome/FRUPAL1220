@@ -15,6 +15,7 @@ using namespace std;
 int mainle(int whiffles, int energy, bool binocs, bool boat)
 {
 	initscr();
+	//the begining of arugument declarations 
 	int y_beg, x_beg;
 	int x_max, y_max;
 	int height, width;
@@ -30,6 +31,7 @@ int mainle(int whiffles, int energy, bool binocs, bool boat)
 	bl = br = 42;
 	const char *bino = "off";
 	const char *bote = "off";
+	//conversion from integers to chars for window print
 	string tmp = to_string(whiffles);
     	char const *to_add = tmp.c_str();
 	string temp = to_string(energy);
@@ -46,6 +48,8 @@ int mainle(int whiffles, int energy, bool binocs, bool boat)
 	WINDOW *win = newwin(height, width, y_beg, x_beg);
 
 	refresh();
+
+	//split display print
 
 	wborder(win, left, right, top, bottom, tl, tr, bl, br);
 	mvprintw(2, (COLS-width/2)-7, "Bag Contents");
