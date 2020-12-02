@@ -64,11 +64,8 @@ int mainle(int whiffles, int energy, bool binocs, bool boat)
 
 	wrefresh(win);
 
-	move(y_max-1,x_max-1);
-	refresh();
-	getch();
-	getch();
-	endwin();
+//	endwin();
+	
 
 	return 0;
 }

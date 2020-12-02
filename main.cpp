@@ -75,7 +75,6 @@ int main() {
     while (running) {
         int ch = getch();
         getyx(stdscr, cy, cx);
-
         // Redraw if the user has given a key input
         // A key input is likely to draw something on screen.
         if (ch != -1) {
@@ -94,7 +93,7 @@ int main() {
             } else {
               move(cy, cx - 1);
             }
-            refresh();
+           // refresh();
             break;
           case KEY_RIGHT:
             if (cx ==  COLS-1) {
@@ -102,7 +101,7 @@ int main() {
             } else {
               move(cy, cx + 1);
             }
-            refresh();
+            //refresh();
             break;
           case KEY_UP:
             if (cy ==  0) {
@@ -110,7 +109,7 @@ int main() {
             } else {
               move(cy - 1, cx);
             }
-            refresh();
+           // refresh();
             break;
           case KEY_DOWN:
             if (cy ==  LINES - 1) {
@@ -118,10 +117,11 @@ int main() {
             } else {
               move(cy + 1, cx);
             }
-            refresh();
+            //refresh();
             break;
         }
-
+//	--energy;
+    //	mainle(whiffles, energy, binoculars, boat);
         refresh();
 
     }
