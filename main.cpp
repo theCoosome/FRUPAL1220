@@ -103,7 +103,7 @@ int main() {
 	// set values, due to possibility of changing viewport
 	int Cols = COLS;
 	int Rows = LINES;
-/*
+
 	while (running) {
 		int ch = getch();
 		getyx(stdscr, cy, cx);
@@ -111,55 +111,54 @@ int main() {
 		// A key input is likely to draw something on screen.
 		if (ch != -1) {
 			move(cy, cx);
+			showGrov(cy, cx, map.getAt(cy, cx));
+			// hero display
 		}
-
+/*
 		// User input, always considered
 		   switch (ch) {
 		   case 'q':
-		//press q to quit
-		running = false;
-		break;
-		case KEY_LEFT:
-		if (cx ==  0) {
-		move(cy, COLS - 1);
-		} else {
-		move(cy, cx - 1);
-		}
-		// refresh();
-		break;
-		case KEY_RIGHT:
-		if (cx ==  COLS-1) {
-		move(cy, 0);
-		} else {
-		move(cy, cx + 1);
-		}
-		//refresh();
-		break;
-		case KEY_UP:
-		if (cy ==  0) {
-		move(LINES - 1, cx);
-		} else {
-		move(cy - 1, cx);
-		}
-		// refresh();
-		break;
-		case KEY_DOWN:
-		if (cy ==  LINES - 1) {
-		move(0, cx);
-		} else {
-		move(cy + 1, cx);
-		}
-		//refresh();
-		break;
+				//press q to quit
+				running = false;
+				break;
+				case KEY_LEFT:
+				if (cx ==  0) {
+				move(cy, COLS - 1);
+				} else {
+				move(cy, cx - 1);
+				}
+				// refresh();
+				break;
+				case KEY_RIGHT:
+				if (cx ==  COLS-1) {
+				move(cy, 0);
+				} else {
+				move(cy, cx + 1);
+				}
+				//refresh();
+				break;
+				case KEY_UP:
+				if (cy ==  0) {
+				move(LINES - 1, cx);
+				} else {
+				move(cy - 1, cx);
+				}
+				// refresh();
+				break;
+				case KEY_DOWN:
+				if (cy ==  LINES - 1) {
+				move(0, cx);
+				} else {
+				move(cy + 1, cx);
+				}
+				//refresh();
+				break;
 		}
 		refresh();
-
-		}
-		 */
+*/
+		 
 		nodelay(stdscr, FALSE);
-//alternative cursor movement
-		do //user input pause loop
-		{	switch(ch)
+		switch(ch)
 			{
 				case KEY_UP: //move up
 					if(cy)
@@ -184,15 +183,14 @@ int main() {
 					else
 						++cx;
 					break;
-			case 'q': //quit the game
+				case 'q': //quit the game
+					running = false;
 					break;
 			}
 			--energy;
 			drawsplit(whiffles, energy, binoculars, boat);
 			move(cy,cx);//move the cursor
-			ch = mvgetch(cy,cx); //grab the new spot
-			curs_set(1);//place cursor in prior postition
-		}while(ch != 'q');
+		}
 
 
 		return endwin();
