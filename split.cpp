@@ -12,7 +12,7 @@
 int drawsplit(int whiffles, int energy, bool binocs, bool boat)
 {
 	initscr();
-	//the begining of arugument declarations 
+	//the begining of arugument declarations
 	int y_beg, x_beg;
 	int x_max, y_max;
 	int height, width;
@@ -62,7 +62,7 @@ int drawsplit(int whiffles, int energy, bool binocs, bool boat)
 	wrefresh(win);
 
 //	endwin();
-	
+
 
 	return 0;
 }

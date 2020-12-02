@@ -59,7 +59,7 @@ int main() {
 	drawsplit(whiffles, energy, binoculars, boat);
 
 	refresh();
-	
+
 
 	// cursor position
 	int cx = 2;
@@ -125,7 +125,7 @@ int main() {
 		}
 		 */
 		nodelay(stdscr, FALSE);
-//alternative cursor movement 
+//alternative cursor movement
 		do //user input pause loop
 		{	switch(ch)
 			{
