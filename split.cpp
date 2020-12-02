@@ -33,9 +33,9 @@ int drawsplit(int whiffles, int energy, bool binocs, bool boat)
 	char *bote = "off";
 	//conversion from integers to chars for window print
 	string tmp = to_string(whiffles);
-    	char const *to_add = tmp.c_str();
+    	const char  *to_add = tmp.c_str();
 	string temp = to_string(energy);
-    	char const *to_add2 = tmp.c_str();
+    	const char  *to_add2 = tmp.c_str();
 	if(binocs == true)
 	{
 		bino = "on";
