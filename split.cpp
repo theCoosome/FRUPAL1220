@@ -12,7 +12,7 @@
 
 using namespace std;
 
-int mainle(int whiffles, int energy, bool binocs, bool boat)
+int drawsplit(int whiffles, int energy, bool binocs, bool boat)
 {
 	initscr();
 	//the begining of arugument declarations 

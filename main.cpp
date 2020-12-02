@@ -56,7 +56,7 @@ int main() {
         attroff(COLOR_PAIR(temp -> terrain));
       }
     }
-    int katch = mainle(whiffles, energy, binoculars, boat);
+    drawsplit(whiffles, energy, binoculars, boat);
 
     move((LINES*3)/8, (COLS*3)/8);
 
@@ -121,7 +121,7 @@ int main() {
             break;
         }
 //	--energy;
-    //	mainle(whiffles, energy, binoculars, boat);
+    //	drawsplit(whiffles, energy, binoculars, boat);
         refresh();
 
     }
