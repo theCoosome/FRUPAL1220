@@ -30,7 +30,7 @@ int drawsplit(int whiffles, int energy, bool binocs, bool boat)
 	tl = tr = 42;
 	bl = br = 42;
 	const char *bino = "off";
-	const char *bote = "off";
+	char *bote = "off";
 	//conversion from integers to chars for window print
 	string tmp = to_string(whiffles);
     	char const *to_add = tmp.c_str();
