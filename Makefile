@@ -5,8 +5,8 @@ PROGS= frupal fog_test
 
 all: $(PROGS)
 
-frupal: main.cpp object.cpp object.h world.cpp world.h
-	$(CC) $(CFLAGS) main.cpp object.cpp world.cpp -o $@ $(LDFLAGS)
+frupal: main.cpp object.cpp object.h split.cpp split.h world.cpp world.h
+	$(CC) $(CFLAGS) main.cpp object.cpp object.h split.cpp split.h world.cpp world.h -o $@ $(LDFLAGS)
 
 fog_test: fog_test.cpp object.cpp object.h world.cpp world.h
 	$(CC) $(CFLAGS) -DTEST fog_test.cpp object.cpp world.cpp -o $@ $(LDFLAGS)

@@ -6,11 +6,8 @@
 
 
 
-#include <ncurses.h>
-#include <string>
 
-
-using namespace std;
+#include "split.h"
 
 int drawsplit(int whiffles, int energy, bool binocs, bool boat)
 {
@@ -29,8 +26,8 @@ int drawsplit(int whiffles, int energy, bool binocs, bool boat)
 	top = bottom = 32;
 	tl = tr = 42;
 	bl = br = 42;
-	const char *bino = "off";
-	char *bote = "off";
+	char *bino = (char*)"off";
+	char *bote = (char*)"off";
 	//conversion from integers to chars for window print
 	string tmp = to_string(whiffles);
     	const char  *to_add = tmp.c_str();
@@ -38,11 +35,11 @@ int drawsplit(int whiffles, int energy, bool binocs, bool boat)
     	const char  *to_add2 = tmp.c_str();
 	if(binocs == true)
 	{
-		bino = "on";
+		bino = (char*)"on";
 	}
 	if(boat == true)
 	{
-		bote = "on";
+		bote = (char*)"on";
 	}
 
 	WINDOW *win = newwin(height, width, y_beg, x_beg);

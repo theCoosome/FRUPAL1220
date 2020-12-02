@@ -4,7 +4,7 @@
 
 #include "object.h"
 #include "world.h"
-#include "split.cpp"
+#include "split.h"
 
 //color definitions
 #define MEADOW_PAIR 1
