@@ -72,7 +72,7 @@ void World::fileRead() {
 		//Interpret each value
 		for (unsigned int x=0; x < width; ++x) {
 			xval[0] = input[x];
-			tiles[x][y].terrain = atoi(xval);
+			tiles[y][x].terrain = atoi(xval);
 		}
 		inf.peek();
 		if (inf.eof())
