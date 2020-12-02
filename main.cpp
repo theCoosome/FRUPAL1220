@@ -16,6 +16,31 @@
 
 using namespace std;
 
+void showGrov(int x, int y, grovnik * show) {
+	char atpoint = ' ';
+	if (show -> poi) {
+		switch (show -> poi -> get_type()) {
+			case 1: //treasure
+				atpoint = '$';
+				break;
+			case 2: //food
+				atpoint = 'F';
+				break;
+			case 3: //tool
+				atpoint = 'T';
+				break;
+			case 7: //obstacle
+				atpoint = '!';
+				break;
+		}
+	}
+	if (show -> terrain == DIAMOND_PAIR) {
+		atpoint = '$';
+	}
+	attron(COLOR_PAIR(show -> terrain));
+	mvaddch(x, y, atpoint);
+	attroff(COLOR_PAIR(show -> terrain));
+}
 
 int main() {
 	initscr();
@@ -35,7 +60,11 @@ int main() {
 
 	// initialize variables
 	World map;
-	map.fileRead();
+	int * herox = new int;
+	int * heroy = new int;
+	*heroy = 2;
+	*herox = 2;
+	map.fileRead(herox, heroy);
 
 	bool running = true; // program running conditional
 
@@ -46,27 +75,30 @@ int main() {
 	bool boat = false;
 	// vector<object> inventory;
 
+	// cursor position
+	int cx = 2;
+	int cy = 2;
+	int playerx = *herox;
+	int playery = *heroy;
+	delete herox;
+	delete heroy;
+	int ch = 0;
 
-	// test world
+	// Initial world draw
 	for (int i = 0; i < 128; i++) {
 		for (int j = 0; j < 128; j++) {
-			grovnik * temp = map.getAt(i, j);
-			attron(COLOR_PAIR(temp -> terrain));
-			mvaddch(i, j, ' ');
-			attroff(COLOR_PAIR(temp -> terrain));
+			showGrov(i ,j, map.getAt(i, j));
 		}
 	}
 	drawsplit(whiffles, energy, binoculars, boat);
 
+	attron(COLOR_PAIR(6));
+	mvaddch(playerx, playery, '@');
+	attroff(COLOR_PAIR(6));
+
 	refresh();
 
 
-	// cursor position
-	int cx = 2;
-	int cy = 2;
-	int playerx = 3;
-	int playery = 3;
-	int ch;
 
 	// set values, due to possibility of changing viewport
 	int Cols = COLS;
@@ -130,12 +162,7 @@ int main() {
 		{	switch(ch)
 			{
 				case KEY_UP: //move up
-					if(cy == 0)
-					{
-						cy= 1;
-
-					}
-					else
+					if(cy)
 						--cy;
 					break;
 				case KEY_DOWN: //move down
@@ -146,11 +173,7 @@ int main() {
 						++cy;
 					break;
 				case KEY_LEFT: //move left
-					if(cx == 0)
-					{
-						cx = 1;
-					}
-					else
+					if(cx)
 						--cx;
 					break;
 				case KEY_RIGHT: //move right

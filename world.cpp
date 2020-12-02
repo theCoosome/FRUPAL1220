@@ -56,7 +56,7 @@ World::~World() {
 }
 
 
-void World::fileRead() {
+void World::fileRead(int * herox, int * heroy) {
 	//Read the map data
 	ifstream inf;
 
@@ -101,6 +101,11 @@ void World::fileRead() {
 
 		// Read the remaining data
 		switch (t) {
+			case 0: // Hero.
+				*herox = x;
+				*heroy = y;
+				break;
+
 			case 1: // treasure: Returned value
 				inf >> cost;
 				tiles[x][y].poi = new treasure(cost, false);
