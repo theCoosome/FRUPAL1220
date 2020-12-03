@@ -114,49 +114,47 @@ int main() {
 			showGrov(cy, cx, map.getAt(cy, cx));
 			// hero display
 		}
-/*
+
 		// User input, always considered
+/*
 		   switch (ch) {
-		   case 'q':
+		                case 'q':
 				//press q to quit
 				running = false;
 				break;
-				case KEY_LEFT:
+				case 'l'://moves player left
 				if (cx ==  0) {
-				move(cy, COLS - 1);
-				} else {
-				move(cy, cx - 1);
-				}
-				// refresh();
+					COLS - 1;
+				} 
+				++cx;
 				break;
-				case KEY_RIGHT:
+				case 'j'://move play right
 				if (cx ==  COLS-1) {
-				move(cy, 0);
-				} else {
-				move(cy, cx + 1);
-				}
-				//refresh();
+					cx = COLS-1;
+				} 
+				--cx;
 				break;
-				case KEY_UP:
+				case 'i': //move player up
 				if (cy ==  0) {
-				move(LINES - 1, cx);
-				} else {
-				move(cy - 1, cx);
-				}
-				// refresh();
+					cy = 0;
+				} 
+				++cy;
 				break;
-				case KEY_DOWN:
+				case 'm': //move player down
 				if (cy ==  LINES - 1) {
-				move(0, cx);
-				} else {
-				move(cy + 1, cx);
-				}
-				//refresh();
+					cy = LINES -1;
+				} 
+				--cy;
 				break;
-		}
-		refresh();
+		    }
+
+		    --energy;
+		    drawsplit(whiffles, energy, binoculars, boat);
+
+                    attron(COLOR_PAIR(6));
+	            mvaddch(playerx, playery, '@');
+	            attroff(COLOR_PAIR(6));
 */
-		 
 		nodelay(stdscr, FALSE);
 		switch(ch)
 			{
@@ -187,8 +185,6 @@ int main() {
 					running = false;
 					break;
 			}
-			--energy;
-			drawsplit(whiffles, energy, binoculars, boat);
 			move(cy,cx);//move the cursor
 		}
 
