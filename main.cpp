@@ -14,6 +14,7 @@
 #define DIAMOND_PAIR 5
 #define HERO_PAIR 6
 
+void printCenter(WINDOW *window, int cols, int line, const char *toPrint);
 void print_lose();
 void setDisplayRange(int herox, int heroy, int cols, int lines, int & xMax, int & xMin, int & yMax, int & yMin);
 
@@ -66,15 +67,41 @@ int main() {
   int displayXMin = 0;
   int displayYMax = 0;
   int displayYMin = 0;
-
+  int gameCols = COLS * 3/4;
+  int infoCols = COLS / 4;
+  setDisplayRange(playerx, playery, gameCols, LINES, displayXMax, displayXMin, displayYMax, displayYMin);
+  //create windows for display
   WINDOW* infoWindow = newwin(LINES, COLS/4, 0, COLS * 3/4);
   WINDOW* gameWindow = newwin(LINES, COLS * 3/4, 0, 0);
+
+  //draw info window
+  //border
   for (int i = 0; i < 128; i++) {
     mvwprintw(infoWindow, i, 0, "|");
   }
+
+  //internal
+  char *bino = (char*)"off";
+  char *bote = (char*)"off";
+  string temp = to_string(energy);
+  const char *energy_balance = temp.c_str();
+  temp = to_string(whiffles);
+  const char *whiffle_balance = temp.c_str();
+  printCenter(infoWindow, infoCols, 2, "Hero's Bag:");
+  printCenter(infoWindow, infoCols, LINES - 13, "Whiffles:"); 
+  printCenter(infoWindow, infoCols, LINES - 12, whiffle_balance); 
+  printCenter(infoWindow, infoCols, LINES - 10, "Energy:"); 
+  printCenter(infoWindow, infoCols, LINES - 9, energy_balance); 
+  printCenter(infoWindow, infoCols, LINES - 7, "Binoculars:"); 
+  printCenter(infoWindow, infoCols, LINES - 6, bino); 
+  printCenter(infoWindow, infoCols, LINES - 4, "Boat:"); 
+  printCenter(infoWindow, infoCols, LINES - 3, bote); 
+
+
 	refresh();
   wrefresh(gameWindow);
   wrefresh(infoWindow);
+ 
 
 
 
@@ -106,7 +133,7 @@ int main() {
           --cx;
         break;
       case KEY_RIGHT: //move right
-        if(cx != COLS-1)
+        if(cx != gameCols - 1)
           ++cx;
         break;
     }
@@ -135,9 +162,59 @@ void print_lose()
 }
 
 void setDisplayRange(int herox, int heroy, int cols, int lines, int & xMax, int & xMin, int & yMax, int & yMin) {
+  if (cols % 2 == 1) {
+    xMax = herox + cols/2;
+    xMin = herox - cols/2;
+  } else {
+    if (herox >= cols/2) {
+      xMax = herox + cols/2 - 1;
+      xMin = herox - cols/2;
+    } else {
+      xMax = herox + cols/2;
+      xMin = herox - cols/2 +1;
+    }
+  } 
+
+  if (lines % 2 == 1) {
+    yMax = heroy + lines/2;
+    yMin = heroy - lines/2;
+  } else {
+    if (heroy >= lines/2) {
+      yMax = heroy + lines/2 - 1;
+      yMin = heroy - lines/2;
+    } else {
+      yMax = heroy + lines/2;
+      yMin = heroy - lines/2 +1;
+    }
+  } 
+
+  if (xMin < 0) {
+    int flip = xMin * -1;
+    xMin = xMin + flip;
+    xMax = xMax + flip;
+  }
+  if (xMax >= 128) {
+    int flip = xMax - 127;
+    xMax = xMax - flip;
+    xMin = xMin - flip;
+  }
+  if (yMin < 0) {
+    int flip = yMin * -1;
+    yMin = yMin + flip;
+    yMax = yMax + flip;
+  }
+  if (yMax >= 128) {
+    int flip = yMax - 127;
+    yMax = yMax - flip;
+    yMin = xMin - flip;
+  }
   return;
 }
 
-
+void printCenter(WINDOW *window, int cols, int line, const char *toPrint) {
+  int length = strlen(toPrint);
+  int printCol = ((cols - length) / 2) - 1;
+  mvwprintw(window, line, printCol, toPrint);
+}
 
 
