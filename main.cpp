@@ -155,6 +155,7 @@ int main() {
                     attron(COLOR_PAIR(6));
 	            mvaddch(playery, playerx, '@');
 	            attroff(COLOR_PAIR(6));
+		    
 
 
 		nodelay(stdscr, FALSE);
