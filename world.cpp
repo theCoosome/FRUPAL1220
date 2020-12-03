@@ -62,7 +62,6 @@ void World::fileRead(int * herox, int * heroy) {
 
 	inf.open("map.txt");
 	char* input = new char[width + 1];
-	char xval;
 
 	//Read each line
 	for (unsigned int y=0; y < height; ++y) {
@@ -71,8 +70,7 @@ void World::fileRead(int * herox, int * heroy) {
 
 		//Interpret each value
 		for (unsigned int x=0; x < width; ++x) {
-			xval = input[x];
-			tiles[y][x].terrain = xval - 48;
+			tiles[y][x].terrain = input[x] - 48;
 		}
 		inf.peek();
 		if (inf.eof())
