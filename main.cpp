@@ -85,7 +85,6 @@ int main() {
 	int playery = *heroy;
 	delete herox;
 	delete heroy;
-	int ch = 0;
 
 	// Initial world draw
 	for (int i = 0; i < 128; i++) {
@@ -104,8 +103,8 @@ int main() {
 
 
 	// set values, due to possibility of changing viewport
-	int Cols = COLS;
-	int Rows = LINES;
+//	int Cols = COLS;
+//	int Rows = LINES;
 
 	while (running) {
 		int ch = getch();
