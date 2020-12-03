@@ -42,9 +42,8 @@ int drawsplit(int whiffles, int energy, bool binocs, bool boat)
 	//conversion from integers to chars for window print
 	string tmp = to_string(energy);
     	const char  *to_add = tmp.c_str();
-	//need to clear the buffer
 	string temp = to_string(whiffles);
-    	const char  *to_add2 = tmp.c_str();
+    	const char  *to_add2 = temp.c_str();
 	if(binocs == true)
 	{
 		bino = (char*)"on";
