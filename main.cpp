@@ -14,6 +14,8 @@
 #define DIAMOND_PAIR 5
 #define HERO_PAIR 6
 
+void print_lose();
+
 using namespace std;
 
 void showGrov(int x, int y, grovnik * show) {
@@ -110,6 +112,10 @@ int main() {
 		getyx(stdscr, cy, cx);
 		// Redraw if the user has given a key input
 		// A key input is likely to draw something on screen.
+		if(energy <= 0)
+		{
+			break;
+		}
 		if (ch != -1) {
 			move(cy, cx);
 			showGrov(cy, cx, map.getAt(cy, cx));
@@ -196,11 +202,29 @@ int main() {
 			move(cy,cx);//move the cursor
 		}
 
+		refresh();
+		if(energy <= 0)
+		  print_lose();
+
 
 		return endwin();
 }
 
+void print_lose()
+{
+	wrefresh(stdscr);
+	initscr();
+	noecho();
+	mvprintw((LINES/2), (COLS/2)-8, "YOU LOSE");
+	move(0,0);
+	refresh();
+	getch();
+	getch();
+	endwin();
+	refresh();
 
+
+}
 
 
 
