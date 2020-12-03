@@ -122,52 +122,51 @@ int main() {
 		}
 
 		// User input, always considered
-		   switch (ch) {
-		                case 'q':
-				//press q to quit
-				running = false;
+		switch (ch) {
+		  case 'q': //press q to quit
+			  running = false;
 				break;
-				case 'l'://moves player left
-				if (playerx ==  0) {
-					playerx = 0;
-				} 
-				--energy;
-				++playerx;
-				break;
-				case 'j'://move play right
-				if (playerx ==  COLS-1) {
-					playerx = COLS-1;
-				} 
-				--energy;
-				--playerx;
-				break;
-				case 'i': //move player up
-				if (playery ==  0) {
-					playery = 0;
-				} 
-				--energy;
-				--playery;
-				break;
-				case 'm': //move player down
-				if (playery ==  LINES - 1) {
-					playery = LINES -1;
-				} 
-		    		--energy;
-				++playery;
-				break;
-			default:
-				break;
-		    }
+      case 'l'://moves player left
+        if (playerx ==  0) {
+          playerx = 0;
+        } 
+        --energy;
+        ++playerx;
+        break;
+      case 'j'://move play right
+        if (playerx ==  COLS-1) {
+          playerx = COLS-1;
+        } 
+        --energy;
+        --playerx;
+        break;
+      case 'i': //move player up
+        if (playery ==  0) {
+          playery = 0;
+        } 
+        --energy;
+        --playery;
+        break;
+      case 'm': //move player down
+        if (playery ==  LINES - 1) {
+          playery = LINES -1;
+        } 
+            --energy;
+        ++playery;
+        break;
+      default:
+        break;
+      }
 
-		    drawsplit(whiffles, energy, binoculars, boat);
-                    attron(COLOR_PAIR(6));
-	            mvaddch(playery, playerx, '@');
-	            attroff(COLOR_PAIR(6));
+		  drawsplit(whiffles, energy, binoculars, boat);
+      attron(COLOR_PAIR(6));
+	    mvaddch(playery, playerx, '@');
+	    attroff(COLOR_PAIR(6));
 		    
 
 
-		nodelay(stdscr, FALSE);
-		switch(ch)
+		  nodelay(stdscr, FALSE);
+		  switch(ch)
 			{
 				case KEY_UP: //move up
 					if(cy)
