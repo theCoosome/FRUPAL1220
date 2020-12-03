@@ -15,34 +15,9 @@
 #define HERO_PAIR 6
 
 void print_lose();
+void setDisplayRange(int herox, int heroy, int cols, int lines, int & xMax, int & xMin, int & yMax, int & yMin);
 
 using namespace std;
-
-void showGrov(int x, int y, grovnik * show) {
-	char atpoint = ' ';
-	if (show -> poi) {
-		switch (show -> poi -> get_type()) {
-			case 1: //treasure
-				atpoint = '$';
-				break;
-			case 2: //food
-				atpoint = 'F';
-				break;
-			case 3: //tool
-				atpoint = 'T';
-				break;
-			case 7: //obstacle
-				atpoint = '!';
-				break;
-		}
-	}
-	if (show -> terrain == DIAMOND_PAIR) {
-		atpoint = '$';
-	}
-	attron(COLOR_PAIR(show -> terrain));
-	mvaddch(x, y, atpoint);
-	attroff(COLOR_PAIR(show -> terrain));
-}
 
 int main() {
 	initscr();
@@ -86,19 +61,20 @@ int main() {
 	delete herox;
 	delete heroy;
 
-	// Initial world draw
-	for (int i = 0; i < 128; i++) {
-		for (int j = 0; j < 128; j++) {
-			showGrov(i ,j, map.getAt(i, j));
-		}
-	}
-	drawsplit(whiffles, energy, binoculars, boat);
+  //display variables
+  int displayXMax = 0;
+  int displayXMin = 0;
+  int displayYMax = 0;
+  int displayYMin = 0;
 
-	attron(COLOR_PAIR(6));
-	mvaddch(playerx, playery, '@');
-	attroff(COLOR_PAIR(6));
-
+  WINDOW* infoWindow = newwin(LINES, COLS/4, 0, COLS * 3/4);
+  WINDOW* gameWindow = newwin(LINES, COLS * 3/4, 0, 0);
+  for (int i = 0; i < 128; i++) {
+    mvwprintw(infoWindow, i, 0, "|");
+  }
 	refresh();
+  wrefresh(gameWindow);
+  wrefresh(infoWindow);
 
 
 
@@ -111,101 +87,37 @@ int main() {
 		getyx(stdscr, cy, cx);
 		// Redraw if the user has given a key input
 		// A key input is likely to draw something on screen.
-		if(energy <= 0)
-		{
-			break;
-		}
-		if (ch != -1) {
-			move(cy, cx);
-			showGrov(cy, cx, map.getAt(cy, cx));
-			// hero display
-		}
 
-		// User input, always considered
 		switch (ch) {
 		  case 'q': //press q to quit
 			  running = false;
 				break;
-      case 'l'://moves player left
-        if (playerx ==  0) {
-          playerx = 0;
-        } 
-        --energy;
-        ++playerx;
+      case KEY_UP: //move up
+        if(cy)
+          --cy;
         break;
-      case 'j'://move play right
-        if (playerx ==  COLS-1) {
-          playerx = COLS-1;
-        } 
-        --energy;
-        --playerx;
+      case KEY_DOWN: //move down
+        if(cy != LINES-1) {
+          ++cy;
+        }
         break;
-      case 'i': //move player up
-        if (playery ==  0) {
-          playery = 0;
-        } 
-        --energy;
-        --playery;
+      case KEY_LEFT: //move left
+        if(cx)
+          --cx;
         break;
-      case 'm': //move player down
-        if (playery ==  LINES - 1) {
-          playery = LINES -1;
-        } 
-            --energy;
-        ++playery;
+      case KEY_RIGHT: //move right
+        if(cx != COLS-1)
+          ++cx;
         break;
-      default:
-        break;
-      }
+    }
+    move(cy, cx);
+    refresh();
 
-		  drawsplit(whiffles, energy, binoculars, boat);
-      attron(COLOR_PAIR(6));
-	    mvaddch(playery, playerx, '@');
-	    attroff(COLOR_PAIR(6));
-		    
+  }
 
-
-		  nodelay(stdscr, FALSE);
-		  switch(ch)
-			{
-				case KEY_UP: //move up
-					if(cy)
-						--cy;
-					break;
-				case KEY_DOWN: //move down
-					if(cy == LINES-1) {
-						cy = LINES -1;
-					}
-					else
-						++cy;
-					break;
-				case KEY_LEFT: //move left
-					if(cx)
-						--cx;
-					break;
-				case KEY_RIGHT: //move right
-					if(cx == COLS-1)
-					{
-						cx = COLS -1;
-					}
-					else
-						++cx;
-					break;
-				case 'q': //quit the game
-					running = false;
-					break;
-				default:
-					break;
-			}
-			move(cy,cx);//move the cursor
-		}
-
-		refresh();
-		if(energy <= 0)
-		  print_lose();
-
-
-		return endwin();
+  delete gameWindow;
+  delete infoWindow;
+	return endwin();
 }
 
 void print_lose()
@@ -220,10 +132,11 @@ void print_lose()
 	getch();
 	endwin();
 	refresh();
-
-
 }
 
+void setDisplayRange(int herox, int heroy, int cols, int lines, int & xMax, int & xMin, int & yMax, int & yMin) {
+  return;
+}
 
 
 
