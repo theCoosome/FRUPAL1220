@@ -126,31 +126,34 @@ int main() {
 				if (playerx ==  0) {
 					playerx = 0;
 				} 
+				--energy;
 				++playerx;
 				break;
 				case 'j'://move play right
 				if (playerx ==  COLS-1) {
 					playerx = COLS-1;
 				} 
+				--energy;
 				--playerx;
 				break;
 				case 'i': //move player up
 				if (playery ==  0) {
 					playery = 0;
 				} 
+				--energy;
 				--playery;
 				break;
 				case 'm': //move player down
 				if (playery ==  LINES - 1) {
 					playery = LINES -1;
 				} 
+		    		--energy;
 				++playery;
 				break;
 			default:
 				break;
 		    }
 
-		    --energy;
 		    drawsplit(whiffles, energy, binoculars, boat);
                     attron(COLOR_PAIR(6));
 	            mvaddch(playery, playerx, '@');

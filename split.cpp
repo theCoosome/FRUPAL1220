@@ -15,7 +15,7 @@ int drawsplit(int whiffles, int energy, bool binocs, bool boat)
 	//the begining of arugument declarations
 	int x = COLS*3/4;
 	int y = 0;
-	while(y != LINES-1)
+	while(y != LINES)
 	{ 
 		mvaddch(y,x, '|');
 		++y;
@@ -40,9 +40,10 @@ int drawsplit(int whiffles, int energy, bool binocs, bool boat)
 	char *bino = (char*)"off";
 	char *bote = (char*)"off";
 	//conversion from integers to chars for window print
-	string tmp = to_string(whiffles);
+	string tmp = to_string(energy);
     	const char  *to_add = tmp.c_str();
-	string temp = to_string(energy);
+	//need to clear the buffer
+	string temp = to_string(whiffles);
     	const char  *to_add2 = tmp.c_str();
 	if(binocs == true)
 	{
