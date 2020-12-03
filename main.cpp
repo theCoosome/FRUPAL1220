@@ -116,45 +116,46 @@ int main() {
 		}
 
 		// User input, always considered
-/*
 		   switch (ch) {
 		                case 'q':
 				//press q to quit
 				running = false;
 				break;
 				case 'l'://moves player left
-				if (cx ==  0) {
-					COLS - 1;
+				if (playerx ==  0) {
+					playerx = 0;
 				} 
-				++cx;
+				++playerx;
 				break;
 				case 'j'://move play right
-				if (cx ==  COLS-1) {
-					cx = COLS-1;
+				if (playerx ==  COLS-1) {
+					playerx = COLS-1;
 				} 
-				--cx;
+				--playerx;
 				break;
 				case 'i': //move player up
-				if (cy ==  0) {
-					cy = 0;
+				if (playery ==  0) {
+					playery = 0;
 				} 
-				++cy;
+				++playery;
 				break;
 				case 'm': //move player down
-				if (cy ==  LINES - 1) {
-					cy = LINES -1;
+				if (playery ==  LINES - 1) {
+					playery = LINES -1;
 				} 
-				--cy;
+				--playery;
+				break;
+			default:
 				break;
 		    }
 
 		    --energy;
 		    drawsplit(whiffles, energy, binoculars, boat);
-
                     attron(COLOR_PAIR(6));
-	            mvaddch(playerx, playery, '@');
+	            mvaddch(playery, playerx, '@');
 	            attroff(COLOR_PAIR(6));
-*/
+
+
 		nodelay(stdscr, FALSE);
 		switch(ch)
 			{
@@ -183,6 +184,8 @@ int main() {
 					break;
 				case 'q': //quit the game
 					running = false;
+					break;
+				default:
 					break;
 			}
 			move(cy,cx);//move the cursor
