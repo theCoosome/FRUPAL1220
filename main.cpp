@@ -46,6 +46,7 @@ int main() {
 	initscr();
 	keypad(stdscr, true);
 	nodelay(stdscr, true);
+	noecho();
 	clear();
 
 	//initialize color stuff
@@ -137,13 +138,13 @@ int main() {
 				if (playery ==  0) {
 					playery = 0;
 				} 
-				++playery;
+				--playery;
 				break;
 				case 'm': //move player down
 				if (playery ==  LINES - 1) {
 					playery = LINES -1;
 				} 
-				--playery;
+				++playery;
 				break;
 			default:
 				break;

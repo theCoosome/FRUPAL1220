@@ -58,6 +58,7 @@ int drawsplit(int whiffles, int energy, bool binocs, bool boat)
 	mvprintw(LINES-6, (COLS-width/2)-7, bino);
 	mvprintw(LINES-4, (COLS-width/2)-7, "Boat: ");
 	mvprintw(LINES-3, (COLS-width/2)-7, bote);
+	
 
 	wrefresh(win);
 
