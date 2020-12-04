@@ -200,7 +200,9 @@ grovnik::grovnik() {
 
 
 grovnik::~grovnik() {
-	// Object pointers are to be handled by their handler
+	if(poi) {
+		delete poi;
+	}
 }
 
 
