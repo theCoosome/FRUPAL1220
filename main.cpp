@@ -18,7 +18,6 @@ void printCenter(WINDOW *window, int cols, int line, const char *toPrint);
 void print_lose();
 void setDisplayRange(int herox, int heroy, int cols, int lines, int & xMax, int & xMin, int & yMax, int & yMin);
 void showGrov(WINDOW *window, int x, int y, grovnik* show);
-
 using namespace std;
 
 int main() {
@@ -131,6 +130,9 @@ int main() {
       }
     }
   }
+  wattron(gameWindow, COLOR_PAIR(HERO_PAIR));
+  mvwaddch(gameWindow, playery, playerx, '@');
+  wattroff(gameWindow, COLOR_PAIR(HERO_PAIR));
 	refresh();
   wrefresh(gameWindow);
   wrefresh(infoWindow);
@@ -169,9 +171,69 @@ int main() {
         if(cx != gameCols - 1)
           ++cx;
         break;
+      case 'j': //move player left
+        if (playerx > 0) {
+          --playerx;
+        }
+        --energy;
+        break;
+      case 'l': //move player right
+        if (playerx < 127) {
+          ++playerx; 
+        }
+        --energy;
+        break;
+      case 'i': //move player up
+        if (playery > 0) {
+          --playery;
+        }
+        --energy;
+        break;
+      case 'k': //move player down
+        if (playery < 127) {
+          ++playery;
+        }
+        --energy;
+        break;
     }
-    move(cy, cx);
-    refresh();
+    
+    setDisplayRange(playerx, playery, gameCols, LINES, displayXMax, displayXMin, displayYMax, displayYMin);
+    /*
+  string temp2 = to_string(displayXMin);
+  const char *one = temp2.c_str();
+  string temp3 = to_string(displayXMax);
+  const char *two = temp3.c_str();
+  string temp4 = to_string(displayYMin);
+  const char *three = temp4.c_str();
+  string temp5 = to_string(displayYMax);
+  const char *four = temp5.c_str();
+  printCenter(infoWindow, infoCols, 4, one);
+  printCenter(infoWindow, infoCols, 5, two);
+  printCenter(infoWindow, infoCols, 6, three);
+  printCenter(infoWindow, infoCols, 7, four);
+  */
+
+    if (binoculars == true)
+      map.clearfog_rad(playerx, playery, 2); 
+    else 
+      map.clearfog_rad(playerx, playery, 1); 
+    fog = map.get_fog1();    
+    for (int col = displayXMin; col <= displayXMax; col++) {
+      for (int line = displayYMin; line <= displayYMax; line++) {
+        if (fog[col][line] == 0) {
+          mvwaddch(gameWindow, line, col, ' ');
+        } else {
+          showGrov(gameWindow, col, line, map.getAt(col, line));
+        }
+      }
+    }
+  wattron(gameWindow, COLOR_PAIR(HERO_PAIR));
+  mvwaddch(gameWindow, playery, playerx, '@');
+  wattroff(gameWindow, COLOR_PAIR(HERO_PAIR));
+	refresh();
+  wrefresh(gameWindow);
+  wrefresh(infoWindow);
+  move(cy, cx);
 
   }
 
@@ -275,3 +337,4 @@ void showGrov(WINDOW * window, int x, int y, grovnik* show) {
   mvwaddch(window, x, y, atpoint);
   wattroff(window, COLOR_PAIR(show->terrain));
 }
+
