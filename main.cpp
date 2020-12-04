@@ -86,19 +86,6 @@ int main() {
 	delete herox;
 	delete heroy;
 
-	// Initial world draw
-	for (int i = 0; i < 128; i++) {
-		for (int j = 0; j < 128; j++) {
-			showGrov(i, j, map.getAt(i, j));
-		}
-	}
-	drawsplit(whiffles, energy, binoculars, boat);
-
-	attron(COLOR_PAIR(6));
-	mvaddch(playerx, playery, '@');
-	attroff(COLOR_PAIR(6));
-
-	refresh();
 
 
 
@@ -109,6 +96,7 @@ int main() {
 */
 
 	while (running) {
+		// World draw
 		for (int i = 0; i < 128; i++) {
 			for (int j = 0; j < 128; j++) {
 				showGrov(i, j, map.getAt(i, j));
@@ -119,18 +107,11 @@ int main() {
 		mvaddch(playery, playerx, '@');
 		attroff(COLOR_PAIR(6));
 		move(cy,cx);//move the cursor
+		refresh();
 		int ch = getch();
-		getyx(stdscr, cy, cx);
-		// Redraw if the user has given a key input
-		// A key input is likely to draw something on screen.
 		if(energy <= 0)
 		{
 			break;
-		}
-		if (ch != -1) {
-			move(cy, cx);
-			showGrov(cy, cx, map.getAt(cy, cx));
-			// hero display
 		}
 
 		// User input, always considered
