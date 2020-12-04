@@ -185,6 +185,10 @@ void World::clearfog_rad(unsigned int x1, unsigned int y1, unsigned int radius) 
 	return;
 }
 
+bool ** World::get_fog1() {
+  return fog;
+}
+
 #ifdef TEST
 bool ** World::get_fog() {
 	return fog;

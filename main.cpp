@@ -17,6 +17,7 @@
 void printCenter(WINDOW *window, int cols, int line, const char *toPrint);
 void print_lose();
 void setDisplayRange(int herox, int heroy, int cols, int lines, int & xMax, int & xMin, int & yMax, int & yMin);
+void showGrov(WINDOW *window, int x, int y, grovnik* show);
 
 using namespace std;
 
@@ -39,6 +40,7 @@ int main() {
 
 	// initialize variables
 	World map;
+  bool **fog = map.get_fog1();
 	int * herox = new int;
 	int * heroy = new int;
 	*heroy = 2;
@@ -70,6 +72,7 @@ int main() {
   int gameCols = COLS * 3/4;
   int infoCols = COLS / 4;
   setDisplayRange(playerx, playery, gameCols, LINES, displayXMax, displayXMin, displayYMax, displayYMin);
+
   //create windows for display
   WINDOW* infoWindow = newwin(LINES, COLS/4, 0, COLS * 3/4);
   WINDOW* gameWindow = newwin(LINES, COLS * 3/4, 0, 0);
@@ -85,8 +88,8 @@ int main() {
   char *bote = (char*)"off";
   string temp = to_string(energy);
   const char *energy_balance = temp.c_str();
-  temp = to_string(whiffles);
-  const char *whiffle_balance = temp.c_str();
+  string temp1 = to_string(whiffles);
+  const char *whiffle_balance = temp1.c_str();
   printCenter(infoWindow, infoCols, 2, "Hero's Bag:");
   printCenter(infoWindow, infoCols, LINES - 13, "Whiffles:"); 
   printCenter(infoWindow, infoCols, LINES - 12, whiffle_balance); 
@@ -98,6 +101,36 @@ int main() {
   printCenter(infoWindow, infoCols, LINES - 3, bote); 
 
 
+  //initial clear fog around starting position
+  map.clearfog_rad(playerx, playery, 1); 
+  fog = map.get_fog1();
+
+  /*/test prints
+  string temp2 = to_string(displayXMax);
+  const char *one = temp2.c_str();
+  string temp3 = to_string(displayYMax);
+  const char *two = temp3.c_str();
+  string temp4 = to_string(playerx);
+  const char *three = temp4.c_str();
+  string temp5 = to_string(playery);
+  const char *four = temp5.c_str();
+  printCenter(infoWindow, infoCols, 4, one);
+  printCenter(infoWindow, infoCols, 5, two);
+  printCenter(infoWindow, infoCols, 6, three);
+  printCenter(infoWindow, infoCols, 7, four);
+
+  */
+
+  //initial game draw
+  for (int col = displayXMin; col <= displayXMax; col++) {
+    for (int line = displayYMin; line <= displayYMax; line++) {
+      if (fog[col][line] == 0) {
+        mvwaddch(gameWindow, line, col, ' ');
+      } else {
+        showGrov(gameWindow, col, line, map.getAt(col, line));
+      }
+    }
+  }
 	refresh();
   wrefresh(gameWindow);
   wrefresh(infoWindow);
@@ -142,8 +175,8 @@ int main() {
 
   }
 
-  delete gameWindow;
-  delete infoWindow;
+  delwin(gameWindow);
+  delwin(infoWindow);
 	return endwin();
 }
 
@@ -217,4 +250,28 @@ void printCenter(WINDOW *window, int cols, int line, const char *toPrint) {
   mvwprintw(window, line, printCol, toPrint);
 }
 
-
+void showGrov(WINDOW * window, int x, int y, grovnik* show) {
+  char atpoint = ' ';
+  if (show->poi) {
+    switch (show -> poi -> get_type()) {
+      case 1: //treasure
+        atpoint = '$';
+        break;
+      case 2: //food
+        atpoint = 'F';
+        break;
+      case 3: //tool
+        atpoint = 'T';
+        break;
+      case 7: //obstacle
+        atpoint = '!';
+        break;
+    }
+  }
+  if (show -> terrain == DIAMOND_PAIR) {
+    atpoint = '$';
+  }
+  wattron(window, COLOR_PAIR(show->terrain));
+  mvwaddch(window, x, y, atpoint);
+  wattroff(window, COLOR_PAIR(show->terrain));
+}
