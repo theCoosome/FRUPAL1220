@@ -65,8 +65,8 @@ void World::fileRead(int * herox, int * heroy) {
 
 	//Read each line
 	for (unsigned int y=0; y < height; ++y) {
-		inf.get(input, width, '\n');
-		inf.ignore(width, '\n');
+		inf.get(input, width + 1, '\n');
+		inf.ignore(width + 1, '\n');
 
 		//Interpret each value
 		for (unsigned int x=0; x < width; ++x) {

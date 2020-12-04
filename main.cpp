@@ -73,7 +73,7 @@ int main() {
 
 	// player variables
 	int energy = 100;
-	int  whiffles = 1000;
+	int whiffles = 1000;
 	bool binoculars = false;
 	bool boat = false;
 	// vector<object> inventory;
@@ -89,7 +89,7 @@ int main() {
 	// Initial world draw
 	for (int i = 0; i < 128; i++) {
 		for (int j = 0; j < 128; j++) {
-			showGrov(i ,j, map.getAt(i, j));
+			showGrov(i, j, map.getAt(i, j));
 		}
 	}
 	drawsplit(whiffles, energy, binoculars, boat);
@@ -103,10 +103,21 @@ int main() {
 
 
 	// set values, due to possibility of changing viewport
-//	int Cols = COLS;
-//	int Rows = LINES;
+/*
+	int Cols = COLS;
+	int Rows = LINES;
+*/
 
 	while (running) {
+		for (int i = 0; i < 128; i++) {
+			for (int j = 0; j < 128; j++) {
+				showGrov(i, j, map.getAt(i, j));
+			}
+		}
+		drawsplit(whiffles, energy, binoculars, boat);
+		attron(COLOR_PAIR(6));
+		mvaddch(playery, playerx, '@');
+		attroff(COLOR_PAIR(6));
 		int ch = getch();
 		getyx(stdscr, cy, cx);
 		// Redraw if the user has given a key input
@@ -122,91 +133,75 @@ int main() {
 		}
 
 		// User input, always considered
-		   switch (ch) {
-		                case 'q':
-				//press q to quit
+		switch(ch) {
+			case 'q': //press q to quit
 				running = false;
 				break;
-				case 'l'://moves player left
-				if (playerx ==  0) {
-					playerx = 0;
+			case 'i': //move player up
+				if (playery) {
+					--playery;
 				} 
 				--energy;
-				++playerx;
 				break;
-				case 'j'://move play right
-				if (playerx ==  COLS-1) {
-					playerx = COLS-1;
+			case 'm': //move player down
+				if (playery < LINES - 1) {
+					++playery;
 				} 
 				--energy;
-				--playerx;
 				break;
-				case 'i': //move player up
-				if (playery ==  0) {
-					playery = 0;
+			case 'j': //move player left
+				if (playerx) {
+					--playerx;
 				} 
 				--energy;
-				--playery;
 				break;
-				case 'm': //move player down
-				if (playery ==  LINES - 1) {
-					playery = LINES -1;
+			case 'l': //move player right
+				if (playerx < COLS - 1) {
+					++playerx;
 				} 
-		    		--energy;
-				++playery;
+				--energy;
 				break;
 			default:
 				break;
-		    }
-
-		    drawsplit(whiffles, energy, binoculars, boat);
-                    attron(COLOR_PAIR(6));
-	            mvaddch(playery, playerx, '@');
-	            attroff(COLOR_PAIR(6));
-		    
-
-
-		nodelay(stdscr, FALSE);
-		switch(ch)
-			{
-				case KEY_UP: //move up
-					if(cy)
-						--cy;
-					break;
-				case KEY_DOWN: //move down
-					if(cy == LINES-1) {
-						cy = LINES -1;
-					}
-					else
-						++cy;
-					break;
-				case KEY_LEFT: //move left
-					if(cx)
-						--cx;
-					break;
-				case KEY_RIGHT: //move right
-					if(cx == COLS-1)
-					{
-						cx = COLS -1;
-					}
-					else
-						++cx;
-					break;
-				case 'q': //quit the game
-					running = false;
-					break;
-				default:
-					break;
-			}
-			move(cy,cx);//move the cursor
 		}
 
-		refresh();
-		if(energy <= 0)
-		  print_lose();
+		nodelay(stdscr, FALSE);
+		switch(ch) {
+			case KEY_UP: //move up
+				if(cy) {
+					--cy;
+				}
+				break;
+			case KEY_DOWN: //move down
+				if(cy < LINES - 1) {
+					++cy;
+				}
+				break;
+			case KEY_LEFT: //move left
+				if(cx) {
+					--cx;
+				}
+				break;
+			case KEY_RIGHT: //move right
+				if(cx < COLS - 1) {
+					++cx;
+				}
+				break;
+			case 'q': //quit the game
+				running = false;
+				break;
+			default:
+				break;
+		}
+		move(cy,cx);//move the cursor
+	}
+
+	refresh();
+	if(energy <= 0)
+		print_lose();
 
 
-		return endwin();
+	return endwin();
 }
 
 void print_lose()

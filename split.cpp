@@ -16,7 +16,7 @@ int drawsplit(int whiffles, int energy, bool binocs, bool boat)
 	int x = COLS*3/4;
 	int y = 0;
 	while(y != LINES)
-	{ 
+	{
 		mvaddch(y,x, '|');
 		++y;
 	}
@@ -38,10 +38,6 @@ int drawsplit(int whiffles, int energy, bool binocs, bool boat)
 	char *bino = (char*)"off";
 	char *bote = (char*)"off";
 	//conversion from integers to chars for window print
-	string tmp = to_string(energy);
-    	const char  *to_add = tmp.c_str();
-	string temp = to_string(whiffles);
-    	const char  *to_add2 = temp.c_str();
 	if(binocs == true)
 	{
 		bino = (char*)"on";
@@ -60,14 +56,14 @@ int drawsplit(int whiffles, int energy, bool binocs, bool boat)
 	int x_beg = x;
 	mvprintw(2, x_beg+6, "Hero");
         mvprintw(LINES-13, x_beg+3, "Whiffles: ");
-	mvprintw(LINES-12, x_beg+3, to_add2);
+	mvprintw(LINES-12, x_beg+3, "%-4d", whiffles);
 	mvprintw(LINES-10, x_beg+3, "Energy: ");
-	mvprintw(LINES-9, x_beg+3, to_add);
+	mvprintw(LINES-9, x_beg+3, "%-3d", energy);
 	mvprintw(LINES-7, x_beg+3, "Binoculars: ");
 	mvprintw(LINES-6, x_beg+3, bino);
 	mvprintw(LINES-4, x_beg+3, "Boat: ");
 	mvprintw(LINES-3, x_beg+3, bote);
-//COLS*3/4-7	
+//COLS*3/4-7
 
 //	wrefresh(win);
 
