@@ -67,7 +67,7 @@ int drawsplit(int whiffles, int energy, bool binocs, bool boat)
 
 //	wrefresh(win);
 
-	endwin();
+	//endwin();
 
 
 	return 0;

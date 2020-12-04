@@ -48,7 +48,7 @@ int main() {
 	initscr();
 	keypad(stdscr, true);
 	nodelay(stdscr, true);
-	noecho();
+	//noecho();
 	clear();
 
 	//initialize color stuff
@@ -87,75 +87,76 @@ int main() {
 	delete heroy;
 
 
-
-
 	// set values, due to possibility of changing viewport
-/*
 	int Cols = COLS;
 	int Rows = LINES;
-*/
+	int splitPos = min(128, Cols * 3 / 4);
+	//Draw the splitscreen split
 
+	// Initial world draw
+	for (int i = 0; i < 128; i++) {
+		for (int j = 0; j < Cols * 3/4; j++) {
+			showGrov(i, j, map.getAt(i, j));
+		}
+	}
+
+	attron(COLOR_PAIR(6));
+	mvaddch(playery, playerx, '@');
+	attroff(COLOR_PAIR(6));
+
+
+	mvvline(0, splitPos, '|', Rows);
 	while (running) {
-		// World draw
-		for (int i = 0; i < 128; i++) {
-			for (int j = 0; j < 128; j++) {
-				showGrov(i, j, map.getAt(i, j));
-			}
-		}
-		drawsplit(whiffles, energy, binoculars, boat);
-		attron(COLOR_PAIR(6));
-		mvaddch(playery, playerx, '@');
-		attroff(COLOR_PAIR(6));
-		move(cy,cx);//move the cursor
-		refresh();
+		//move(cy,cx);//move the cursor
 		int ch = getch();
-		if(energy <= 0)
-		{
-			break;
+
+		//nodelay(stdscr, FALSE);
+
+		//Player movement pre-draw
+		if (ch == 'w' || ch == 'a' || ch == 's' || ch == 'd') {
+			showGrov(playery, playerx, map.getAt(playery, playerx));
 		}
 
-		// User input, always considered
+		// User input
 		switch(ch) {
 			case 'q': //press q to quit
 				running = false;
 				break;
-			case 'i': //move player up
+
+			//Player movement
+			case 'w': //move player up
 				if (playery) {
 					--playery;
 				} 
 				--energy;
 				break;
-			case 'm': //move player down
+			case 's': //move player down
 				if (playery < 128) {
 					++playery;
 				} 
 				--energy;
 				break;
-			case 'j': //move player left
+			case 'a': //move player left
 				if (playerx) {
 					--playerx;
 				} 
 				--energy;
 				break;
-			case 'l': //move player right
+			case 'd': //move player right
 				if (playerx < 128) {
 					++playerx;
 				} 
 				--energy;
 				break;
-			default:
-				break;
-		}
 
-		nodelay(stdscr, FALSE);
-		switch(ch) {
+			// Cursor movement
 			case KEY_UP: //move up
 				if(cy) {
 					--cy;
 				}
 				break;
 			case KEY_DOWN: //move down
-				if(cy < LINES - 1) {
+				if(cy < Rows - 1) {
 					++cy;
 				}
 				break;
@@ -165,16 +166,39 @@ int main() {
 				}
 				break;
 			case KEY_RIGHT: //move right
-				if(cx < COLS - 1) {
+				if(cx < Cols - 1) {
 					++cx;
 				}
-				break;
-			case 'q': //quit the game
-				running = false;
 				break;
 			default:
 				break;
 		}
+
+		// If the user types something, draw over it
+		if (ch != -1) {
+			if (cx < splitPos){ // Redraw map info
+				showGrov(cy, cx, map.getAt(cy, cx));
+				// hero display. Always attempt redraw
+				attron(COLOR_PAIR(6));
+				mvaddch(playery, playerx, '@');
+				attroff(COLOR_PAIR(6));
+			}
+			if (cx == splitPos) { //Redraw the screen split
+				mvaddch(cy, splitPos, '|');
+			}
+			if (cx > splitPos){ // Redraw splitscreen blank background
+				mvaddch(cy, cx, ' ');
+			}
+		}
+
+		drawsplit(whiffles, energy, binoculars, boat);
+		//After the mvaddch, because they move the cursor as well
+		move(cy, cx);
+
+		refresh();
+
+		if (energy <= 0)
+			running = false;
 	}
 
 	if(energy <= 0)
