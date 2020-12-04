@@ -177,7 +177,6 @@ int main() {
 		}
 	}
 
-	refresh();
 	if(energy <= 0)
 		print_lose();
 
