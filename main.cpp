@@ -218,7 +218,6 @@ void print_lose()
 	move(0,0);
 	refresh();
 	getch();
-	getch();
 	endwin();
 	refresh();
 
