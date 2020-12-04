@@ -118,6 +118,7 @@ int main() {
 		attron(COLOR_PAIR(6));
 		mvaddch(playery, playerx, '@');
 		attroff(COLOR_PAIR(6));
+		move(cy,cx);//move the cursor
 		int ch = getch();
 		getyx(stdscr, cy, cx);
 		// Redraw if the user has given a key input
@@ -144,7 +145,7 @@ int main() {
 				--energy;
 				break;
 			case 'm': //move player down
-				if (playery < LINES - 1) {
+				if (playery < 128) {
 					++playery;
 				} 
 				--energy;
@@ -156,7 +157,7 @@ int main() {
 				--energy;
 				break;
 			case 'l': //move player right
-				if (playerx < COLS - 1) {
+				if (playerx < 128) {
 					++playerx;
 				} 
 				--energy;
@@ -193,7 +194,6 @@ int main() {
 			default:
 				break;
 		}
-		move(cy,cx);//move the cursor
 	}
 
 	refresh();
