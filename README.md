@@ -7,6 +7,7 @@ By Bailey Manzer, Colton Jelsema, Jonnie Herrera, Leah Moser, Vincent Vermilya
 - [Description](#description)
 # Controls
 - <kbd>↑</kbd> <kbd>↓</kbd> <kbd>→</kbd> <kbd>←</kbd> Move cursor
+- <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> Move player
 - <kbd>0</kbd>-<kbd>9</kbd> Options
 - <kbd>Q</kbd> Quit
 # Description
