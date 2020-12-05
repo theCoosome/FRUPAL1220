@@ -8,8 +8,8 @@ int main(int argc, char* argv[]) {
 	const int length = 9;
 	// Expected result of fog test
 	const bool expected[length][width] = {
-		{1, 1, 0, 0, 0, 0, 0, 0, 0},
-		{1, 1, 0, 0, 0, 0, 0, 0, 0},
+		{1, 1, 0, 0, 0, 0, 0, 1, 1},
+		{1, 1, 0, 0, 0, 0, 0, 1, 1},
 		{0, 0, 0, 0, 0, 0, 0, 0, 0},
 		{0, 0, 0, 1, 1, 1, 0, 0, 0},
 		{0, 0, 0, 1, 1, 1, 0, 0, 0},
@@ -22,6 +22,7 @@ int main(int argc, char* argv[]) {
 	test.clearfog_rad(4, 4, 1);
 	// Show off bounds check
 	test.clearfog_rad(0, 0, 1);
+	test.clearfog_rad(0, 8, 1);
 	test.clearfog_rad(8, 8, 1);
 	// Show off getter function
 	bool** tmp = test.get_fog();

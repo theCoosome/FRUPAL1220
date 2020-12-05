@@ -185,13 +185,13 @@ void World::clearfog(unsigned int y1, unsigned int x1) {
 void World::clearfog_rad(unsigned int y1, unsigned int x1, unsigned int radius) {
 	for(int y = (int)radius * -1; y <= (int)radius; y++) {
 		for(int x = (int)radius * -1; x <= (int)radius; x++) {
-			clearfog(x1 + x, y1 + y);
+			clearfog(y1 + x, x1 + y);
 		}
 	}
 	return;
 }
 
-bool World::get_fog(unsigned int y1, unsigned int x1) {
+bool World::getfog(unsigned int y1, unsigned int x1) {
 	if(x1 >= width || y1 >= height) {
 		return false;
 	}

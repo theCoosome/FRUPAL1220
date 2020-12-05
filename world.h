@@ -34,7 +34,7 @@ class World {
 	void clearfog_rad(unsigned int y1, unsigned int x1, unsigned int radius);
 	void fileRead(int * heroy, int * herox);
 	grovnik * getAt(unsigned int y, unsigned int x);
-	bool get_fog(unsigned int y1, unsigned int x1);
+	bool getfog(unsigned int y1, unsigned int x1);
 #ifdef TEST
 	bool ** get_fog();
 #endif
