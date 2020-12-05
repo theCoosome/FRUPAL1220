@@ -48,7 +48,7 @@ int main() {
 	initscr();
 	keypad(stdscr, true);
 	nodelay(stdscr, true);
-	//noecho();
+	noecho();
 	clear();
 
 	//initialize color stuff
@@ -106,10 +106,7 @@ int main() {
 	//Draw the splitscreen split
 	mvvline(0, splitPos, '|', Rows);
 	while (running) {
-		//move(cy,cx);//move the cursor
 		int ch = getch();
-
-		//nodelay(stdscr, FALSE);
 
 		//Player movement pre-draw
 		if (ch == 'w' || ch == 'a' || ch == 's' || ch == 'd') {
@@ -173,22 +170,10 @@ int main() {
 				break;
 		}
 
-		// If the user types something, draw over it
-		if (ch != -1) {
-			if (cx < splitPos){ // Redraw map info
-				showGrov(cy, cx, map.getAt(cy, cx));
-				// hero display. Always attempt redraw
-				attron(COLOR_PAIR(6));
-				mvaddch(playery, playerx, '@');
-				attroff(COLOR_PAIR(6));
-			}
-			if (cx == splitPos) { //Redraw the screen split
-				mvaddch(cy, splitPos, '|');
-			}
-			if (cx > splitPos){ // Redraw splitscreen blank background
-				mvaddch(cy, cx, ' ');
-			}
-		}
+		// hero display
+		attron(COLOR_PAIR(6));
+		mvaddch(playery, playerx, '@');
+		attroff(COLOR_PAIR(6));
 
 		drawsplit(whiffles, energy, binoculars, boat);
 		//After the mvaddch, because they move the cursor as well
