@@ -93,6 +93,9 @@ int main() {
 
 	//Draw the splitscreen split
 	mvvline(0, splitPos, '|', Rows);
+
+	// Clear map for debugging file reader
+	//map.clearfog_rad(0, 0, 128);
 	while (running) {
 		if(binoculars) {
 			map.clearfog_rad(playery, playerx, 2);
