@@ -11,6 +11,7 @@ By Bailey Manzer, Colton Jelsema, Jonnie Herrera, Leah Moser, Vincent Vermilya
 - <kbd>0</kbd>-<kbd>9</kbd> Options
 - <kbd>Q</kbd> Quit
 # Description
+[Moodle page](https://moodle.cs.pdx.edu/mod/page/view.php?id=429)
 Frupal is a 128x128 grovnik island.
 The hero begins with 100 energy and a bank account that has 1000 whiffles.
 The hero dies when energy reaches 0.
