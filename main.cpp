@@ -91,7 +91,6 @@ int main() {
 	int Cols = COLS;
 	int Rows = LINES;
 	int splitPos = min(128, Cols * 3 / 4);
-	//Draw the splitscreen split
 
 	// Initial world draw
 	for (int y = 0; y < 128; y++) {
@@ -104,7 +103,7 @@ int main() {
 	mvaddch(playery, playerx, '@');
 	attroff(COLOR_PAIR(6));
 
-
+	//Draw the splitscreen split
 	mvvline(0, splitPos, '|', Rows);
 	while (running) {
 		//move(cy,cx);//move the cursor
@@ -127,25 +126,25 @@ int main() {
 			case 'w': //move player up
 				if (playery) {
 					--playery;
-				} 
+				}
 				--energy;
 				break;
 			case 's': //move player down
 				if (playery < 128) {
 					++playery;
-				} 
+				}
 				--energy;
 				break;
 			case 'a': //move player left
 				if (playerx) {
 					--playerx;
-				} 
+				}
 				--energy;
 				break;
 			case 'd': //move player right
 				if (playerx < 128) {
 					++playerx;
-				} 
+				}
 				--energy;
 				break;
 
