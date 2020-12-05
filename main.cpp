@@ -47,7 +47,6 @@ void showGrov(int y, int x, grovnik * show) {
 int main() {
 	initscr();
 	keypad(stdscr, true);
-	nodelay(stdscr, true);
 	noecho();
 	clear();
 
@@ -92,20 +91,37 @@ int main() {
 	int Rows = LINES;
 	int splitPos = min(128, Cols * 3 / 4);
 
-	// Initial world draw
-	for (int y = 0; y < 128; y++) {
-		for (int x = 0; x < Cols * 3/4; x++) {
-			showGrov(y, x, map.getAt(y, x));
-		}
-	}
-
-	attron(COLOR_PAIR(6));
-	mvaddch(playery, playerx, '@');
-	attroff(COLOR_PAIR(6));
-
 	//Draw the splitscreen split
 	mvvline(0, splitPos, '|', Rows);
 	while (running) {
+		if(binoculars) {
+			map.clearfog_rad(playery, playerx, 2);
+		} else {
+			map.clearfog_rad(playery, playerx, 1);
+		}
+
+		// Initial world draw
+		for (int y = 0; y < 128; y++) {
+			for (int x = 0; x < Cols * 3/4; x++) {
+				if(map.getfog(y, x)) {
+					showGrov(y, x, map.getAt(y, x));
+				} else {
+					mvaddch(y, x, ' ');
+				}
+			}
+		}
+
+		// hero display
+		attron(COLOR_PAIR(6));
+		mvaddch(playery, playerx, '@');
+		attroff(COLOR_PAIR(6));
+
+		drawsplit(whiffles, energy, binoculars, boat);
+		//After the mvaddch, because they move the cursor as well
+		move(cy, cx);
+
+		refresh();
+
 		int ch = getch();
 
 		//Player movement pre-draw
@@ -170,18 +186,7 @@ int main() {
 				break;
 		}
 
-		// hero display
-		attron(COLOR_PAIR(6));
-		mvaddch(playery, playerx, '@');
-		attroff(COLOR_PAIR(6));
-
-		drawsplit(whiffles, energy, binoculars, boat);
-		//After the mvaddch, because they move the cursor as well
-		move(cy, cx);
-
-		refresh();
-
-		if (energy <= 0)
+		if(energy <= 0)
 			running = false;
 	}
 
