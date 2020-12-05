@@ -199,7 +199,7 @@ bool World::getfog(unsigned int y1, unsigned int x1) {
 }
 
 #ifdef TEST
-bool ** World::get_fog() {
+bool ** World::getfog() {
 	return fog;
 }
 #endif

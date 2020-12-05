@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
 	test.clearfog_rad(0, 8, 1);
 	test.clearfog_rad(8, 8, 1);
 	// Show off getter function
-	bool** tmp = test.get_fog();
+	bool** tmp = test.getfog();
 	for(int y = 0; y < length; y++) {
 		for(int x = 0; x < width; x++) {
 			if(tmp[y][x] != expected[y][x]) {

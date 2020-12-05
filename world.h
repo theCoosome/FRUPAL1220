@@ -36,7 +36,7 @@ class World {
 	grovnik * getAt(unsigned int y, unsigned int x);
 	bool getfog(unsigned int y1, unsigned int x1);
 #ifdef TEST
-	bool ** get_fog();
+	bool ** getfog();
 #endif
 
 	private:
