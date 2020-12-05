@@ -19,6 +19,7 @@ void print_lose();
 using namespace std;
 
 void showGrov(int y, int x, grovnik * show) {
+	if (x < 0 || y < 0 || x > 127 || y > 127) return;
 	char atpoint = ' ';
 	if (show -> poi) {
 		switch (show -> poi -> get_type()) {
@@ -91,46 +92,29 @@ int main() {
 	int Rows = LINES;
 	int splitPos = min(128, Cols * 3 / 4);
 
+
+	map.clearfog_rad(playery, playerx, 1);
+
+	// Initial world draw
+	for (int y = 0; y < 128; y++) {
+		for (int x = 0; x < Cols * 3/4; x++) {
+			if(map.getfog(y, x)) {
+				showGrov(y, x, map.getAt(y, x));
+			} else {
+				mvaddch(y, x, ' ');
+			}
+		}
+	}
+
 	//Draw the splitscreen split
 	mvvline(0, splitPos, '|', Rows);
+	drawsplit(whiffles, energy, binoculars, boat);
 
 	// Clear map for debugging file reader
 	//map.clearfog_rad(0, 0, 128);
 	while (running) {
-		if(binoculars) {
-			map.clearfog_rad(playery, playerx, 2);
-		} else {
-			map.clearfog_rad(playery, playerx, 1);
-		}
-
-		// Initial world draw
-		for (int y = 0; y < 128; y++) {
-			for (int x = 0; x < Cols * 3/4; x++) {
-				if(map.getfog(y, x)) {
-					showGrov(y, x, map.getAt(y, x));
-				} else {
-					mvaddch(y, x, ' ');
-				}
-			}
-		}
-
-		// hero display
-		attron(COLOR_PAIR(6));
-		mvaddch(playery, playerx, '@');
-		attroff(COLOR_PAIR(6));
-
-		drawsplit(whiffles, energy, binoculars, boat);
-		//After the mvaddch, because they move the cursor as well
-		move(cy, cx);
-
-		refresh();
 
 		int ch = getch();
-
-		//Player movement pre-draw
-		if (ch == 'w' || ch == 'a' || ch == 's' || ch == 'd') {
-			showGrov(playery, playerx, map.getAt(playery, playerx));
-		}
 
 		// User input
 		switch(ch) {
@@ -189,13 +173,63 @@ int main() {
 				break;
 		}
 
+		//Player movement post-draw
+		if (ch == 'w' || ch == 'a' || ch == 's' || ch == 'd') {
+			showGrov(playery, playerx, map.getAt(playery, playerx));
+
+			int radius;
+			if(binoculars) {
+				map.clearfog_rad(playery, playerx, 2);
+				radius = 2;
+			} else {
+				map.clearfog_rad(playery, playerx, 1);
+				radius = 1;
+			}
+			for(int y = playery - radius; y <= playery + radius; y++) {
+				for(int x = playerx - radius; x <= playerx + radius; x++) {
+					showGrov(y, x, map.getAt(y, x));
+				}
+			}
+
+			// hero display post-move
+			attron(COLOR_PAIR(6));
+			mvaddch(playery, playerx, '@');
+			attroff(COLOR_PAIR(6));
+		}
+
+		// If the user types something, draw over it
+		if (ch != -1) {
+			if (cx < splitPos){ // Redraw map info
+				if(map.getfog(cy, cx)) {
+					showGrov(cy, cx, map.getAt(cy, cx));
+				} else {
+					mvaddch(cy, cx, ' ');
+				}
+				// hero display. In case you typed over it
+				attron(COLOR_PAIR(6));
+				mvaddch(playery, playerx, '@');
+				attroff(COLOR_PAIR(6));
+			}
+			if (cx == splitPos) { //Redraw the screen split
+				mvaddch(cy, splitPos, '|');
+			}
+			if (cx > splitPos){ // Redraw splitscreen blank background
+				mvaddch(cy, cx, ' ');
+			}
+		}
+
+		drawsplit(whiffles, energy, binoculars, boat);
+		//After the mvaddch, because they move the cursor as well
+		move(cy, cx);
+
 		if(energy <= 0)
 			running = false;
+
+		refresh();
 	}
 
 	if(energy <= 0)
 		print_lose();
-
 
 	return endwin();
 }
