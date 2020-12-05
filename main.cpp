@@ -18,7 +18,7 @@ void print_lose();
 
 using namespace std;
 
-void showGrov(int x, int y, grovnik * show) {
+void showGrov(int y, int x, grovnik * show) {
 	char atpoint = ' ';
 	if (show -> poi) {
 		switch (show -> poi -> get_type()) {
@@ -40,7 +40,7 @@ void showGrov(int x, int y, grovnik * show) {
 		atpoint = '$';
 	}
 	attron(COLOR_PAIR(show -> terrain));
-	mvaddch(x, y, atpoint);
+	mvaddch(y, x, atpoint);
 	attroff(COLOR_PAIR(show -> terrain));
 }
 
@@ -67,7 +67,7 @@ int main() {
 	int * heroy = new int;
 	*heroy = 2;
 	*herox = 2;
-	map.fileRead(herox, heroy);
+	map.fileRead(heroy, herox);
 
 	bool running = true; // program running conditional
 
@@ -94,9 +94,9 @@ int main() {
 	//Draw the splitscreen split
 
 	// Initial world draw
-	for (int i = 0; i < 128; i++) {
-		for (int j = 0; j < Cols * 3/4; j++) {
-			showGrov(i, j, map.getAt(i, j));
+	for (int y = 0; y < 128; y++) {
+		for (int x = 0; x < Cols * 3/4; x++) {
+			showGrov(y, x, map.getAt(y, x));
 		}
 	}
 

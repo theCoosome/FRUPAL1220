@@ -56,7 +56,7 @@ World::~World() {
 }
 
 
-void World::fileRead(int * herox, int * heroy) {
+void World::fileRead(int * heroy, int * herox) {
 	//Read the map data
 	ifstream inf;
 
@@ -91,9 +91,9 @@ void World::fileRead(int * herox, int * heroy) {
 	inf.open("mapdata.txt");
 	inf.peek();
 	while (!inf.eof()) {
-		inf >> x;
-		inf.ignore(5, ' ');
 		inf >> y;
+		inf.ignore(5, ' ');
+		inf >> x;
 		inf.ignore(5, ' ');
 		inf >> t;
 		inf.ignore(5, ' ');
@@ -107,7 +107,7 @@ void World::fileRead(int * herox, int * heroy) {
 
 			case 1: // treasure: Returned value
 				inf >> cost;
-				tiles[x][y].poi = new treasure(cost, false);
+				tiles[y][x].poi = new treasure(cost, false);
 				break;
 
 			case 2: // food: cost, value, name
@@ -117,7 +117,7 @@ void World::fileRead(int * herox, int * heroy) {
 				inf.ignore(100, ' ');
 
 				inf.get(input, 256, '\n');
-				tiles[x][y].poi = new food(cost, input, value);
+				tiles[y][x].poi = new food(cost, input, value);
 				break;
 
 			case 3: // tools: cost, power, obstype, name
@@ -129,26 +129,26 @@ void World::fileRead(int * herox, int * heroy) {
 				inf.ignore(100, ' ');
 
 				inf.get(input, 256, '\n');
-				tiles[x][y].poi = new tool(cost, input, power, type);
+				tiles[y][x].poi = new tool(cost, input, power, type);
 				break;
 
 			case 4: // clues
-				//tiles[x][y].poi = new
+				//tiles[y][x].poi = new
 				break;
 
 			case 5: // ship
-				//tiles[x][y].poi = new
+				//tiles[y][x].poi = new
 				break;
 
 			case 6: // Binoculars
-				//tiles[x][y].poi = new
+				//tiles[y][x].poi = new
 				break;
 
 			case 7: // Obsticle: cost, type
 				inf >> cost;
 				inf.ignore(100, ' ');
 				inf >> type;
-				tiles[x][y].poi = new obstacle(cost, type);
+				tiles[y][x].poi = new obstacle(cost, type);
 				break;
 		}
 		inf.ignore(256, '\n'); // Ignore to the next line
@@ -157,17 +157,23 @@ void World::fileRead(int * herox, int * heroy) {
 	inf.close();
 }
 
-void World::setGrovnik(int x, int y, int terr_type, object * data) {
-	tiles[x][y].setData(terr_type, data);
+void World::setGrovnik(unsigned int y, unsigned int x, int terr_type, object * data) {
+	if(y > height || x > width) {
+		return;
+	}
+	tiles[y][x].setData(terr_type, data);
 }
 
-grovnik * World::getAt(unsigned int x, unsigned int y) {
-	return & tiles[x][y];
+grovnik * World::getAt(unsigned int y, unsigned int x) {
+	if(y > height || x > width) {
+		return NULL;
+	}
+	return & tiles[y][x];
 }
 
 // Clear fog[y1][x1] from false to true
 // Basecase bounds check to avoid segfault
-void World::clearfog(unsigned int x1, unsigned int y1) {
+void World::clearfog(unsigned int y1, unsigned int x1) {
 	if(x1 >= width || y1 >= height) {
 		return;
 	}
@@ -176,7 +182,7 @@ void World::clearfog(unsigned int x1, unsigned int y1) {
 }
 
 // Call clearfog for a square radius centered on fog[y1][x1]
-void World::clearfog_rad(unsigned int x1, unsigned int y1, unsigned int radius) {
+void World::clearfog_rad(unsigned int y1, unsigned int x1, unsigned int radius) {
 	for(int y = (int)radius * -1; y <= (int)radius; y++) {
 		for(int x = (int)radius * -1; x <= (int)radius; x++) {
 			clearfog(x1 + x, y1 + y);
@@ -185,7 +191,10 @@ void World::clearfog_rad(unsigned int x1, unsigned int y1, unsigned int radius) 
 	return;
 }
 
-bool World::get_fog(unsigned int x1, unsigned int y1) {
+bool World::get_fog(unsigned int y1, unsigned int x1) {
+	if(x1 >= width || y1 >= height) {
+		return false;
+	}
 	return fog[y1][x1];
 }
 

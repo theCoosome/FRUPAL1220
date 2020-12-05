@@ -29,12 +29,12 @@ class World {
 	~World();
 
 	// grovnik builder for use by world builders
-	void setGrovnik(int x, int y, int terr_type, object * data);
-	void clearfog(unsigned int x1, unsigned int y1);
-	void clearfog_rad(unsigned int x1, unsigned int y1, unsigned int radius);
-	void fileRead(int * herox, int * heroy);
-	grovnik * getAt(unsigned int x, unsigned int y);
-	bool get_fog(unsigned int x1, unsigned int y1);
+	void setGrovnik(unsigned int y, unsigned int x, int terr_type, object * data);
+	void clearfog(unsigned int y1, unsigned int x1);
+	void clearfog_rad(unsigned int y1, unsigned int x1, unsigned int radius);
+	void fileRead(int * heroy, int * herox);
+	grovnik * getAt(unsigned int y, unsigned int x);
+	bool get_fog(unsigned int y1, unsigned int x1);
 #ifdef TEST
 	bool ** get_fog();
 #endif
