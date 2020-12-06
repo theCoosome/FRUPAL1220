@@ -86,11 +86,11 @@ int main() {
 	int whiffles = 1000;
 	bool binoculars = false;
 	bool boat = false;
-	// vector<object> inventory;
+	vector<tool*> inventory;
 
 	// cursor position
-	int cx = 2;
-	int cy = 2;
+	int cx = 0;
+	int cy = 0;
 	int playerx = *herox;
 	int playery = *heroy;
 	delete herox;
@@ -136,6 +136,51 @@ int main() {
 			case 'w': //move player up
 				if (playery) {
           grovnik * check = map.getAt(playery - 1, playerx);
+          if (check->poi != nullptr) {
+            int objType = check->poi->get_type();
+            if (objType == 1) { //treasure
+              whiffles = whiffles + check->poi->get_cost(); 
+              map.clearPOI(playery - 1, playerx);
+            } else if (objType == 2) { //food
+              food* foundFood = check->poi->getFood();
+              if (whiffles >= foundFood->get_cost()) {
+                whiffles = whiffles - foundFood->get_cost();
+                energy = energy + foundFood->get_value();
+                map.clearPOI(playery - 1, playerx);
+              } else {
+                ++playery;
+              }
+            } else if (objType == 3) { //tools
+              tool* foundTool = check->poi->getTool();
+              if (whiffles >= foundTool->get_cost()) {
+                whiffles = whiffles - foundTool->get_cost();
+                map.clearPOI(playery - 1, playerx);
+                inventory.push_back(foundTool);
+              } else {
+                ++playery;
+              }
+            } else if (objType == 4) { //clues
+            } else if (objType == 5) { //ship
+              if (whiffles >= check->poi->get_cost()) {
+                whiffles = whiffles - check->poi->get_cost();
+                map.clearPOI(playery - 1, playerx);
+                boat = true;
+              } else {
+                ++playery;
+              }
+            } else if (objType == 6) { //binoculars
+              if (whiffles >= check->poi->get_cost()) {
+                whiffles = whiffles - check->poi->get_cost();
+                map.clearPOI(playery - 1, playerx);
+                binoculars = true;
+              } else {
+                ++playery;
+              }
+            } else { //obsticles
+              
+            }
+          }
+
           switch (check->terrain) {
             case 1: //meadow
               --playery;
@@ -157,6 +202,50 @@ int main() {
 			case 's': //move player down
 				if (playery < 128) {
           grovnik * check = map.getAt(playery + 1, playerx);
+          if (check->poi != nullptr) {
+            int objType = check->poi->get_type();
+            if (objType == 1) { //treasure
+              whiffles = whiffles + check->poi->get_cost(); 
+              map.clearPOI(playery + 1, playerx);
+            } else if (objType == 2) { //food
+              food* foundFood = check->poi->getFood();
+              if (whiffles >= foundFood->get_cost()) {
+                whiffles = whiffles - foundFood->get_cost();
+                energy = energy + foundFood->get_value();
+                map.clearPOI(playery + 1, playerx);
+              } else {
+                --playery;
+              }
+            } else if (objType == 3) { //tools
+              tool* foundTool = check->poi->getTool();
+              if (whiffles >= foundTool->get_cost()) {
+                whiffles = whiffles - foundTool->get_cost();
+                map.clearPOI(playery + 1, playerx);
+                inventory.push_back(foundTool);
+              } else {
+                --playery;
+              }
+            } else if (objType == 4) { //clues
+            } else if (objType == 5) { //ship
+              if (whiffles >= check->poi->get_cost()) {
+                whiffles = whiffles - check->poi->get_cost();
+                map.clearPOI(playery + 1, playerx);
+                boat = true;
+              } else {
+                --playery;
+              }
+            } else if (objType == 6) { //binoculars
+              if (whiffles >= check->poi->get_cost()) {
+                whiffles = whiffles - check->poi->get_cost();
+                map.clearPOI(playery + 1, playerx);
+                binoculars = true;
+              } else {
+                --playery;
+              }
+            } else { //obsticles
+              
+            }
+          }
           switch (check->terrain) {
             case 1: //meadow
               ++playery;
@@ -178,6 +267,50 @@ int main() {
 			case 'a': //move player left
 				if (playerx) {
           grovnik * check = map.getAt(playery, playerx - 1);
+          if (check->poi != nullptr) {
+            int objType = check->poi->get_type();
+            if (objType == 1) { //treasure
+              whiffles = whiffles + check->poi->get_cost(); 
+              map.clearPOI(playery, playerx - 1);
+            } else if (objType == 2) { //food
+              food* foundFood = check->poi->getFood();
+              if (whiffles >= foundFood->get_cost()) {
+                whiffles = whiffles - foundFood->get_cost();
+                energy = energy + foundFood->get_value();
+                map.clearPOI(playery, playerx - 1);
+              } else {
+                ++playerx;
+              }
+            } else if (objType == 3) { //tools
+              tool* foundTool = check->poi->getTool();
+              if (whiffles >= foundTool->get_cost()) {
+                whiffles = whiffles - foundTool->get_cost();
+                map.clearPOI(playery, playerx - 1);
+                inventory.push_back(foundTool);
+              } else {
+                ++playerx;
+              }
+            } else if (objType == 4) { //clues
+            } else if (objType == 5) { //ship
+              if (whiffles >= check->poi->get_cost()) {
+                whiffles = whiffles - check->poi->get_cost();
+                map.clearPOI(playery, playerx - 1);
+                boat = true;
+              } else {
+                ++playerx;
+              }
+            } else if (objType == 6) { //binoculars
+              if (whiffles >= check->poi->get_cost()) {
+                whiffles = whiffles - check->poi->get_cost();
+                map.clearPOI(playery, playerx - 1);
+                binoculars = true;
+              } else {
+                ++playerx;
+              }
+            } else { //obsticles
+              
+            }
+          }
           switch (check->terrain) {
             case 1: //meadow
               --playerx;
@@ -199,6 +332,50 @@ int main() {
 			case 'd': //move player right
 				if (playerx < 128) {
           grovnik * check = map.getAt(playery, playerx + 1);
+          if (check->poi != nullptr) {
+            int objType = check->poi->get_type();
+            if (objType == 1) { //treasure
+              whiffles = whiffles + check->poi->get_cost(); 
+              map.clearPOI(playery, playerx + 1);
+            } else if (objType == 2) { //food
+              food* foundFood = check->poi->getFood();
+              if (whiffles >= foundFood->get_cost()) {
+                whiffles = whiffles - foundFood->get_cost();
+                energy = energy + foundFood->get_value();
+                map.clearPOI(playery, playerx + 1);
+              } else {
+                --playerx;
+              }
+            } else if (objType == 3) { //tools
+              tool* foundTool = check->poi->getTool();
+              if (whiffles >= foundTool->get_cost()) {
+                whiffles = whiffles - foundTool->get_cost();
+                map.clearPOI(playery, playerx + 1);
+                inventory.push_back(foundTool);
+              } else {
+                --playerx;
+              }
+            } else if (objType == 4) { //clues
+            } else if (objType == 5) { //ship
+              if (whiffles >= check->poi->get_cost()) {
+                whiffles = whiffles - check->poi->get_cost();
+                map.clearPOI(playery, playerx + 1);
+                boat = true;
+              } else {
+                --playerx;
+              }
+            } else if (objType == 6) { //binoculars
+              if (whiffles >= check->poi->get_cost()) {
+                whiffles = whiffles - check->poi->get_cost();
+                map.clearPOI(playery, playerx + 1);
+                binoculars = true;
+              } else {
+                --playerx;
+              }
+            } else { //obsticles
+              
+            }
+          }
           switch (check->terrain) {
             case 1: //meadow
               ++playerx;
