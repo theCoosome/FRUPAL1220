@@ -3,6 +3,8 @@
 #include <vector>
 
 #include "object.h"
+#include "world.h"
+
 using namespace std;
 
-int drawsplit(int whiffles, int energy, bool binocs, bool boat, vector<tool*> inventory);
+int drawsplit(int whiffles, int energy, bool binocs, bool boat, grovnik * grov, vector<tool*> inventory);

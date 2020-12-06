@@ -1,5 +1,3 @@
-// Author of header: Colton Jelsema and Vincent Vermilya
-// Header for the matrix that stores information about the game world
 
 #include "object.h"
 

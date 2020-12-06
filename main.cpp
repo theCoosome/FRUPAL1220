@@ -2,8 +2,8 @@
 #include <vector>
 #include <fstream>
 
-#include "object.h"
-#include "world.h"
+//#include "object.h"
+//#include "world.h"
 #include "split.h"
 
 //color definitions
@@ -118,7 +118,7 @@ int main() {
 
 	//Draw the splitscreen split
 	mvvline(0, splitPos, '|', Rows);
-	drawsplit(whiffles, energy, binoculars, boat, inventory);
+	drawsplit(whiffles, energy, binoculars, boat, map.getAt(cy, cx), inventory);
 
 	// Clear map for debugging file reader
 	//map.clearfog_rad(0, 0, 128);
@@ -465,7 +465,7 @@ int main() {
 			}
 		}
 
-		drawsplit(whiffles, energy, binoculars, boat, inventory);
+		drawsplit(whiffles, energy, binoculars, boat, map.getAt(cy, cx), inventory);
 		//After the mvaddch, because they move the cursor as well
 		move(cy, cx);
 

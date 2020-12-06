@@ -8,8 +8,14 @@
 
 
 #include "split.h"
+void printCenter(int startingCols, int cols, int line, const char *toPrint) {
+  int length = strlen(toPrint);
+  int printCol = ((cols - length) / 2) + startingCols;
+  mvprintw(line, printCol, toPrint);
+  return;
+}
 
-int drawsplit(int whiffles, int energy, bool binocs, bool boat, vector<tool*> inventory)
+int drawsplit(int whiffles, int energy, bool binocs, bool boat, grovnik * grov, vector<tool*> inventory)
 {
 	//initscr();
 	//the begining of arugument declarations
@@ -47,6 +53,27 @@ int drawsplit(int whiffles, int energy, bool binocs, bool boat, vector<tool*> in
 		bote = (char*)"on ";
 	}
 
+  //grovnik info under cursor
+  char * terrType;
+  switch (grov->terrain) {
+    case 1: //meadow
+      terrType = (char*)"Meadow";
+      break;
+    case 2: //swamp
+      terrType = (char*)"Swamp";
+      break;
+    case 3: //water
+      terrType = (char*)"Water";
+      break;
+    case 4: //wall
+      terrType = (char*)"Wall";
+      break;
+    default:
+      terrType = (char*)"Unknown";
+      break;
+  }
+  
+
 //	WINDOW *win = newwin(height, width, y_beg, x_beg);
 //	refresh();
 
@@ -55,7 +82,12 @@ int drawsplit(int whiffles, int energy, bool binocs, bool boat, vector<tool*> in
 //	wborder(win, left, right, top, bottom, tl, tr, bl, br);
 	int x_beg = x;
 	mvprintw(2, x_beg+8, "Hero");
-	mvprintw(4, x_beg+8, "Grovnik Info:");
+  printCenter(x_beg, COLS/4, 2, "Hero");
+  mvprintw(4, x_beg+3, "Grovnik Info:");
+  mvprintw(6, x_beg+3, "Terrain:");
+  //predraw to clear
+  mvprintw(7, x_beg+3, "                  ");
+  mvprintw(7, x_beg+3, terrType);
   mvprintw(LINES-13, x_beg+3, "Whiffles: ");
 	mvprintw(LINES-12, x_beg+3, "%-4d", whiffles);
 	mvprintw(LINES-10, x_beg+3, "Energy: ");
