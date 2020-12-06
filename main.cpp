@@ -286,27 +286,6 @@ int main() {
 			attroff(COLOR_PAIR(6));
 		}
 
-		// If the user types something, draw over it
-		if (ch != -1) {
-			if (cx < splitPos){ // Redraw map info
-				if(map.getfog(cy, cx)) {
-					showGrov(cy, cx, map.getAt(cy, cx));
-				} else {
-					mvaddch(cy, cx, ' ');
-				}
-				// hero display. In case you typed over it
-				attron(COLOR_PAIR(6));
-				mvaddch(playery, playerx, '@');
-				attroff(COLOR_PAIR(6));
-			}
-			if (cx == splitPos) { //Redraw the screen split
-				mvaddch(cy, splitPos, '|');
-			}
-			if (cx > splitPos){ // Redraw splitscreen blank background
-				mvaddch(cy, cx, ' ');
-			}
-		}
-
 		drawsplit(whiffles, energy, binoculars, boat);
 		//After the mvaddch, because they move the cursor as well
 		move(cy, cx);
