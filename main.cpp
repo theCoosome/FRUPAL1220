@@ -15,6 +15,7 @@
 #define HERO_PAIR 6
 
 void print_lose();
+void print_win();
 void movecheck();
 
 using namespace std;
@@ -57,7 +58,7 @@ void showGrov(int y, int x, grovnik * show) {
 
 // Move player to y1/x1 depending on terrain and use POI @ y1/x1
 // Sorry you have to pass all that by reference but it's out of scope
-void move_player(int* playery, int* playerx, int y1, int x1, World* map, int* energy, int* whiffles, bool* binoculars, bool* boat, vector<tool*>* inventory) {
+void move_player(int* playery, int* playerx, int y1, int x1, World* map, int* energy, int* whiffles, bool* binoculars, bool* boat, vector<tool*>* inventory, bool* diamond) {
 	grovnik* check = map->getAt(y1, x1);
 	switch (check->terrain) {
 		case 1: //meadow
@@ -80,6 +81,11 @@ void move_player(int* playery, int* playerx, int y1, int x1, World* map, int* en
 			break;
 		case 4: //wall
 			(*energy)--;
+			break;
+		case 5: //diamond
+			*playery = y1;
+			*playerx = x1;
+			*diamond = true;
 			break;
 	}
 	if (!check->poi) {
@@ -158,6 +164,7 @@ int main() {
 	bool binoculars = false;
 	bool boat = false;
 	vector<tool*> inventory;
+	bool diamond = false;
 
 	// cursor position
 	int cx = 0;
@@ -211,22 +218,22 @@ int main() {
 			//Player movement
 			case 'w': //move player up
 				if (playery) {
-					move_player(&playery, &playerx, playery - 1, playerx, &map, &energy, &whiffles, &binoculars, &boat, &inventory);
+					move_player(&playery, &playerx, playery - 1, playerx, &map, &energy, &whiffles, &binoculars, &boat, &inventory, &diamond);
 				}
 				break;
 			case 's': //move player down
 				if (playery < 128) {
-					move_player(&playery, &playerx, playery + 1, playerx, &map, &energy, &whiffles, &binoculars, &boat, &inventory);
+					move_player(&playery, &playerx, playery + 1, playerx, &map, &energy, &whiffles, &binoculars, &boat, &inventory, &diamond);
 				}
 				break;
 			case 'a': //move player left
 				if (playerx) {
-					move_player(&playery, &playerx, playery, playerx - 1, &map, &energy, &whiffles, &binoculars, &boat, &inventory);
+					move_player(&playery, &playerx, playery, playerx - 1, &map, &energy, &whiffles, &binoculars, &boat, &inventory, &diamond);
 				}
 				break;
 			case 'd': //move player right
 				if (playerx < 128) {
-					move_player(&playery, &playerx, playery, playerx + 1, &map, &energy, &whiffles, &binoculars, &boat, &inventory);
+					move_player(&playery, &playerx, playery, playerx + 1, &map, &energy, &whiffles, &binoculars, &boat, &inventory, &diamond);
 				}
 				break;
 
@@ -306,12 +313,16 @@ int main() {
 
 		if(energy <= 0)
 			running = false;
+		if(diamond)
+			running = false;
 
 		refresh();
 	}
 
 	if(energy <= 0)
 		print_lose();
+	if(diamond)
+		print_win();
 
 	return endwin();
 }
@@ -327,8 +338,18 @@ void print_lose()
 	getch();
 	endwin();
 	refresh();
-
-
 }
 
+void print_win()
+{
+	wrefresh(stdscr);
+	initscr();
+	noecho();
+	mvprintw((LINES/2), (COLS/2)-8, "YOU WIN");
+	move(0,0);
+	refresh();
+	getch();
+	endwin();
+	refresh();
+}
 
