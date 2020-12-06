@@ -15,6 +15,7 @@
 #define HERO_PAIR 6
 
 void print_lose();
+void movecheck();
 
 using namespace std;
 
@@ -134,25 +135,85 @@ int main() {
 			//Player movement
 			case 'w': //move player up
 				if (playery) {
-					--playery;
+          grovnik * check = map.getAt(playery - 1, playerx);
+          switch (check->terrain) {
+            case 1: //meadow
+              --playery;
+              break;
+            case 2: //swamp
+              --playery;
+              --energy;
+              break;
+            case 3: //water
+              if (boat == true)
+                --playery;
+              break;
+            case 4: //wall
+              break;
+          }
 				}
 				--energy;
 				break;
 			case 's': //move player down
 				if (playery < 128) {
-					++playery;
+          grovnik * check = map.getAt(playery + 1, playerx);
+          switch (check->terrain) {
+            case 1: //meadow
+              ++playery;
+              break;
+            case 2: //swamp
+              ++playery;
+              --energy;
+              break;
+            case 3: //water
+              if (boat == true)
+                ++playery;
+              break;
+            case 4: //wall
+              break;
+          }
 				}
 				--energy;
 				break;
 			case 'a': //move player left
 				if (playerx) {
-					--playerx;
+          grovnik * check = map.getAt(playery, playerx - 1);
+          switch (check->terrain) {
+            case 1: //meadow
+              --playerx;
+              break;
+            case 2: //swamp
+              --playerx;
+              --energy;
+              break;
+            case 3: //water
+              if (boat == true)
+                --playerx;
+              break;
+            case 4: //wall
+              break;
+          }
 				}
 				--energy;
 				break;
 			case 'd': //move player right
 				if (playerx < 128) {
-					++playerx;
+          grovnik * check = map.getAt(playery, playerx + 1);
+          switch (check->terrain) {
+            case 1: //meadow
+              ++playerx;
+              break;
+            case 2: //swamp
+              ++playerx;
+              --energy;
+              break;
+            case 3: //water
+              if (boat == true)
+                ++playerx;
+              break;
+            case 4: //wall
+              break;
+          }
 				}
 				--energy;
 				break;
@@ -257,8 +318,5 @@ void print_lose()
 
 
 }
-
-
-
 
 
