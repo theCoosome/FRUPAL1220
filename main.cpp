@@ -67,7 +67,7 @@ int main() {
 	*heroy = 2;
 	*herox = 2;
 	map.fileRead(heroy, herox);
-
+	grovnik * grov;
 	bool running = true; // program running conditional
 
 	// player variables
@@ -140,25 +140,37 @@ int main() {
 
 			//Player movement
 			case 'w': //move player up
-				if (playery) {
+				if (playery > 1) {
+					grov = map.getAt(playery - 1, playerx);
+					if((grov->terrain == 3 && !boat) || grov->terrain == 4)
+						break;
 					--playery;
 				}
 				--energy;
 				break;
 			case 's': //move player down
 				if (playery < 128) {
+					grov = map.getAt(playery + 1, playerx);
+					if((grov->terrain == 3 && !boat) || grov->terrain == 4)
+						break;
 					++playery;
 				}
 				--energy;
 				break;
 			case 'a': //move player left
 				if (playerx) {
+					grov = map.getAt(playery, playerx - 1);
+					if((grov->terrain == 3 && !boat) || grov->terrain == 4)
+						break;
 					--playerx;
 				}
 				--energy;
 				break;
 			case 'd': //move player right
 				if (playerx < 128) {
+					grov = map.getAt(playery, playerx + 1);
+					if((grov->terrain == 3 && !boat) || grov->terrain == 4)
+						break;
 					++playerx;
 				}
 				--energy;
