@@ -32,6 +32,15 @@ void showGrov(int y, int x, grovnik * show) {
 			case 3: //tool
 				atpoint = 'T';
 				break;
+			case 4: //clues
+				atpoint = '?';
+				break;
+			case 5: //ship
+				atpoint = 'S';
+				break;
+			case 6: //binoculars
+				atpoint = 'B';
+				break;
 			case 7: //obstacle
 				atpoint = '!';
 				break;

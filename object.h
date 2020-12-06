@@ -112,5 +112,18 @@ class obstacle: public object
 
 };
 
+
+class clue: public object
+{
+	public:
+	clue();
+	clue(char * data);
+	~clue();
+
+	protected:
+	char * hint;
+	
+};
+
 #endif
 

@@ -133,15 +133,18 @@ void World::fileRead(int * heroy, int * herox) {
 				break;
 
 			case 4: // clues
-				//tiles[y][x].poi = new
+				inf.get(input, 256, '\n');
+				tiles[y][x].poi = new clue(input);
 				break;
 
 			case 5: // ship
-				//tiles[y][x].poi = new
+				inf >> cost;
+				tiles[y][x].poi = new object(5, cost);
 				break;
 
 			case 6: // Binoculars
-				//tiles[y][x].poi = new
+				inf >> cost;
+				tiles[y][x].poi = new object(6, cost);
 				break;
 
 			case 7: // Obsticle: cost, type
@@ -151,7 +154,7 @@ void World::fileRead(int * heroy, int * herox) {
 				tiles[y][x].poi = new obstacle(cost, type);
 				break;
 		}
-		inf.ignore(256, '\n'); // Ignore to the next line
+		inf.ignore(2048, '\n'); // Ignore to the next line
 		inf.peek();
 	}
 	inf.close();

@@ -48,7 +48,21 @@ object::~object()
 }
 
 
-food::food():name(NULL), value(0)
+clue::clue():object(4, 0), hint(NULL)
+{
+}
+
+clue::clue(char * data):object(4, 0) {
+	hint = new char[strlen(data)+1];
+	strcpy(hint, data);
+}
+
+clue::~clue() {
+	if (hint)
+		delete[] hint;
+}
+
+food::food():object(0, 2), name(NULL), value(0)
 //default constructor
 {
 
@@ -93,7 +107,7 @@ food::~food()
 }
 
 
-tool::tool():name(NULL), power(0), obs_type(0)
+tool::tool():object(0, 3), name(NULL), power(0), obs_type(0)
 //default constructor
 {
 
@@ -138,7 +152,7 @@ tool::~tool()
 	name = NULL;
 }
 
-treasure::treasure():is_empty(0)
+treasure::treasure():object(0, 1), is_empty(0)
 //default constructor
 {
 
