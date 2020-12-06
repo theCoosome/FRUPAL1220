@@ -83,8 +83,9 @@ clue::clue(char * data):object(4, 0) {
 }
 
 clue::~clue() {
-	if (hint)
-		delete[] hint;
+	if (hint) {
+		delete [] hint;
+	}
 }
 
 food::food():object(0, 2), name(NULL), value(0)
@@ -100,11 +101,7 @@ food::food(int add_cost, char *add_name, int add_value):object(2, add_cost)
 	name  = new char[strlen(add_name)+1];
 	strcpy(name, add_name);
 	value = add_value;
-
-
 }
-
-
 
 food::food(const food &to_copy):object(to_copy)
 //copy constructor
@@ -127,8 +124,9 @@ int food::get_value()
 food::~food()
 //destructor for the play area
 {
-	delete [] name;
-	name = NULL;
+	if (name) {
+		delete [] name;
+	}
 }
 
 
@@ -173,8 +171,9 @@ int tool::get_obstype()
 
 tool::~tool()
 {
-	delete [] name;
-	name = NULL;
+	if (name) {
+		delete [] name;
+	}
 }
 
 treasure::treasure():object(0, 1), is_empty(0)
