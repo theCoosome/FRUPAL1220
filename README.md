@@ -12,3 +12,4 @@ By Bailey Manzer, Colton Jelsema, Jonnie Herrera, Leah Moser, Vincent Vermilya
 - <kbd>Q</kbd> Quit
 # Description
 Just read the [Moodle page](https://moodle.cs.pdx.edu/mod/page/view.php?id=429).
+Remember to `make test` and `valgrind ./frupal`!
