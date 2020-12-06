@@ -40,11 +40,11 @@ int drawsplit(int whiffles, int energy, bool binocs, bool boat)
 	//conversion from integers to chars for window print
 	if(binocs == true)
 	{
-		bino = (char*)"on";
+		bino = (char*)"on ";
 	}
 	if(boat == true)
 	{
-		bote = (char*)"on";
+		bote = (char*)"on ";
 	}
 
 //	WINDOW *win = newwin(height, width, y_beg, x_beg);
