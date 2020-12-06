@@ -177,6 +177,11 @@ grovnik * World::getAt(unsigned int y, unsigned int x) {
 // Clears the POI. MAKE SURE TO RETRIEVE THE ITEM FIRST
 bool World::clearPOI(int y, int x) {
 	if (tiles[y][x].poi) {
+		int type = tiles[y][x].poi -> get_type();
+		// Some objects dissapear when obtained, aren't moved into inventory.
+		if (type == 1 || type == 5 || type == 6){
+			delete tiles[y][x].poi;
+		}
 		tiles[y][x].poi = NULL;
 		return true;
 	}

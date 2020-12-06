@@ -36,9 +36,6 @@ class object
 	int get_type();
 	int get_cost();
 
-	//type 1
-	int getTres(); // Returns value.
-
 	//type 2
 	food * getFood();
 
@@ -47,12 +44,6 @@ class object
 
 	//type 4
 	clue * getClue();
-
-	//type 5
-	int getShip(); // returns cost.
-
-	//type 6
-	int getBino(); // returns cost
 
 	//type 7
 	obstacle * getObst();

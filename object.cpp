@@ -48,6 +48,31 @@ object::~object()
 }
 
 
+food * object::getFood() {
+	if (type == 2)
+		return dynamic_cast<food*>(this);
+	return NULL;
+}
+
+tool * object::getTool() {
+	if (type == 3)
+		return dynamic_cast<tool*>(this);
+	return NULL;
+}
+
+clue * object::getClue() {
+	if (type == 4)
+		return dynamic_cast<clue*>(this);
+	return NULL;
+}
+
+obstacle * object::getObst() {
+	if (type == 7)
+		return dynamic_cast<obstacle*>(this);
+	return NULL;
+}
+
+
 clue::clue():object(4, 0), hint(NULL)
 {
 }
