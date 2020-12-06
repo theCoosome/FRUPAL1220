@@ -55,6 +55,8 @@ void showGrov(int y, int x, grovnik * show) {
 	attroff(COLOR_PAIR(show -> terrain));
 }
 
+// Move player to y1/x1 depending on terrain and use POI @ y1/x1
+// Sorry you have to pass all that by reference but it's out of scope
 void move_player(int* playery, int* playerx, int y1, int x1, World* map, int* energy, int* whiffles, bool* binoculars, bool* boat, vector<tool*>* inventory) {
 	grovnik* check = map->getAt(y1, x1);
 	switch (check->terrain) {
@@ -184,6 +186,11 @@ int main() {
 			}
 		}
 	}
+
+	// Initial hero display
+	attron(COLOR_PAIR(6));
+	mvaddch(playery, playerx, '@');
+	attroff(COLOR_PAIR(6));
 
 	//Draw the splitscreen split
 	mvvline(0, splitPos, '|', Rows);
