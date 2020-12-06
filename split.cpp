@@ -9,7 +9,7 @@
 
 #include "split.h"
 
-int drawsplit(int whiffles, int energy, bool binocs, bool boat)
+int drawsplit(int whiffles, int energy, bool binocs, bool boat, vector<tool*> inventory)
 {
 	//initscr();
 	//the begining of arugument declarations
@@ -54,8 +54,9 @@ int drawsplit(int whiffles, int energy, bool binocs, bool boat)
 
 //	wborder(win, left, right, top, bottom, tl, tr, bl, br);
 	int x_beg = x;
-	mvprintw(2, x_beg+6, "Hero");
-        mvprintw(LINES-13, x_beg+3, "Whiffles: ");
+	mvprintw(2, x_beg+8, "Hero");
+	mvprintw(4, x_beg+8, "Grovnik Info:");
+  mvprintw(LINES-13, x_beg+3, "Whiffles: ");
 	mvprintw(LINES-12, x_beg+3, "%-4d", whiffles);
 	mvprintw(LINES-10, x_beg+3, "Energy: ");
 	mvprintw(LINES-9, x_beg+3, "%-3d", energy);
