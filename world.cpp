@@ -174,6 +174,15 @@ grovnik * World::getAt(unsigned int y, unsigned int x) {
 	return & tiles[y][x];
 }
 
+// Clears the POI. MAKE SURE TO RETRIEVE THE ITEM FIRST
+bool World::clearPOI(int y, int x) {
+	if (tiles[y][x].poi) {
+		tiles[y][x].poi = NULL;
+		return true;
+	}
+	return false;
+}
+
 // Clear fog[y1][x1] from false to true
 // Basecase bounds check to avoid segfault
 void World::clearfog(unsigned int y1, unsigned int x1) {

@@ -35,6 +35,7 @@ class World {
 	void fileRead(int * heroy, int * herox);
 	grovnik * getAt(unsigned int y, unsigned int x);
 	bool getfog(unsigned int y1, unsigned int x1);
+	bool clearPOI(int y, int x);
 #ifdef TEST
 	bool ** getfog();
 #endif
