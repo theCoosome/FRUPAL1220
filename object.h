@@ -135,6 +135,7 @@ class clue: public object
 	clue();
 	clue(char * data);
 	~clue();
+	char * getHint();
 
 	protected:
 	char * hint;

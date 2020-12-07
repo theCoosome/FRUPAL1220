@@ -88,6 +88,11 @@ clue::~clue() {
 	}
 }
 
+char * clue::getHint() {
+	return hint;
+}
+
+
 food::food():object(0, 2), name(NULL), value(0)
 //default constructor
 {
