@@ -80,6 +80,7 @@ void drawTerr(int x_beg, grovnik * grov) {
 	// TODO Clear the space that was drawn
 //	mvprintw(5, x_beg+3, "                  ");
 
+	mvprintw(8, x_beg+3, "                     ");
 	if (grov) {
 		object * temp = grov -> poi;
 		if(temp) {
