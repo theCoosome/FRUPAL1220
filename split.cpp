@@ -81,22 +81,22 @@ int drawsplit(int whiffles, int energy, bool binocs, bool boat, grovnik * grov, 
 
 //	wborder(win, left, right, top, bottom, tl, tr, bl, br);
 	int x_beg = x;
-	mvprintw(2, x_beg+8, "Hero");
+	//mvprintw(2, x_beg+8, "Hero");
   printCenter(x_beg, COLS/4, 2, "Hero");
   mvprintw(4, x_beg+3, "Grovnik Info:");
   mvprintw(6, x_beg+3, "Terrain:");
+  mvprintw(8, x_beg+3, "Food:");
   //predraw to clear
   mvprintw(7, x_beg+3, "                  ");
   mvprintw(7, x_beg+3, terrType);
   mvprintw(LINES-13, x_beg+3, "Whiffles: ");
-	mvprintw(LINES-12, x_beg+3, "%-4d", whiffles);
-	mvprintw(LINES-10, x_beg+3, "Energy: ");
-	mvprintw(LINES-9, x_beg+3, "%-3d", energy);
-	mvprintw(LINES-7, x_beg+3, "Binoculars: ");
-	mvprintw(LINES-6, x_beg+3, bino);
-	mvprintw(LINES-4, x_beg+3, "Boat: ");
-	mvprintw(LINES-3, x_beg+3, bote);
-//COLS*3/4-7
+  mvprintw(LINES-12, x_beg+3, "%-4d", whiffles);
+  mvprintw(LINES-10, x_beg+3, "Energy: ");
+  mvprintw(LINES-9, x_beg+3, "%-3d", energy);
+  mvprintw(LINES-7, x_beg+3, "Binoculars: ");
+  mvprintw(LINES-6, x_beg+3, bino);
+  mvprintw(LINES-4, x_beg+3, "Boat: ");
+  mvprintw(LINES-3, x_beg+3, bote);
 
 //	wrefresh(win);
 
