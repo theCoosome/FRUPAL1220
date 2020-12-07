@@ -111,6 +111,7 @@ void drawTerr(int x_beg, grovnik * grov) {
 			 case 5: { // ship. Display cost
 				mvprintw(8, x_beg+3, "                  ");
 				mvprintw(8, x_beg+3, "Boat");
+				mvprintw(9, x_beg+3, "%-3d", temp->get_cost());
 				break;
 			 }
 			 case 6: { // binoculars. show cost
