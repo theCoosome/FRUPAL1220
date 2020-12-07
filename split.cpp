@@ -81,6 +81,7 @@ void drawTerr(int x_beg, grovnik * grov) {
 
         clearPrint(8, x_beg+3);
 	clearPrint(9, x_beg+3);
+	clearPrint(10, x_beg+3);
 	if (grov) {
 		object * temp = grov -> poi;
 		if(temp) {
@@ -116,12 +117,16 @@ void drawTerr(int x_beg, grovnik * grov) {
 			 case 5: { // ship. Display cost
 				clearPrint(8, x_beg+3);
 				mvprintw(8, x_beg+3, "Boat");
-				mvprintw(9, x_beg+3, "%-3d", temp->get_cost());
+				mvprintw(9, x_beg+3, "Cost:");
+				mvprintw(10, x_beg+3, "%-3d", temp->get_cost());
 				break;
 			 }
 			 case 6: { // binoculars. show cost
 				clearPrint(8, x_beg+3);
 				mvprintw(8, x_beg+3, "Binoculars:");
+				clearPrint(9, x_beg+3);
+				mvprintw(9, x_beg+3, "Cost:");
+				mvprintw(10, x_beg+3, "%-3d", temp->get_cost());
 				break;
 			 }
 			 case 7: { // obstacle. Display type (UNIMPLEMENTED)
