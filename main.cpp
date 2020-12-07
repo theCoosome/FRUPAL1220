@@ -77,10 +77,11 @@ void move_player(int* playery, int* playerx, int y1, int x1, World* map, int* en
 				*playerx = x1;
 				break;
 			}
-			(*energy)--;
+			if(*boat)
+			  (*energy)--; //don't want energy to go down if cant move
 			break;
 		case 4: //wall
-			(*energy)--;
+			//(*energy)--; //dont want energy to go down if cant move
 			break;
 		case 5: //diamond
 			*playery = y1;
@@ -279,6 +280,7 @@ int main() {
 
 		// User input
 		switch(ch) {
+
 			case 'q': //press q to quit
 				running = false;
 				break;

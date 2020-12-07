@@ -77,7 +77,6 @@ void drawTerr(int x_beg, grovnik * grov) {
 
 	mvprintw(7, x_beg+3, "Grovnik Info:");
 
-	// TODO Clear the space that was drawn
 
         clearPrint(8, x_beg+3);
 	clearPrint(9, x_beg+3);
