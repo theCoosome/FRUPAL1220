@@ -114,17 +114,61 @@ void move_player(int* playery, int* playerx, int y1, int x1, World* map, int* en
 		// TODO
 
 	} else if (objType == 5) { //ship
-		if (*whiffles >= check->poi->get_cost()) {
-			*whiffles -= check->poi->get_cost();
-			map->clearPOI(y1, x1);
-			*boat = true;
+		char answer;
+		mvprintw(15, 119, "                                       "); // clears text for next use
+		mvprintw(15, 119, "You have found a boat!");
+		mvprintw(16, 119, "Would you like to purchase them?");
+		mvprintw(17, 119, "Cost: 200 Whiffles");
+		mvprintw(18, 119, "Press y or n: ");
+		refresh();
+		answer = getchar();
+		// clearing text
+		mvprintw(15, 119, "                                   ");	
+		mvprintw(16, 119, "                                   ");	
+		mvprintw(17, 119, "                                   ");	
+		mvprintw(18, 119, "                                   ");	
+		if(answer == 'y' || answer == 'Y')
+		{
+			if (*whiffles >= check->poi->get_cost()) {
+				mvprintw(15, 119, "You purchased the boat!");
+				*whiffles -= check->poi->get_cost();
+				map->clearPOI(y1, x1);
+				*boat = true;
+			}
+			else
+				mvprintw(15, 119, "Error! Could not purchase!");
 		}
+		else
+			mvprintw(15, 119, "You did not purchase the boat!");
 	} else if (objType == 6) { //binoculars
-		if (*whiffles >= check->poi->get_cost()) {
-			*whiffles -= check->poi->get_cost();
-			map->clearPOI(y1, x1);
-			*binoculars = true;
+		char answer;
+		mvprintw(15, 119, "                                       "); // clears text for next use
+		mvprintw(15, 119, "You have found some binoculars!");
+		mvprintw(16, 119, "Would you like to purchase them?");
+		mvprintw(17, 119, "Cost: 50 Whiffles");
+		mvprintw(18, 119, "Press y or n: ");
+		refresh();
+		answer = getchar();
+		// clearing text
+		mvprintw(15, 119, "                                   ");	
+		mvprintw(16, 119, "                                   ");	
+		mvprintw(17, 119, "                                   ");	
+		mvprintw(18, 119, "                                   ");	
+		if(answer == 'y' || answer == 'Y')
+		{
+			if (*whiffles >= check->poi->get_cost()) {
+				mvprintw(15, 119, "You purchased the binoculars!");
+				*whiffles -= check->poi->get_cost();
+				map->clearPOI(y1, x1);
+				*binoculars = true;
+			}
+			else
+				mvprintw(15, 119, "Error! Could not purchase!");
 		}
+		else
+			mvprintw(15, 119, "You did not purchase the binoculars!");
+			
+		
 	} else { //obsticles
 
 		// TODO
