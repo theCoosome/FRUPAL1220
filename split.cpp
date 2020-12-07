@@ -69,13 +69,54 @@ void drawTerr(int x_beg, grovnik * grov) {
 		terrType = (char*)"Unknown";
 	}
 
-  mvprintw(4, x_beg+3, "Terrain:");
-  //predraw to clear for terrain
-  mvprintw(5, x_beg+3, "                  ");
-  mvprintw(5, x_beg+3, terrType);
-  
+	mvprintw(4, x_beg+3, "Terrain:");
+	//predraw to clear for terrain
+	mvprintw(5, x_beg+3, "                  ");
+	mvprintw(5, x_beg+3, terrType);
 
-  mvprintw(7, x_beg+3, "Grovnik Info:");
+
+	mvprintw(7, x_beg+3, "Grovnik Info:");
+
+	// TODO Clear the space that was drawn
+	// mvprintw(5, x_beg+3, "                  ");
+
+	if (grov) {
+		object * temp = grov -> poi;
+		if(temp) {
+			switch (temp -> get_type()) {
+			 case 1: { // Treasure. show "treasure"
+			 	mvprintw(8, x_beg+3, "Treasure");
+			 	break;
+			 }
+			 case 2: { // Food. Show name & cost
+			 	mvprintw(8, x_beg+3, "Food:");
+			 	food *print_food = temp->getFood();
+			 	char *p_food = print_food->get_name(); 
+			 	mvprintw(9, x_beg+3, p_food); 
+			 	break;
+			 }
+			 case 3: { // Tool. show name, cost, effectiveness
+			 	mvprintw(8, x_beg+3, "Tool:");
+			 	break;
+			 }
+			 case 4: { // clue. Leave clues behind and show info whenever
+			 	mvprintw(8, x_beg+3, "Clue:");
+			 	break;
+			 }
+			 case 5: { // ship. Display cost
+			 	mvprintw(8, x_beg+3, "Boat");
+			 	break;
+			 }
+			 case 6: { // binoculars. show cost
+			 	mvprintw(8, x_beg+3, "Binoculars:");
+			 	break;
+			 }
+			 case 7: { // obstacle. Display type (UNIMPLEMENTED)
+			 	break;
+			 }
+			}
+		}
+	}
 
 }
 
