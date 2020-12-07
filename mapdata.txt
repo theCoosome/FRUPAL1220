@@ -5,4 +5,6 @@
 7 4 2 5 20 Fat apple
 7 6 3 20 2 1 steel axe
 7 8 7 20 1
-7 10 4 this is a test clue, ignore me
+7 10 4 The treasure is surrounded by water, buy a boat!
+25 20 4 You are close to the chest! Go east!
+13 47 4 You are close to the chest! Go south!
