@@ -72,7 +72,8 @@ int drawsplit(int whiffles, int energy, bool binocs, bool boat, grovnik * grov, 
       terrType = (char*)"Unknown";
       break;
   }
-  
+ object *food = grov->poi->getFood();
+ //jchar *p_food = food->get_name(); 
 
 //	WINDOW *win = newwin(height, width, y_beg, x_beg);
 //	refresh();
@@ -89,6 +90,7 @@ int drawsplit(int whiffles, int energy, bool binocs, bool boat, grovnik * grov, 
   //predraw to clear
   mvprintw(7, x_beg+3, "                  ");
   mvprintw(7, x_beg+3, terrType);
+  mvprintw(9, x_beg+3, "working"); 
   mvprintw(LINES-13, x_beg+3, "Whiffles: ");
   mvprintw(LINES-12, x_beg+3, "%-4d", whiffles);
   mvprintw(LINES-10, x_beg+3, "Energy: ");
