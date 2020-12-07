@@ -101,6 +101,11 @@ void drawTerr(int x_beg, grovnik * grov) {
 			 case 3: { // Tool. show name, cost, effectiveness
 				mvprintw(8, x_beg+3, "                  ");
 				mvprintw(8, x_beg+3, "Tool:");
+				mvprintw(10, x_beg+3, "%-3d", temp->get_cost());
+				tool *print_tool = temp->getTool();
+				char *p_tool = print_tool->get_t_name();
+				mvprintw(9, x_beg+3, "                  ");
+				mvprintw(9, x_beg+3, p_tool);
 				break;
 			 }
 			 case 4: { // clue. Leave clues behind and show info whenever
