@@ -387,6 +387,8 @@ int main() {
 
 void print_lose()
 {
+	beep();
+	flash();
 	wrefresh(stdscr);
 	initscr();
 	noecho();
@@ -400,6 +402,8 @@ void print_lose()
 
 void print_win()
 {
+	beep();
+	flash();
 	wrefresh(stdscr);
 	initscr();
 	noecho();
