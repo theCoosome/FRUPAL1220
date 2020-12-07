@@ -201,7 +201,14 @@ int main() {
 
 	//Draw the splitscreen split
 	mvvline(0, splitPos, '|', Rows);
-	drawsplit(whiffles, energy, binoculars, boat, map.getAt(cy, cx), inventory);
+	drawValues(splitPos, whiffles, energy, binoculars, boat);
+	if (map.getfog(cy, cx)) {
+		drawTerr(splitPos, map.getAt(cy, cx));
+	} else {
+		drawTerr(splitPos, NULL);
+	}
+
+	//drawsplit(whiffles, energy, binoculars, boat, map.getAt(cy, cx), inventory);
 
 	// Clear map for debugging file reader
 	//map.clearfog_rad(0, 0, 128);
@@ -307,7 +314,14 @@ int main() {
 			}
 		}
 
-		drawsplit(whiffles, energy, binoculars, boat, map.getAt(cy, cx), inventory);
+
+		//drawsplit(whiffles, energy, binoculars, boat, map.getAt(cy, cx), inventory);
+		drawValues(splitPos, whiffles, energy, binoculars, boat);
+		if (map.getfog(cy, cx)) {
+			drawTerr(splitPos, map.getAt(cy, cx));
+		} else {
+			drawTerr(splitPos, NULL);
+		}
 		//After the mvaddch, because they move the cursor as well
 		move(cy, cx);
 

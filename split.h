@@ -7,4 +7,6 @@
 
 using namespace std;
 
-int drawsplit(int whiffles, int energy, bool binocs, bool boat, grovnik * grov, vector<tool*> inventory);
+void drawValues(int splitPos, int whiffles, int energy, bool binocs, bool boat);
+void drawTerr(int splitPos, grovnik * grov);
+void drawInven(int splitPos, vector<tool*> inventory);
