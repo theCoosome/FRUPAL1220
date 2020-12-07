@@ -110,8 +110,24 @@ void move_player(int* playery, int* playerx, int y1, int x1, World* map, int* en
 			inventory->push_back(foundTool);
 		}
 	} else if (objType == 4) { //clues
-
-		// TODO
+		char * hint;	
+		clue * get_clue = check->poi->getClue();
+		mvprintw(15, 119, "                                       "); // clears text for next use
+		mvprintw(15, 119, "You found a clue!");
+		hint = new char[strlen(get_clue->getHint()) + 1];
+		strcpy(hint, get_clue->getHint());
+		
+		// displaying the clue close to where the player is	
+		move(*playery + 5, *playerx + 5);
+		printw("The clue is: %s", hint);
+		refresh();
+		map->clearPOI(y1, x1);
+		//deleting text
+		mvprintw(16, 119, "Press any key to continue!");
+		getch();
+		mvprintw(16, 119, "                                 ");
+		mvprintw(*playery + 5, *playerx + 5, "                                                                                   "); 
+		refresh();
 
 	} else if (objType == 5) { //ship
 		char answer;
