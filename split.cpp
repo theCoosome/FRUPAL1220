@@ -89,6 +89,7 @@ void drawTerr(int x_beg, grovnik * grov) {
 			 	break;
 			 }
 			 case 2: { // Food. Show name & cost
+			        mvprintw(8, x_beg+3, "                  ");
 			 	mvprintw(8, x_beg+3, "Food:");
 			 	food *print_food = temp->getFood();
 			 	char *p_food = print_food->get_name(); 
@@ -97,10 +98,12 @@ void drawTerr(int x_beg, grovnik * grov) {
 			 	break;
 			 }
 			 case 3: { // Tool. show name, cost, effectiveness
+			        mvprintw(8, x_beg+3, "                  ");
 			 	mvprintw(8, x_beg+3, "Tool:");
 			 	break;
 			 }
 			 case 4: { // clue. Leave clues behind and show info whenever
+			        mvprintw(8, x_beg+3, "                  ");
 			 	mvprintw(8, x_beg+3, "Clue:");
 			 	break;
 			 }
