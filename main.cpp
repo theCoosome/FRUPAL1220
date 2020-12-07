@@ -123,19 +123,20 @@ void move_player(int* playery, int* playerx, int y1, int x1, World* map, int* en
 		printw("The clue is: %s", hint);
 		delete [] hint;
 		refresh();
-		map->clearPOI(y1, x1);
 		//deleting text
 		mvprintw(16, 119, "Press any key to continue!");
 		getch();
 		mvprintw(16, 119, "                                 ");
-		mvprintw(*playery + 5, *playerx + 5, "                                                                                   ");
 		refresh();
+		mvprintw(*playery + 5, *playerx + 5, "                                                                                   ");
+		*energy += 1; // fixed where it would take an energy when you pressed button to continue
+		map->clearPOI(y1, x1);
 
 	} else if (objType == 5) { //ship
 		char answer;
 		mvprintw(15, 119, "                                       "); // clears text for next use
 		mvprintw(15, 119, "You have found a boat!");
-		mvprintw(16, 119, "Would you like to purchase them?");
+		mvprintw(16, 119, "Would you like to purchase it?");
 		mvprintw(17, 119, "Cost: 200 Whiffles");
 		mvprintw(18, 119, "Press y or n: ");
 		refresh();
