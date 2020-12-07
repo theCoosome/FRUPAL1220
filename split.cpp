@@ -72,8 +72,8 @@ int drawsplit(int whiffles, int energy, bool binocs, bool boat, grovnik * grov, 
       terrType = (char*)"Unknown";
       break;
   }
- object *food = grov->poi->getFood();
- //jchar *p_food = food->get_name(); 
+// object *food = grov->poi->getFood();
+ //char *p_food = food->get_name(); 
 
 //	WINDOW *win = newwin(height, width, y_beg, x_beg);
 //	refresh();
