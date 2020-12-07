@@ -30,7 +30,7 @@ void drawValues(int x_beg, int whiffles, int energy, bool binocs, bool boat) {
 	}
 
 	//mvprintw(2, x_beg+8, "Hero");
-  printCenter(x_beg, COLS/4, 2, "Hero");
+        printCenter(x_beg, COLS/4, 2, "Hero");
 	mvprintw(LINES-13, x_beg+3, "Whiffles: ");
 	mvprintw(LINES-12, x_beg+3, "%-4d", whiffles);
 	mvprintw(LINES-10, x_beg+3, "Energy: ");
@@ -78,7 +78,7 @@ void drawTerr(int x_beg, grovnik * grov) {
 	mvprintw(7, x_beg+3, "Grovnik Info:");
 
 	// TODO Clear the space that was drawn
-	// mvprintw(5, x_beg+3, "                  ");
+//	mvprintw(5, x_beg+3, "                  ");
 
 	if (grov) {
 		object * temp = grov -> poi;
@@ -92,6 +92,7 @@ void drawTerr(int x_beg, grovnik * grov) {
 			 	mvprintw(8, x_beg+3, "Food:");
 			 	food *print_food = temp->getFood();
 			 	char *p_food = print_food->get_name(); 
+				mvprintw(9, x_beg+3, "                  ");
 			 	mvprintw(9, x_beg+3, p_food); 
 			 	break;
 			 }
@@ -104,10 +105,12 @@ void drawTerr(int x_beg, grovnik * grov) {
 			 	break;
 			 }
 			 case 5: { // ship. Display cost
+			        mvprintw(8, x_beg+3, "                  ");
 			 	mvprintw(8, x_beg+3, "Boat");
 			 	break;
 			 }
 			 case 6: { // binoculars. show cost
+			        mvprintw(8, x_beg+3, "                  ");
 			 	mvprintw(8, x_beg+3, "Binoculars:");
 			 	break;
 			 }
