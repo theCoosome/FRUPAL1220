@@ -243,6 +243,8 @@ int main() {
 
 
 	map.clearfog_rad(playery, playerx, 1);
+	// Clear map for debugging file reader
+	//map.clearfog_rad(0, 0, 128);
 
 	// Initial world draw
 	for (int y = 0; y < 128; y++) {
@@ -271,8 +273,6 @@ int main() {
 
 	//drawsplit(whiffles, energy, binoculars, boat, map.getAt(cy, cx), inventory);
 
-	// Clear map for debugging file reader
-	//map.clearfog_rad(0, 0, 128);
 	while (running) {
 
 		int ch = getch();
