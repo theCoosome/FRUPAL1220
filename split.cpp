@@ -30,14 +30,14 @@ void drawValues(int x_beg, int whiffles, int energy, bool binocs, bool boat) {
 		bote = (char*)"on ";
 	}
 
-        printCenter(x_beg, COLS/4, 2, "Hero");
+        printCenter(x_beg, COLS/4, 2, "Hero of Frupal");
 	mvprintw(LINES-13, x_beg+3, "Whiffles: ");
 	mvprintw(LINES-12, x_beg+3, "%-4d", whiffles);
 	mvprintw(LINES-10, x_beg+3, "Energy: ");
 	mvprintw(LINES-9, x_beg+3, "%-3d", energy);
 	mvprintw(LINES-7, x_beg+3, "Binoculars: ");
 	mvprintw(LINES-6, x_beg+3, bino);
-	mvprintw(LINES-4, x_beg+3, "Boat: ");
+	mvprintw(LINES-4, x_beg+3, "Ship: ");
 	mvprintw(LINES-3, x_beg+3, bote);
 
 }
@@ -116,7 +116,7 @@ void drawTerr(int x_beg, grovnik * grov) {
 			 }
 			 case 5: { // ship. Display cost
 				clearPrint(8, x_beg+3);
-				mvprintw(8, x_beg+3, "Boat");
+				mvprintw(8, x_beg+3, "Ship:");
 				mvprintw(9, x_beg+3, "Cost:");
 				mvprintw(10, x_beg+3, "%-3d", temp->get_cost());
 				break;
