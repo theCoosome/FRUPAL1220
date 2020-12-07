@@ -110,23 +110,24 @@ void move_player(int* playery, int* playerx, int y1, int x1, World* map, int* en
 			inventory->push_back(foundTool);
 		}
 	} else if (objType == 4) { //clues
-		char * hint;	
+		char * hint;
 		clue * get_clue = check->poi->getClue();
 		mvprintw(15, 119, "                                       "); // clears text for next use
 		mvprintw(15, 119, "You found a clue!");
 		hint = new char[strlen(get_clue->getHint()) + 1];
 		strcpy(hint, get_clue->getHint());
-		
-		// displaying the clue close to where the player is	
+
+		// displaying the clue close to where the player is
 		move(*playery + 5, *playerx + 5);
 		printw("The clue is: %s", hint);
+		delete [] hint;
 		refresh();
 		map->clearPOI(y1, x1);
 		//deleting text
 		mvprintw(16, 119, "Press any key to continue!");
 		getch();
 		mvprintw(16, 119, "                                 ");
-		mvprintw(*playery + 5, *playerx + 5, "                                                                                   "); 
+		mvprintw(*playery + 5, *playerx + 5, "                                                                                   ");
 		refresh();
 
 	} else if (objType == 5) { //ship
@@ -139,10 +140,10 @@ void move_player(int* playery, int* playerx, int y1, int x1, World* map, int* en
 		refresh();
 		answer = getchar();
 		// clearing text
-		mvprintw(15, 119, "                                   ");	
-		mvprintw(16, 119, "                                   ");	
-		mvprintw(17, 119, "                                   ");	
-		mvprintw(18, 119, "                                   ");	
+		mvprintw(15, 119, "                                   ");
+		mvprintw(16, 119, "                                   ");
+		mvprintw(17, 119, "                                   ");
+		mvprintw(18, 119, "                                   ");
 		if(answer == 'y' || answer == 'Y')
 		{
 			if (*whiffles >= check->poi->get_cost()) {
@@ -166,10 +167,10 @@ void move_player(int* playery, int* playerx, int y1, int x1, World* map, int* en
 		refresh();
 		answer = getchar();
 		// clearing text
-		mvprintw(15, 119, "                                   ");	
-		mvprintw(16, 119, "                                   ");	
-		mvprintw(17, 119, "                                   ");	
-		mvprintw(18, 119, "                                   ");	
+		mvprintw(15, 119, "                                   ");
+		mvprintw(16, 119, "                                   ");
+		mvprintw(17, 119, "                                   ");
+		mvprintw(18, 119, "                                   ");
 		if(answer == 'y' || answer == 'Y')
 		{
 			if (*whiffles >= check->poi->get_cost()) {
@@ -183,8 +184,8 @@ void move_player(int* playery, int* playerx, int y1, int x1, World* map, int* en
 		}
 		else
 			mvprintw(15, 119, "You did not purchase the binoculars!");
-			
-		
+
+
 	} else { //obsticles
 
 		// TODO
@@ -375,7 +376,6 @@ int main() {
 		}
 
 
-		//drawsplit(whiffles, energy, binoculars, boat, map.getAt(cy, cx), inventory);
 		drawValues(splitPos, whiffles, energy, binoculars, boat);
 		if (map.getfog(cy, cx)) {
 			drawTerr(splitPos, map.getAt(cy, cx));

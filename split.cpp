@@ -86,40 +86,40 @@ void drawTerr(int x_beg, grovnik * grov) {
 		if(temp) {
 			switch (temp -> get_type()) {
 			 case 1: { // Treasure. show "treasure"
-			 	mvprintw(8, x_beg+3, "Treasure");
-			 	break;
+				mvprintw(8, x_beg+3, "Treasure");
+				break;
 			 }
 			 case 2: { // Food. Show name & cost
-			        mvprintw(8, x_beg+3, "                  ");
-			 	mvprintw(8, x_beg+3, "Food:");
-			 	food *print_food = temp->getFood();
-			 	char *p_food = print_food->get_name(); 
+				mvprintw(8, x_beg+3, "                  ");
+				mvprintw(8, x_beg+3, "Food:");
+				food *print_food = temp->getFood();
+				char *p_food = print_food->get_name();
 				mvprintw(9, x_beg+3, "                  ");
-			 	mvprintw(9, x_beg+3, p_food); 
-			 	break;
+				mvprintw(9, x_beg+3, p_food);
+				break;
 			 }
 			 case 3: { // Tool. show name, cost, effectiveness
-			        mvprintw(8, x_beg+3, "                  ");
-			 	mvprintw(8, x_beg+3, "Tool:");
-			 	break;
+				mvprintw(8, x_beg+3, "                  ");
+				mvprintw(8, x_beg+3, "Tool:");
+				break;
 			 }
 			 case 4: { // clue. Leave clues behind and show info whenever
-			        mvprintw(8, x_beg+3, "                  ");
-			 	mvprintw(8, x_beg+3, "Clue:");
-			 	break;
+				mvprintw(8, x_beg+3, "                  ");
+				mvprintw(8, x_beg+3, "Clue:");
+				break;
 			 }
 			 case 5: { // ship. Display cost
-			        mvprintw(8, x_beg+3, "                  ");
-			 	mvprintw(8, x_beg+3, "Boat");
-			 	break;
+				mvprintw(8, x_beg+3, "                  ");
+				mvprintw(8, x_beg+3, "Boat");
+				break;
 			 }
 			 case 6: { // binoculars. show cost
-			        mvprintw(8, x_beg+3, "                  ");
-			 	mvprintw(8, x_beg+3, "Binoculars:");
-			 	break;
+				mvprintw(8, x_beg+3, "                  ");
+				mvprintw(8, x_beg+3, "Binoculars:");
+				break;
 			 }
 			 case 7: { // obstacle. Display type (UNIMPLEMENTED)
-			 	break;
+				break;
 			 }
 			}
 		}
