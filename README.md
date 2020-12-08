@@ -30,7 +30,10 @@ terrain, such as the swamp, is so hard to travel through it takes two energy to 
 The walls are considered impassible. Be careful the energy is also taken over water and if
 you lose all your energy you lose! However, find the diamon hidden in the kingdom and you will
 get one trillion trillion dollars and win! 
+
 You can find our short demo video and presentation here: https://media.pdx.edu/media/1_38tje2ip
+
 Our github rep is here: https://github.com/theCoosome/FRUPAL1220
+
 Our Kanban board is here: https://github.com/theCoosome/FRUPAL1220/projects
 
