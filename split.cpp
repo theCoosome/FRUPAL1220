@@ -3,10 +3,6 @@
 //The split screen with stats
 
 
-
-
-
-
 #include "split.h"
 
 void printCenter(int startingCols, int cols, int line, const char *toPrint) {
@@ -42,7 +38,7 @@ void drawValues(int x_beg, int whiffles, int energy, bool binocs, bool boat) {
 
 }
 
-void drawTerr(int x_beg, grovnik * grov) {
+void drawTerr(int x_beg, grovnik * grov, char ** obstypes) {
 
 
   //grovnik info under cursor
@@ -90,46 +86,64 @@ void drawTerr(int x_beg, grovnik * grov) {
 				break;
 			 }
 			 case 2: { // Food. Show name & cost
-			        clearPrint(8, x_beg+3);
+				clearPrint(8, x_beg+3);
 				mvprintw(8, x_beg+3, "Food:");
 				food *print_food = temp->getFood();
-				char *p_food = print_food->get_name();
+				mvprintw(8, x_beg+3, print_food->get_name());
+
 				clearPrint(9, x_beg+3);
-				mvprintw(9, x_beg+3, p_food);
+				mvprintw(9, x_beg+3, "Cost:");
+				mvprintw(9, x_beg+10, "%-3d", temp->get_cost());
 				break;
 			 }
 			 case 3: { // Tool. show name, cost, effectiveness
-				clearPrint(8, x_beg+3);
-				mvprintw(8, x_beg+3, "Tool:");
-				mvprintw(10, x_beg+3, "%-3d", temp->get_cost());
 				tool *print_tool = temp->getTool();
-				char *p_tool = print_tool->get_t_name();
+				clearPrint(8, x_beg+3);
+				mvprintw(8, x_beg+3, "Tool:  ");
+				mvprintw(8, x_beg+10, print_tool -> get_t_name());
+
 				clearPrint(9, x_beg+3);
-				mvprintw(9, x_beg+3, p_tool);
+				mvprintw(9, x_beg+3, "Effective on ");
+				mvprintw(9, x_beg+16, obstypes[print_tool -> get_obstype()]);
+
+				clearPrint(10, x_beg+3);
+				mvprintw(10, x_beg+3, "Cost:  ");
+				mvprintw(10, x_beg+10, "%-3d", temp->get_cost());
+				//mvprintw(9, x_beg+3, p_tool);
 				break;
 			 }
 			 case 4: { // clue. Leave clues behind and show info whenever
 				clearPrint(8, x_beg+3);
-				mvprintw(8, x_beg+3, "Clue:");
+				mvprintw(8, x_beg+3, "Clue");
+				//Print the clue?
 				break;
 			 }
 			 case 5: { // ship. Display cost
 				clearPrint(8, x_beg+3);
-				mvprintw(8, x_beg+3, "Ship:");
-				mvprintw(9, x_beg+3, "Cost:");
-				mvprintw(10, x_beg+3, "%-3d", temp->get_cost());
+				mvprintw(8, x_beg+3, "Ship");
+
+				clearPrint(9, x_beg+3);
+				mvprintw(9, x_beg+3, "Cost:  ");
+				mvprintw(9, x_beg+10, "%-3d", temp->get_cost());
 				break;
 			 }
 			 case 6: { // binoculars. show cost
 				clearPrint(8, x_beg+3);
-				mvprintw(8, x_beg+3, "Binoculars:");
+				mvprintw(8, x_beg+3, "Binoculars");
+
 				clearPrint(9, x_beg+3);
-				mvprintw(9, x_beg+3, "Cost:");
-				mvprintw(10, x_beg+3, "%-3d", temp->get_cost());
+				mvprintw(9, x_beg+3, "Cost:  ");
+				mvprintw(9, x_beg+10, "%-3d", temp->get_cost());
 				break;
 			 }
-			 case 7: { // obstacle. Display type (UNIMPLEMENTED)
+			 case 7: { // obstacle. Display type
 			 	clearPrint(8, x_beg+3);
+				mvprintw(8, x_beg+3, "Obstacle:");
+				mvprintw(8, x_beg+13, obstypes[temp->getObst()->get_obstacle()]);
+
+				clearPrint(9, x_beg+3);
+				mvprintw(9, x_beg+3, "Energy required: ");
+				mvprintw(9, x_beg+22, "%-3d", temp -> get_cost());
 				break;
 			 }
 			}
@@ -144,7 +158,7 @@ void drawInven(int x_beg, vector<tool*> inventory)
 }
 void clearPrint(int where, int spot)
 {
-	mvprintw(where, spot, "                       ");
+	mvprintw(where, spot, "                                    ");
 }
 
 

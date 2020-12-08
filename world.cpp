@@ -56,10 +56,9 @@ World::~World() {
 }
 
 
-void World::fileRead(int * heroy, int * herox) {
+char ** World::fileRead(int * heroy, int * herox) {
 	//Read the map data
 	ifstream inf;
-
 	inf.open("map.txt");
 	char* input = new char[width + 1];
 
@@ -79,6 +78,12 @@ void World::fileRead(int * heroy, int * herox) {
 	delete [] input;
 	inf.close();
 
+	//Prepare obstacle type definition
+	char ** obstypes = new char*[10];
+	for (int i=0; i<10; ++i){
+		obstypes[i] = new char[128];
+	}
+
 	//Read the data for points of interest
 	int x;
 	int y;
@@ -96,7 +101,6 @@ void World::fileRead(int * heroy, int * herox) {
 		inf >> x;
 		inf.ignore(5, ' ');
 		inf >> t;
-		inf.ignore(5, ' ');
 
 		// Read the remaining data
 		switch (t) {
@@ -106,11 +110,13 @@ void World::fileRead(int * heroy, int * herox) {
 				break;
 
 			case 1: // treasure: Returned value
+				inf.ignore(5, ' ');
 				inf >> cost;
 				tiles[y][x].poi = new treasure(cost, false);
 				break;
 
 			case 2: // food: cost, value, name
+				inf.ignore(5, ' ');
 				inf >> cost;
 				inf.ignore(100, ' ');
 				inf >> value;
@@ -121,6 +127,7 @@ void World::fileRead(int * heroy, int * herox) {
 				break;
 
 			case 3: // tools: cost, power, obstype, name
+				inf.ignore(5, ' ');
 				inf >> cost;
 				inf.ignore(100, ' ');
 				inf >> power;
@@ -133,31 +140,42 @@ void World::fileRead(int * heroy, int * herox) {
 				break;
 
 			case 4: // clues
+				inf.ignore(5, ' ');
 				inf.get(input, 256, '\n');
 				tiles[y][x].poi = new clue(input);
 				break;
 
 			case 5: // ship
+				inf.ignore(5, ' ');
 				inf >> cost;
 				tiles[y][x].poi = new object(5, cost);
 				break;
 
 			case 6: // Binoculars
+				inf.ignore(5, ' ');
 				inf >> cost;
 				tiles[y][x].poi = new object(6, cost);
 				break;
 
 			case 7: // Obsticle: cost, type
+				inf.ignore(5, ' ');
 				inf >> cost;
 				inf.ignore(100, ' ');
 				inf >> type;
 				tiles[y][x].poi = new obstacle(cost, type);
+				break;
+
+			case 9: //define an obstacle type
+				inf.ignore(5, ' ');
+				inf.get(obstypes[x], 128, '\n');
 				break;
 		}
 		inf.ignore(2048, '\n'); // Ignore to the next line
 		inf.peek();
 	}
 	inf.close();
+
+	return obstypes;
 }
 
 void World::setGrovnik(unsigned int y, unsigned int x, int terr_type, object * data) {

@@ -30,7 +30,7 @@ class World {
 	void setGrovnik(unsigned int y, unsigned int x, int terr_type, object * data);
 	void clearfog(unsigned int y1, unsigned int x1);
 	void clearfog_rad(unsigned int y1, unsigned int x1, unsigned int radius);
-	void fileRead(int * heroy, int * herox);
+	char ** fileRead(int * heroy, int * herox);
 	grovnik * getAt(unsigned int y, unsigned int x);
 	bool getfog(unsigned int y1, unsigned int x1);
 	bool clearPOI(int y, int x);

@@ -8,6 +8,6 @@
 using namespace std;
 
 void drawValues(int splitPos, int whiffles, int energy, bool binocs, bool boat);
-void drawTerr(int splitPos, grovnik * grov);
+void drawTerr(int splitPos, grovnik * grov, char ** obstypes);
 void drawInven(int splitPos, vector<tool*> inventory);
 void clearPrint(int where, int spot);

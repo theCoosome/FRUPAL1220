@@ -216,7 +216,7 @@ int main() {
 	int * heroy = new int;
 	*heroy = 2;
 	*herox = 2;
-	map.fileRead(heroy, herox);
+	char ** obstypes = map.fileRead(heroy, herox);
 
 	bool running = true; // program running conditional
 
@@ -267,9 +267,9 @@ int main() {
 	mvvline(0, splitPos, '|', Rows);
 	drawValues(splitPos, whiffles, energy, binoculars, boat);
 	if (map.getfog(cy, cx)) {
-		drawTerr(splitPos, map.getAt(cy, cx));
+		drawTerr(splitPos, map.getAt(cy, cx), obstypes);
 	} else {
-		drawTerr(splitPos, NULL);
+		drawTerr(splitPos, NULL, obstypes);
 	}
 
 	//drawsplit(whiffles, energy, binoculars, boat, map.getAt(cy, cx), inventory);
@@ -304,6 +304,15 @@ int main() {
 			case 'd': //move player right
 				if (playerx < 128) {
 					move_player(&playery, &playerx, playery, playerx + 1, &map, &energy, &whiffles, &binoculars, &boat, &inventory, &diamond);
+				}
+				break;
+
+			case 'c':
+				map.clearfog_rad(64, 64, 65);
+				for (int y = 0; y < 128; y++) {
+					for (int x = 0; x < Cols * 3/4; x++) {
+						showGrov(y, x, map.getAt(y, x));
+					}
 				}
 				break;
 
@@ -380,9 +389,9 @@ int main() {
 
 		drawValues(splitPos, whiffles, energy, binoculars, boat);
 		if (map.getfog(cy, cx)) {
-			drawTerr(splitPos, map.getAt(cy, cx));
+			drawTerr(splitPos, map.getAt(cy, cx), obstypes);
 		} else {
-			drawTerr(splitPos, NULL);
+			drawTerr(splitPos, NULL, obstypes);
 		}
 		//After the mvaddch, because they move the cursor as well
 		move(cy, cx);
@@ -399,6 +408,12 @@ int main() {
 		print_lose();
 	if(diamond)
 		print_win();
+
+	// obstypes de-allocation
+	for (int i=0; i < 10; ++i) {
+		delete[] obstypes[i];
+	}
+	delete[] obstypes;
 
 	return endwin();
 }
