@@ -33,7 +33,7 @@ get one trillion trillion dollars and win!
 
 You can find our short demo video and presentation here: https://media.pdx.edu/media/1_38tje2ip
 
-Our github rep is here: https://github.com/theCoosome/FRUPAL1220
+Our github repo is here: https://github.com/theCoosome/FRUPAL1220
 
 Our Kanban board is here: https://github.com/theCoosome/FRUPAL1220/projects
 
