@@ -90,7 +90,7 @@ void drawTerr(int x_beg, grovnik * grov) {
 				break;
 			 }
 			 case 2: { // Food. Show name & cost
-			        clearPrint(8, x_beg+3);
+				clearPrint(8, x_beg+3);
 				mvprintw(8, x_beg+3, "Food:");
 				food *print_food = temp->getFood();
 				char *p_food = print_food->get_name();
@@ -129,7 +129,7 @@ void drawTerr(int x_beg, grovnik * grov) {
 				break;
 			 }
 			 case 7: { // obstacle. Display type (UNIMPLEMENTED)
-			 	clearPrint(8, x_beg+3);
+				clearPrint(8, x_beg+3);
 				break;
 			 }
 			}
