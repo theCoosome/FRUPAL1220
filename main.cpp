@@ -121,14 +121,20 @@ void move_player(int* playery, int* playerx, int y1, int x1, World* map, int* en
 		// displaying the clue close to where the player is
 		move(*playery + 5, *playerx + 5);
 		printw("The clue is: %s", hint);
-		delete [] hint;
 		refresh();
 		//deleting text
 		mvprintw(16, 119, "Press any key to continue!");
 		getch();
-		mvprintw(16, 119, "                                 ");
+		mvprintw(16, 119, "                          ");
 		refresh();
-		mvprintw(*playery + 5, *playerx + 5, "                                                                                   ");
+		for(unsigned int x = 0; x < strlen("The clue is: ") + strlen(hint); x++) {
+			if(map->getfog(*playery + 5, *playerx + 5 + x)) {
+				showGrov(*playery + 5, *playerx + 5 + x, map->getAt(*playery + 5, *playerx + 5 + x));
+			} else {
+				mvaddch(*playery + 5, *playerx + 5 + x, ' ');
+			}
+		}
+		delete [] hint;
 		*energy += 1; // fixed where it would take an energy when you pressed button to continue
 		map->clearPOI(y1, x1);
 
