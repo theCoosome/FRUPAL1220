@@ -12,8 +12,8 @@ By Bailey Manzer, Colton Jelsema, Jonnie Herrera, Leah Moser, Vincent Vermilya
 - <kbd>Q</kbd> Quit
 # Description
 This is the Kindom of Frupal done by group 12. To compile and run you simply use make
-and ./frupal. This allows places you into the game in the top right corner of the first map.
-The game movment uses both cursor movement and player movement. When the  cursor hovers
+and ./frupal. This places you into the game in the top right corner of the first map.
+The game uses both cursor movement and player movement. When the  cursor hovers
 over items that are visible outside of the "fog of war" you can see stats about them in the
 sidebar. While the items that remain hidden under the fog are not accessable. 
 The controls are shown above. The sidebar shows all things that come up the game, such as clues. 
@@ -24,9 +24,9 @@ We also wanted to have the world scroll but that remained unfinished as well. Ho
 did implement many other things. We have a handful of object interactions such as, clues, hints,
 food, treasure, and tools. We also allow the player the ability to buy either binoculars or ship
 upon finding them in a grovnick. The binoculars clear some of the "fog of war" that envelopes 
-the Kingdom in darkness and shows a larger radius to the player of the kingdom. Their are ships 
+the Kingdom in darkness and shows a larger radius to the player of the kingdom. There are ships 
 placed througout the kingdom as well that can be purchased for whiffles. Whiffles can be 
-gained from treasures which are also scatter througout the kindgdom. The player is able to 
+gained from treasures which are also scattered througout the kindgdom. The player is able to 
 travel all through the kingdom, however every movement takes energy. Some  of the 
 terrains in Frupal, such as the swamp, are hard to travel through taking two energy to move
 through it. The walls are considered impassible. Be careful! Energy is also taken over water 
