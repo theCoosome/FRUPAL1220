@@ -4,101 +4,58 @@
 #include "map-sample.h"
 #include <fstream>
 
-// constructor
-map::map()
-{
-	worldMap = getMap(); // worldMap catches the getMap value which will be a 2D array
-
-// Original 2D array initialization
-/*
-	for(int r = 0; r < 128; r++)
-	{
-		worldMap[r] = new grovnik[128];
-	}
-
-	for(int r = 0; r < 128; r++)
-	{
-		for(int c = 0; c < 128; c++)
-		{
-			worldMap[r][c].item = NULL;
-			worldMap[r][c].visited = 0;
-		}
-	}
-*/
+Map::Map() {
+	worldMap = getMapFromFile(); 
 }
 
-// Destructor: still need to check for memory leaks
-map::~map()
-{
-	if(worldMap)
-	{
-
-		for(int c = 0; c < 5; c++)
-		{
+Map::~Map() {
+	if(worldMap) {
+		for(int c = 0; c < 5; c++) {
 			delete [] worldMap[c];
 		}
-
-		delete [] worldMap;
+    delete [] worldMap;
 	}
-
-
 }
 
 // function reads a text file filled with numbers, representing the items
-grovnik** map::getMap()
-{
+grovnik ** Map::getMapFromFile() {
 	ifstream in_file;
-
 	in_file.open("map.txt");
-
-	if(!in_file)
-	{
+	if(!in_file) {
 		cout << "Failed to open file!" << endl;
 		return 0;
 	}
 
-	grovnik ** Map = new grovnik * [5];
+	grovnik ** grovnikMap = new grovnik * [5];
 
-	for(int r = 0; r < 5; r++)
-	{
-		Map[r] = new grovnik[5];
+	for(int row = 0; row < 5; row++) {
+		grovnikMap[row] = new grovnik[5];
 	}
 
-	for(int r = 0; r < 5; r++)
-	{
-		for(int c = 0; c < 5; c++)
-		{
-			in_file >> Map[r][c].item;
-			//Map[r][c].item = in_file.get(); // need a set type function from object class
-			Map[r][c].visited = 0;
+	for(int row = 0; row < 5; row++) {
+		for(int column = 0; column < 5; column++) {
+			in_file >> grovnikMap[row][column].item;
+			grovnikMap[row][column].visited = False;
 		}
 	}
-
-	return Map; // returns 2D array, need to ask if its okay
+	return grovnikMap;
 }
 
-// displays the map
-void map::displayMap()
-{
-	if(!worldMap)
-	{
+void Map::displayMap() {
+	if(!worldMap) {
 		cout << "No map created!";
 		return;
 	}
 
-	for(int r = 0; r < 5; r++)
-	{
-		for(int c =0; c < 5; c++)
-		{
-			cout << worldMap[r][c].item;
+	for(int row = 0; row < 5; row++) {
+		for(int column = 0; column < 5; column++) {
+			cout << worldMap[row][column].item;
 		}
 		cout << endl;
 	}
-
-	//cout << "3, 3: " << worldMap[3][3].item << endl; // was testing whether it displayed correctly
 }
 
-// test main function to see if it worked
+//
 int main()
 {
 	map obj;
