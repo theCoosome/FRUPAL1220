@@ -5,80 +5,72 @@
 
 #include "split.h"
 
-void printCenter(int startingCols, int cols, int line, const char *toPrint) {
-  int length = strlen(toPrint);
-  int printCol = ((cols - length) / 2) + startingCols;
-  mvprintw(line, printCol, toPrint);
-  return;
+void printInCenter(int startingColumns, int columns, int line, const char * phraseToPrint) {
+  int lengthOfPhrase = strlen(phraseToPrint);
+  int printColumnStart = ((columns - lengthOfPhrase) / 2) + startingColumns;
+  mvprintw(line, printColumnStart, phraseToPrint);
 }
 
-void drawValues(int x_beg, int whiffles, int energy, bool binocs, bool boat) {
+void drawValues(int x_beg, int whiffles, int energy, bool binoculars, bool boat) {
+	char *binocularString = (char*)"off";
+	char *boatString = (char*)"off";
 
-	char *bino = (char*)"off";
-	char *bote = (char*)"off";
-	//conversion from integers to chars for window print
-	if(binocs == true)
-	{
-		bino = (char*)"on ";
+	if (binoculars == true)	{
+		binocularString = (char*)"on ";
 	}
-	if(boat == true)
-	{
-		bote = (char*)"on ";
+  if (boat == true) {
+		boatString = (char*)"on ";
 	}
 
-        printCenter(x_beg, COLS/4, 2, "Hero of Frupal");
+  printInCenter(x_beg, COLS/4, 2, "Hero of Frupal");
 	mvprintw(LINES-13, x_beg+3, "Whiffles: ");
 	mvprintw(LINES-12, x_beg+3, "%-4d", whiffles);
 	mvprintw(LINES-10, x_beg+3, "Energy: ");
 	mvprintw(LINES-9, x_beg+3, "%-3d", energy);
 	mvprintw(LINES-7, x_beg+3, "Binoculars: ");
-	mvprintw(LINES-6, x_beg+3, bino);
+	mvprintw(LINES-6, x_beg+3, binocularString);
 	mvprintw(LINES-4, x_beg+3, "Ship: ");
-	mvprintw(LINES-3, x_beg+3, bote);
+	mvprintw(LINES-3, x_beg+3, boatString);
 
 }
 
-void drawTerr(int x_beg, grovnik * grov, char ** obstypes) {
+void drawTerr(int x_beg, grovnik * grovnik, char ** obstacleTypes) {
 
 
   //grovnik info under cursor
-	char * terrType;
-	if(grov) {
-	  switch (grov->terrain) {
-	    case 1: //meadow
-	      terrType = (char*)"Meadow";
+	char * terrainType;
+	if(grovnik) {
+	  switch (grovnik->terrain) {
+	    case 1: 
+	      terrainType = (char*)"Meadow";
 	      break;
-	    case 2: //swamp
-	      terrType = (char*)"Swamp";
+	    case 2: 
+	      terrainType = (char*)"Swamp";
 	      break;
-	    case 3: //water
-	      terrType = (char*)"Water";
+	    case 3: 
+	      terrainType = (char*)"Water";
 	      break;
-	    case 4: //wall
-	      terrType = (char*)"Wall";
+	    case 4: 
+	      terrainType = (char*)"Wall";
 	      break;
 	    default:
-	      terrType = (char*)"Unknown";
+	      terrainType = (char*)"Unknown";
 	      break;
 	  }
 	} else {
-		terrType = (char*)"Unknown";
+		terrainType = (char*)"Unknown";
 	}
 
 	mvprintw(4, x_beg+3, "Terrain:");
 	//predraw to clear for terrain
 	clearPrint(5, x_beg+3);
-	mvprintw(5, x_beg+3, terrType);
-
-
+	mvprintw(5, x_beg+3, terrainType);
 	mvprintw(7, x_beg+3, "Grovnik Info:");
-
-
-        clearPrint(8, x_beg+3);
+  clearPrint(8, x_beg+3);
 	clearPrint(9, x_beg+3);
 	clearPrint(10, x_beg+3);
-	if (grov) {
-		object * temp = grov -> poi;
+	if (grovnik) {
+		object * temp = grovnik -> poi;
 		if(temp) {
 			switch (temp -> get_type()) {
 			 case 1: { // Treasure. show "treasure"
@@ -104,7 +96,7 @@ void drawTerr(int x_beg, grovnik * grov, char ** obstypes) {
 
 				clearPrint(9, x_beg+3);
 				mvprintw(9, x_beg+3, "Effective on ");
-				mvprintw(9, x_beg+16, obstypes[print_tool -> get_obstype()]);
+				mvprintw(9, x_beg+16, obstacleTypes[print_tool -> get_obstype()]);
 
 				clearPrint(10, x_beg+3);
 				mvprintw(10, x_beg+3, "Cost:  ");
@@ -139,7 +131,7 @@ void drawTerr(int x_beg, grovnik * grov, char ** obstypes) {
 			 case 7: { // obstacle. Display type
 			 	clearPrint(8, x_beg+3);
 				mvprintw(8, x_beg+3, "Obstacle:");
-				mvprintw(8, x_beg+13, obstypes[temp->getObst()->get_obstacle()]);
+				mvprintw(8, x_beg+13, obstacleTypes[temp->getObst()->get_obstacle()]);
 
 				clearPrint(9, x_beg+3);
 				mvprintw(9, x_beg+3, "Energy required: ");
@@ -152,10 +144,6 @@ void drawTerr(int x_beg, grovnik * grov, char ** obstypes) {
 
 }
 
-void drawInven(int x_beg, vector<tool*> inventory)
-{
-	return;
-}
 void clearPrint(int where, int spot)
 {
 	mvprintw(where, spot, "                                    ");
