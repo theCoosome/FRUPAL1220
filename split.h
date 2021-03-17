@@ -8,5 +8,5 @@
 using namespace std;
 
 void drawValues(int splitPos, int whiffles, int energy, bool binocs, bool boat);
-void drawTerr(int splitPos, grovnik * grov, char ** obstypes);
+void drawTerr(int splitPos, Grovnik * grov, char ** obstypes);
 void clearPrint(int where, int spot);

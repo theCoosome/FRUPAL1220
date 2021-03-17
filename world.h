@@ -1,36 +1,33 @@
 
 #include "object.h"
 
-// Stores information about a single Grovnik tile.
-class grovnik {
+class Grovnik {
 	public:
-    grovnik();
-    grovnik(const grovnik & copy); // Copy constructor
-    grovnik(int terr_type, object * data); // complex constructor
-    ~grovnik();
+    Grovnik();
+    Grovnik(const Grovnik & copy); // Copy constructor
+    Grovnik(int terr_type, object * data); // complex constructor
+    ~Grovnik();
 
 	  void setData(int terr_type, object * data);
 
-    int terrain; // type of terrain
-    object * poi; // Point of interest on this tile
+    int terrain; 
+    object * pointOfInterest;
 };
 
 class World {
 	public:
     World();
     World(unsigned int width1, unsigned int length1);
-    // The world should never by directly copied.
-
     ~World();
 
     // grovnik builder for use by world builders
-    void setGrovnik(unsigned int y, unsigned int x, int terr_type, object * data);
-    void clearfog(unsigned int y1, unsigned int x1);
-    void clearfog_rad(unsigned int y1, unsigned int x1, unsigned int radius);
+    void setGrovnik(unsigned int line, unsigned int column, int terr_type, object * data);
+    void clearfog(unsigned int line, unsigned int column);
+    void clearfogOfRadius(unsigned int line, unsigned int column, unsigned int radius);
     char ** fileRead(int * heroy, int * herox);
-    grovnik * getAt(unsigned int y, unsigned int x);
-    bool getfog(unsigned int y1, unsigned int x1);
-    bool clearPOI(int y, int x);
+    Grovnik * getAt(unsigned int line, unsigned int column);
+    bool getfog(unsigned int line, unsigned int column);
+    bool clearPOI(int line, int column);
 
 #ifdef TEST
     bool ** getfog();
@@ -38,6 +35,6 @@ class World {
 
 	private:
     unsigned int width, height;
-    grovnik ** tiles;
+    Grovnik ** tiles;
     bool ** fog; // false is fog, true is clear
 };

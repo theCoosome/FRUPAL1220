@@ -34,7 +34,7 @@ void drawValues(int x_beg, int whiffles, int energy, bool binoculars, bool boat)
 
 }
 
-void drawTerr(int x_beg, grovnik * grovnik, char ** obstacleTypes) {
+void drawTerr(int x_beg, Grovnik * grovnik, char ** obstacleTypes) {
 
 
   //grovnik info under cursor
@@ -70,7 +70,7 @@ void drawTerr(int x_beg, grovnik * grovnik, char ** obstacleTypes) {
 	clearPrint(9, x_beg+3);
 	clearPrint(10, x_beg+3);
 	if (grovnik) {
-		object * temp = grovnik -> poi;
+		object * temp = grovnik -> pointOfInterest;
 		if(temp) {
 			switch (temp -> get_type()) {
 			 case 1: { // Treasure. show "treasure"

@@ -17,28 +17,20 @@ class obstacle;
 
 class object {
 	public:
-	object(); //default constructor
-	object(const object & to_copy); //copy constructor
-	object(int add_type, int add_cost); //constructor with args
-	virtual ~object();//destructor
-	int get_type();
-	int get_cost();
-
-	//type 2
-	food * getFood();
-
-	//type 3
-	tool * getTool();
-
-	//type 4
-	clue * getClue();
-
-	//type 7
-	obstacle * getObst();
+    object(); //default constructor
+    object(const object & to_copy); //copy constructor
+    object(int add_type, int add_cost); //constructor with args
+    virtual ~object();//destructor
+    int get_type();
+    int get_cost();
+    food * getFood();
+    tool * getTool();
+    clue * getClue();
+    obstacle * getObst();
 
 	protected:
-	int type;
-	int cost; //How much this object costs
+    int type;
+    int cost; //How much this object costs
 
 };
 
@@ -53,8 +45,8 @@ class food: public object {
 	int get_value();
 
 	protected:
-	char *name; //The name of the food
-	int value; //How much energy is restored
+    char *name; //The name of the food
+    int value; //How much energy is restored
 };
 
 

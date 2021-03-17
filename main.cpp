@@ -2,8 +2,6 @@
 #include <vector>
 #include <fstream>
 
-//#include "object.h"
-//#include "world.h"
 #include "split.h"
 
 //color definitions
@@ -20,11 +18,11 @@ void movecheck();
 
 using namespace std;
 
-void showGrov(int y, int x, grovnik * show) {
+void showGrov(int y, int x, Grovnik * show) {
 	if (x < 0 || y < 0 || x > 127 || y > 127) return;
 	char atpoint = ' ';
-	if (show -> poi) {
-		switch (show -> poi -> get_type()) {
+	if (show -> pointOfInterest) {
+		switch (show -> pointOfInterest -> get_type()) {
 			case 1: //treasure
 				atpoint = '$';
 				break;
@@ -59,7 +57,7 @@ void showGrov(int y, int x, grovnik * show) {
 // Move player to y1/x1 depending on terrain and use POI @ y1/x1
 // Sorry you have to pass all that by reference but it's out of scope
 void move_player(int* playery, int* playerx, int y1, int x1, World* map, int* energy, int* whiffles, bool* binoculars, bool* boat, vector<tool*>* inventory, bool* diamond) {
-	grovnik* check = map->getAt(y1, x1);
+	Grovnik* check = map->getAt(y1, x1);
 	switch (check->terrain) {
 		case 1: //meadow
 			*playery = y1;
@@ -89,22 +87,22 @@ void move_player(int* playery, int* playerx, int y1, int x1, World* map, int* en
 			*diamond = true;
 			break;
 	}
-	if (!check->poi) {
+	if (!check->pointOfInterest) {
 		return;
 	}
-	int objType = check->poi->get_type();
+	int objType = check->pointOfInterest->get_type();
 	if (objType == 1) { //treasure
-		*whiffles += check->poi->get_cost();
+		*whiffles += check->pointOfInterest->get_cost();
 		map->clearPOI(y1, x1);
 	} else if (objType == 2) { //food
-		food* foundFood = check->poi->getFood();
+		food* foundFood = check->pointOfInterest->getFood();
 		if (*whiffles >= foundFood->get_cost()) {
 			*whiffles -= foundFood->get_cost();
 			*energy += foundFood->get_value();
 			map->clearPOI(y1, x1);
 		}
 	} else if (objType == 3) { //tools
-		tool* foundTool = check->poi->getTool();
+		tool* foundTool = check->pointOfInterest->getTool();
 		if (*whiffles >= foundTool->get_cost()) {
 			*whiffles -= foundTool->get_cost();
 			map->clearPOI(y1, x1);
@@ -112,7 +110,7 @@ void move_player(int* playery, int* playerx, int y1, int x1, World* map, int* en
 		}
 	} else if (objType == 4) { //clues
 		char * hint;
-		clue * get_clue = check->poi->getClue();
+		clue * get_clue = check->pointOfInterest->getClue();
 		mvprintw(15, 119, "                                       "); // clears text for next use
 		mvprintw(15, 119, "You found a clue!");
 		hint = new char[strlen(get_clue->getHint()) + 1];
@@ -154,9 +152,9 @@ void move_player(int* playery, int* playerx, int y1, int x1, World* map, int* en
 		mvprintw(18, 119, "                                   ");
 		if(answer == 'y' || answer == 'Y')
 		{
-			if (*whiffles >= check->poi->get_cost()) {
+			if (*whiffles >= check->pointOfInterest->get_cost()) {
 				mvprintw(15, 119, "You purchased the boat!");
-				*whiffles -= check->poi->get_cost();
+				*whiffles -= check->pointOfInterest->get_cost();
 				map->clearPOI(y1, x1);
 				*boat = true;
 			}
@@ -181,9 +179,9 @@ void move_player(int* playery, int* playerx, int y1, int x1, World* map, int* en
 		mvprintw(18, 119, "                                   ");
 		if(answer == 'y' || answer == 'Y')
 		{
-			if (*whiffles >= check->poi->get_cost()) {
+			if (*whiffles >= check->pointOfInterest->get_cost()) {
 				mvprintw(15, 119, "You purchased the binoculars!");
-				*whiffles -= check->poi->get_cost();
+				*whiffles -= check->pointOfInterest->get_cost();
 				map->clearPOI(y1, x1);
 				*binoculars = true;
 			}
@@ -250,9 +248,9 @@ int main() {
 	int splitPos = min(128, Cols * 3 / 4);
 
 
-	map.clearfog_rad(playery, playerx, 1);
+	map.clearfogOfRadius(playery, playerx, 1);
 	// Clear map for debugging file reader
-	//map.clearfog_rad(0, 0, 128);
+	//map.clearfogOfRadius(0, 0, 128);
 
 	// Initial world draw
 	for (int y = 0; y < 128; y++) {
@@ -315,7 +313,7 @@ int main() {
 				break;
 
 			case 'c':
-				map.clearfog_rad(64, 64, 65);
+				map.clearfogOfRadius(64, 64, 65);
 				for (int y = 0; y < 128; y++) {
 					for (int x = 0; x < Cols * 3/4; x++) {
 						showGrov(y, x, map.getAt(y, x));
@@ -323,23 +321,22 @@ int main() {
 				}
 				break;
 
-			// Cursor movement
-			case KEY_UP: //move up
+			case KEY_UP:
 				if(cy) {
 					--cy;
 				}
 				break;
-			case KEY_DOWN: //move down
+			case KEY_DOWN:
 				if(cy < Rows - 1) {
 					++cy;
 				}
 				break;
-			case KEY_LEFT: //move left
+			case KEY_LEFT:
 				if(cx) {
 					--cx;
 				}
 				break;
-			case KEY_RIGHT: //move right
+			case KEY_RIGHT:
 				if(cx < Cols - 1) {
 					++cx;
 				}
@@ -354,10 +351,10 @@ int main() {
 
 			int radius;
 			if(binoculars) {
-				map.clearfog_rad(playery, playerx, 2);
+				map.clearfogOfRadius(playery, playerx, 2);
 				radius = 2;
 			} else {
-				map.clearfog_rad(playery, playerx, 1);
+				map.clearfogOfRadius(playery, playerx, 1);
 				radius = 1;
 			}
 			for(int y = playery - radius; y <= playery + radius; y++) {

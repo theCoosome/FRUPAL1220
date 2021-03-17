@@ -8,11 +8,11 @@ using namespace std;
 
 
 World::World(): width(128), height(128) {
-	tiles = new grovnik*[height];
+	tiles = new Grovnik*[height];
 	for(unsigned int y = 0; y < height; y++) {
-		tiles[y] = new grovnik[width];
+		tiles[y] = new Grovnik[width];
 		for(unsigned int x = 0; x < width; x++) {
-			tiles[y][x] = grovnik();
+			tiles[y][x] = Grovnik();
 		}
 	}
 
@@ -26,11 +26,11 @@ World::World(): width(128), height(128) {
 }
 
 World::World(unsigned int width1, unsigned int length1): width(width1), height(length1) {
-	tiles = new grovnik*[height];
+	tiles = new Grovnik*[height];
 	for(unsigned int y = 0; y < height; y++) {
-		tiles[y] = new grovnik[width];
+		tiles[y] = new Grovnik[width];
 		for(unsigned int x = 0; x < width; x++) {
-			tiles[y][x] = grovnik();
+			tiles[y][x] = Grovnik();
 		}
 	}
 
@@ -112,7 +112,7 @@ char ** World::fileRead(int * heroy, int * herox) {
 			case 1: // treasure: Returned value
 				inf.ignore(5, ' ');
 				inf >> cost;
-				tiles[y][x].poi = new treasure(cost, false);
+				tiles[y][x].pointOfInterest = new treasure(cost, false);
 				break;
 
 			case 2: // food: cost, value, name
@@ -123,7 +123,7 @@ char ** World::fileRead(int * heroy, int * herox) {
 				inf.ignore(100, ' ');
 
 				inf.get(input, 256, '\n');
-				tiles[y][x].poi = new food(cost, input, value);
+				tiles[y][x].pointOfInterest = new food(cost, input, value);
 				break;
 
 			case 3: // tools: cost, power, obstype, name
@@ -136,25 +136,25 @@ char ** World::fileRead(int * heroy, int * herox) {
 				inf.ignore(100, ' ');
 
 				inf.get(input, 256, '\n');
-				tiles[y][x].poi = new tool(cost, input, power, type);
+				tiles[y][x].pointOfInterest = new tool(cost, input, power, type);
 				break;
 
 			case 4: // clues
 				inf.ignore(5, ' ');
 				inf.get(input, 256, '\n');
-				tiles[y][x].poi = new clue(input);
+				tiles[y][x].pointOfInterest = new clue(input);
 				break;
 
 			case 5: // ship
 				inf.ignore(5, ' ');
 				inf >> cost;
-				tiles[y][x].poi = new object(5, cost);
+				tiles[y][x].pointOfInterest = new object(5, cost);
 				break;
 
 			case 6: // Binoculars
 				inf.ignore(5, ' ');
 				inf >> cost;
-				tiles[y][x].poi = new object(6, cost);
+				tiles[y][x].pointOfInterest = new object(6, cost);
 				break;
 
 			case 7: // Obsticle: cost, type
@@ -162,7 +162,7 @@ char ** World::fileRead(int * heroy, int * herox) {
 				inf >> cost;
 				inf.ignore(100, ' ');
 				inf >> type;
-				tiles[y][x].poi = new obstacle(cost, type);
+				tiles[y][x].pointOfInterest = new obstacle(cost, type);
 				break;
 
 			case 9: //define an obstacle type
@@ -178,55 +178,51 @@ char ** World::fileRead(int * heroy, int * herox) {
 	return obstypes;
 }
 
-void World::setGrovnik(unsigned int y, unsigned int x, int terr_type, object * data) {
-	if(y > height || x > width) {
+void World::setGrovnik(unsigned int line, unsigned int column, int terrain_type, object * data) {
+	if(line > height || column > width) {
 		return;
 	}
-	tiles[y][x].setData(terr_type, data);
+	tiles[line][column].setData(terrain_type, data);
 }
 
-grovnik * World::getAt(unsigned int y, unsigned int x) {
-	if(y > height || x > width) {
+Grovnik * World::getAt(unsigned int line, unsigned int column) {
+	if(line > height || column > width) {
 		return NULL;
 	}
-	return & tiles[y][x];
+	return & tiles[line][column];
 }
 
-// Clears the POI. MAKE SURE TO RETRIEVE THE ITEM FIRST
-bool World::clearPOI(int y, int x) {
-	if (tiles[y][x].poi) {
-		delete tiles[y][x].poi;
-		tiles[y][x].poi = NULL;
+bool World::clearPOI(int line, int column) {
+	if (tiles[line][column].pointOfInterest) {
+		delete tiles[line][column].pointOfInterest;
+		tiles[line][column].pointOfInterest = NULL;
 		return true;
 	}
 	return false;
 }
 
-// Clear fog[y1][x1] from false to true
-// Basecase bounds check to avoid segfault
-void World::clearfog(unsigned int y1, unsigned int x1) {
-	if(x1 >= width || y1 >= height) {
+void World::clearfog(unsigned int line, unsigned int column) {
+	if(column >= width || line >= height) {
 		return;
 	}
-	fog[y1][x1] = true;
+	fog[line][column] = true;
 	return;
 }
 
-// Call clearfog for a square radius centered on fog[y1][x1]
-void World::clearfog_rad(unsigned int y1, unsigned int x1, unsigned int radius) {
+void World::clearfogOfRadius(unsigned int line, unsigned int column, unsigned int radius) {
 	for(int y = (int)radius * -1; y <= (int)radius; y++) {
 		for(int x = (int)radius * -1; x <= (int)radius; x++) {
-			clearfog(y1 + x, x1 + y);
+			clearfog(line + x, column + y);
 		}
 	}
 	return;
 }
 
-bool World::getfog(unsigned int y1, unsigned int x1) {
-	if(x1 >= width || y1 >= height) {
+bool World::getfog(unsigned int line, unsigned int column) {
+	if(column >= width || line >= height) {
 		return false;
 	}
-	return fog[y1][x1];
+	return fog[line][column];
 }
 
 #ifdef TEST
@@ -237,31 +233,31 @@ bool ** World::getfog() {
 
 
 
-grovnik::grovnik() {
+Grovnik::Grovnik() {
 	terrain = 0;
-	poi = NULL;
+	pointOfInterest = NULL;
 }
 
 
-grovnik::~grovnik() {
-	if(poi) {
-		delete poi;
+Grovnik::~Grovnik() {
+	if(pointOfInterest) {
+		delete pointOfInterest;
 	}
 }
 
 
-grovnik::grovnik(const grovnik & copy) {
+Grovnik::Grovnik(const Grovnik & copy) {
 	terrain = copy.terrain;
 }
 
 
 // if there is nothing of interest on this tile, set data to null
-grovnik::grovnik(int terr_type, object * data) {
+Grovnik::Grovnik(int terr_type, object * data) {
 	terrain = terr_type;
-	poi = data;
+	pointOfInterest = data;
 }
 
-void grovnik::setData(int terr_type, object * data) {
+void Grovnik::setData(int terr_type, object * data) {
 	terrain = terr_type;
-	poi = data;
+	pointOfInterest = data;
 }

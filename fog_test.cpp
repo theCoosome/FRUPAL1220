@@ -19,11 +19,11 @@ int main(int argc, char* argv[]) {
 		{0, 0, 0, 0, 0, 0, 0, 1, 1},
 	};
 	World test = World(width, length);
-	test.clearfog_rad(4, 4, 1);
+	test.clearfogOfRadius(4, 4, 1);
 	// Show off bounds check
-	test.clearfog_rad(0, 0, 1);
-	test.clearfog_rad(0, 8, 1);
-	test.clearfog_rad(8, 8, 1);
+	test.clearfogOfRadius(0, 0, 1);
+	test.clearfogOfRadius(0, 8, 1);
+	test.clearfogOfRadius(8, 8, 1);
 	// Show off getter function
 	bool** tmp = test.getfog();
 	for(int y = 0; y < length; y++) {
