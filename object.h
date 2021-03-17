@@ -1,14 +1,3 @@
-//Author of header: Leah Moser
-//Program: Frupal Game
-//Date: 11/10/20
-//This is the header file for the heirarchical relationship portion
-//of the program. This file holds all the prototypes for the funcitonality of the
-//implementation file.
-//Note to the group: Please feel free to change anything you see might need
-//changing
-
-
-
 #include <iostream>
 #include <cstdlib>
 #include <cstring>
@@ -26,8 +15,7 @@ class tool;
 class clue;
 class obstacle;
 
-class object
-{
+class object {
 	public:
 	object(); //default constructor
 	object(const object & to_copy); //copy constructor
@@ -55,8 +43,7 @@ class object
 };
 
 
-class food: public object
-{
+class food: public object {
 	public:
 	food(); //default constructor
 	food(int add_cost, char *add_name, int value); //constuctor with args
@@ -68,78 +55,64 @@ class food: public object
 	protected:
 	char *name; //The name of the food
 	int value; //How much energy is restored
-
 };
 
 
-class tool: public object
-{
+class tool: public object {
 	public:
-	tool(); //default constructor
-	//constructor with args
-	tool(int add_cost, char *add_name, int add_power, int obs_type);
-	tool(const tool &to_copy);
-	int get_obstype();
-	int get_power();
-	char* get_t_name();
-	~tool(); //destrucor
+    tool(); 
+    tool(int add_cost, char *add_name, int add_power, int obs_type);
+    tool(const tool &to_copy);
+    ~tool(); 
+
+    int get_obstype();
+    int get_power();
+    char* get_t_name();
 
 	protected:
-	char *name; //The name of the tool
-	int power; //how much power it has?
-	int obs_type; // What type(s?) of obsticles this is useful for
-
+    char *name; 
+    int power; 
+    int obs_type;
 };
 
 
-class treasure: public object
-{
+class treasure: public object {
 	public:
-	treasure(); //default constructor
-	//constructor with args
-	treasure(int add_cost, bool isempty);
-	treasure(const treasure &to_copy); //copy constructor
-	~treasure(); // destructor
-	bool get_empty();
+    treasure(); 
+    treasure(int add_cost, bool isempty);
+    treasure(const treasure &to_copy); 
+    ~treasure(); 
+
+    bool get_empty();
 
 	protected:
-	bool is_empty; //will it dissapear when empty?
-	//Treasure chests appear to be defined to only contain whiffles.
-	//Cost is repurposed to how much money you gain when opened.
-
+    bool is_empty;
 };
 
 
-class obstacle: public object
-{
+class obstacle: public object {
 	public:
-	obstacle(); //default constructor
-	//constructor with args
-	obstacle(int add_cost, int obs_type);
-	obstacle(const obstacle &to_copy); //copy constructor
-	~obstacle(); // destructor
-	int get_obstacle();
-
-
+    obstacle();
+    obstacle(int add_cost, int obs_type);
+    obstacle(const obstacle &to_copy);
+    ~obstacle(); 
+    int get_obstacle();
 
 	protected:
-	//Cost is repurposed into Durability, or Cost to destroy
-	int obs_type; // The obsticle type
-
+    //cost repurposed to durability
+    int obs_type;
 };
 
 
-class clue: public object
-{
+class clue: public object {
 	public:
-	clue();
-	clue(char * data);
-	~clue();
-	char * getHint();
+    clue();
+    clue(char * data);
+    ~clue();
+    char * getHint();
 
 	protected:
-	char * hint;
-
+    char * hint;
 };
 
 #endif
