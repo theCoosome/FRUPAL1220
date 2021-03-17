@@ -11,8 +11,6 @@ class grovnik {
 
 	  void setData(int terr_type, object * data);
 
-    //private: 'proper' structure dictates use of private variables,
-    // but having a manager for the data makes that unwieldly and unnessecary.
     int terrain; // type of terrain
     object * poi; // Point of interest on this tile
 };
